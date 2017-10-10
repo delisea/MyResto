@@ -117,3 +117,11 @@ docker run -it -p 8080:8080 myapp
 > si tout va bien l’application est accessible à l’addresse localhost:8080/app
 >
 > si le fichier est celui généré dans la partie précédente l'addresse est localhost:8080/nomfichier/toto
+
+
+
+
+
+
+
+https://www.mkyong.com/maven/how-to-install-maven-in-windows/
