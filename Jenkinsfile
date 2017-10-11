@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh './rebuild.sh'
+                sh './javaee7-angular/build.sh'
             }
         }
     }
