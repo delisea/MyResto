@@ -17,8 +17,8 @@ pipeline {
 					COMPONENT_INSTANCE=1
 					DOCKERFILE=Dockerfile
 
-					docker image remove -f ${COMPONENT_NAME}-${COMPONENT_INSTANCE}:${COMPONENT_VERSION}
-					docker container rm -f ${COMPONENT_NAME}-${COMPONENT_INSTANCE}
+					docker image remove -f ${COMPONENT_NAME}-${COMPONENT_INSTANCE}:${COMPONENT_VERSION}  || true
+					docker container rm -f ${COMPONENT_NAME}-${COMPONENT_INSTANCE}  || true
 
 					docker pull jboss/wildfly
 					docker build -t ${COMPONENT_NAME}-${COMPONENT_INSTANCE}:${COMPONENT_VERSION} -f $DOCKERFILE .
