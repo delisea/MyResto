@@ -15,6 +15,7 @@ pipeline {
 					COMPONENT_VERSION="1.0"
 					COMPONENT_NAME="wildfly-app"
 					COMPONENT_INSTANCE=1
+					DOCKERFILE=Dockerfile
 
 					docker image remove -f ${COMPONENT_NAME}-${COMPONENT_INSTANCE}:${COMPONENT_VERSION}
 					docker container rm -f ${COMPONENT_NAME}-${COMPONENT_INSTANCE}
