@@ -2,7 +2,7 @@ FROM jboss/wildfly
 MAINTAINER Didier Donsez
 
 # Should be changed for your public domain name
-ENV SWAGGER_API_URL http://localhost:8080/swagger.json
+ENV SWAGGER_API_URL http://25.12.88.85:8080/swagger.json
 
 ENV SWAGGER_DIST swagger-ui
 ENV SWAGGER_TARGET_DIR $JBOSS_HOME/welcome-content
