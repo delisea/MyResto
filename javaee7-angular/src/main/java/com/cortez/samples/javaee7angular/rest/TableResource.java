@@ -1,5 +1,8 @@
 package com.cortez.samples.javaee7angular.rest;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 
-import com.cortez.samples.javaee7angular.data.Table;
+import com.cortez.samples.javaee7angular.data.TableResto;
 
 @Stateless
 @ApplicationPath("/resources")
@@ -28,20 +31,28 @@ public class TableResource extends Application{
 	
 	@GET
 	@Path("{id}")
-	public Table getTable(@PathParam("id") Long id) {
-		return entityManager.find(Table.class, id);
+	public TableResto getTable(@PathParam("id") Long id) {
+		TableResto t = new TableResto();
+		try{
+			return entityManager.find(TableResto.class, id);
+		}catch(Exception e){
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			t.setLog(e.getLocalizedMessage()+"/n"+errors.toString());
+		}
+		return t;
 	}
 	
 	@POST
-    public Table saveTable(Table table) {
+    public TableResto saveTable(TableResto table) {
         if (table.getId() == null) {
-            Table tableToSave = new Table();
+            TableResto tableToSave = new TableResto();
             tableToSave.setAvailable_places(table.getAvailable_places());
             tableToSave.setMovable(table.isMovable());
             tableToSave.setNumber(table.getNumber());
             entityManager.persist(table);
         } else {
-            Table tableToUpdate = getTable(table.getId());
+            TableResto tableToUpdate = getTable(table.getId());
             tableToUpdate.setAvailable_places(table.getAvailable_places());
             tableToUpdate.setMovable(table.isMovable());
             tableToUpdate.setNumber(table.getNumber());

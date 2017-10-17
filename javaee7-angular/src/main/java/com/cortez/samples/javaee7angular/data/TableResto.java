@@ -7,7 +7,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-public class Table{
+public class TableResto{
 
 	/* Attributs */
 	
@@ -21,6 +21,16 @@ public class Table{
 	// Le numéro de table
 	private int number;
 	
+	private String log;
+	
+	public String getLog() {
+		return log;
+	}
+
+	public void setLog(String log) {
+		this.log = log;
+	}
+
 	// Nombre de couverts restants disponibles
 	private int available_places;
 	
@@ -30,7 +40,7 @@ public class Table{
 	
 	/* Constructeurs */
 	
-	public Table() {
+	public TableResto() {
 		super();
 	}
 	
