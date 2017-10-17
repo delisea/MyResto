@@ -19,3 +19,5 @@ INSERT INTO PERSON("ID", "NAME", "DESCRIPTION", "IMAGEURL") VALUES (18, 'Sarutob
 INSERT INTO PERSON("ID", "NAME", "DESCRIPTION", "IMAGEURL") VALUES (19, 'Tsunade', 'Konoha', 'http://img4.wikia.nocookie.net/__cb20150108211132/naruto/images/b/b3/Tsunade_infobox2.png')
 INSERT INTO PERSON("ID", "NAME", "DESCRIPTION", "IMAGEURL") VALUES (20, 'Orochimaru', 'Missing-nin', 'http://vignette2.wikia.nocookie.net/naruto/images/1/14/Orochimaru_Infobox.png/revision/latest/scale-to-width-down/300?cb=20150925223113')
 INSERT INTO PERSON("ID", "NAME", "DESCRIPTION", "IMAGEURL") VALUES (21, 'Uchicha Itachi', 'Missing-nin', 'http://vignette2.wikia.nocookie.net/naruto/images/b/bb/Itachi.png/revision/latest/scale-to-width-down/300?cb=20150602102445')
+
+INSERT INTO TABLERESTO("ID", "NUMBER", "AVAILABLE_PLACES", "MOVABLE") VALUES(22, 1,100,false);

@@ -41,3 +41,5 @@ docker pull jboss/wildfly
 docker build -t ${COMPONENT_NAME}-${COMPONENT_INSTANCE}:${COMPONENT_VERSION} -f $DOCKERFILE .
 
 docker run  --hostname ${COMPONENT_NAME}-${COMPONENT_INSTANCE} --name ${COMPONENT_NAME}-${COMPONENT_INSTANCE} -p 8080:8080 -p 9990:9990 -d ${COMPONENT_NAME}-${COMPONENT_INSTANCE}:${COMPONENT_VERSION}
+wait_for_host_port localhost 8080
+open http://localhost:8080/

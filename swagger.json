@@ -1,184 +1,270 @@
-
 {
-    "swagger":"2.0",
-    "info":{
-        "version":"3.10",
-        "title":"javaee7-angular"
-    },
-    "host":"",
-    "basePath":"/javaee7-angular/resources",
-    "schemes":[
-        "http"
-    ],
-    "paths":{
-        "/persons":{
-            "get":{
-                "consumes":[
-                    "application/json"
-                ],
-                "produces":[
-                    "application/json"
-                ],
-                "parameters":[
-                    {
-                        "type":"integer",
-                        "name":"page",
-                        "in":"query",
-                        "required":false,
-                        "default":"1"
-                    },
-                    {
-                        "type":"string",
-                        "name":"sortDirections",
-                        "in":"query",
-                        "required":false,
-                        "default":"asc"
-                    },
-                    {
-                        "type":"string",
-                        "name":"sortFields",
-                        "in":"query",
-                        "required":false,
-                        "default":"id"
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"OK",
-                        "headers":{
-                        },
-                        "schema":{
-                            "$ref":"#/definitions/PaginatedListWrapper"
-                        }
-                    }
-                }
-            },
-            "post":{
-                "consumes":[
-                    "application/json"
-                ],
-                "produces":[
-                    "application/json"
-                ],
-                "parameters":[
-                    {
-                        "name":"body",
-                        "in":"body",
-                        "required":true,
-                        "schema":{
-                            "$ref":"#/definitions/Person"
-                        }
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"OK",
-                        "headers":{
-                        },
-                        "schema":{
-                            "$ref":"#/definitions/Person"
-                        }
-                    }
-                }
+  "swagger": "2.0",
+  "info": {
+    "version": "3.10",
+    "title": "javaee7-angular"
+  },
+  "host": "localhost:8080",
+  "basePath": "/javaee7-angular/resources",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/persons": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "default": "1"
+          },
+          {
+            "type": "string",
+            "name": "sortDirections",
+            "in": "query",
+            "required": false,
+            "default": "asc"
+          },
+          {
+            "type": "string",
+            "name": "sortFields",
+            "in": "query",
+            "required": false,
+            "default": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/PaginatedListWrapper"
             }
-        },
-        "/persons/{id}":{
-            "get":{
-                "consumes":[
-                    "application/json"
-                ],
-                "produces":[
-                    "application/json"
-                ],
-                "parameters":[
-                    {
-                        "type":"integer",
-                        "name":"id",
-                        "in":"path",
-                        "required":true
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"OK",
-                        "headers":{
-                        },
-                        "schema":{
-                            "$ref":"#/definitions/Person"
-                        }
-                    }
-                }
-            },
-            "delete":{
-                "consumes":[
-                    "application/json"
-                ],
-                "produces":[
-                    "application/json"
-                ],
-                "parameters":[
-                    {
-                        "type":"integer",
-                        "name":"id",
-                        "in":"path",
-                        "required":true
-                    }
-                ],
-                "responses":{
-                    "204":{
-                        "description":"No Content",
-                        "headers":{
-                        }
-                    }
-                }
-            }
+          }
         }
-    },
-    "definitions":{
-        "Object":{
-            "properties":{
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Person"
             }
-        },
-        "PaginatedListWrapper":{
-            "properties":{
-                "currentPage":{
-                    "type":"integer"
-                },
-                "list":{
-                    "type":"array",
-                    "items":{
-                        "$ref":"#/definitions/Object"
-                    }
-                },
-                "pageSize":{
-                    "type":"integer"
-                },
-                "sortDirections":{
-                    "type":"string"
-                },
-                "sortFields":{
-                    "type":"string"
-                },
-                "totalResults":{
-                    "type":"integer"
-                }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Person"
             }
-        },
-        "Person":{
-            "properties":{
-                "description":{
-                    "type":"string"
-                },
-                "id":{
-                    "type":"integer"
-                },
-                "imageUrl":{
-                    "type":"string"
-                },
-                "name":{
-                    "type":"string"
-                }
-            }
+          }
         }
+      }
+    },
+    "/persons/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/tables/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        }
+      }
     }
+  },
+  "definitions": {
+    "Object": {
+      "properties": {}
+    },
+    "PaginatedListWrapper": {
+      "properties": {
+        "currentPage": {
+          "type": "integer"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Object"
+          }
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "sortDirections": {
+          "type": "string"
+        },
+        "sortFields": {
+          "type": "string"
+        },
+        "totalResults": {
+          "type": "integer"
+        }
+      }
+    },
+    "Person": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Table": {
+      "properties": {
+        "number": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "available_places": {
+          "type": "integer"
+        },
+        "movable": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
 }

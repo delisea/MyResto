@@ -52,6 +52,7 @@ public class Person {
         this.imageUrl = link;
     }
 
+    /*
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
@@ -61,7 +62,8 @@ public class Person {
 
         return id.equals(person.id);
     }
-
+	*/
+    
     @Override
     public int hashCode() {
         return id.hashCode();

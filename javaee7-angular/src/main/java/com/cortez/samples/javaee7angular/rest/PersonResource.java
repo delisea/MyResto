@@ -74,6 +74,12 @@ public class PersonResource extends Application {
     public Person getPerson(@PathParam("id") Long id) {
         return entityManager.find(Person.class, id);
     }
+    
+    @GET
+    @Path("{name}")
+    public Person getPersonByName(@PathParam("name") String name) {
+        return entityManager.find(Person.class, name);
+    }
 
     @POST
     public Person savePerson(Person person) {
