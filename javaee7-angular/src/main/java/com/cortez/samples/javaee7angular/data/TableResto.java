@@ -10,13 +10,10 @@ import javax.persistence.*;
 public class TableResto{
 
 	/* Attributs */
-	
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "table_id")
     @SequenceGenerator(name = "table_id", sequenceName = "id")
     private Long id;
-	
-	private static final long serialVersionUID = 1L;
 	
 	// Le numéro de table
 	private int number;

@@ -10,8 +10,8 @@ import javax.persistence.*;
 @Entity
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id")
-    @SequenceGenerator(name = "id", sequenceName = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_id") // Attention : generator = name
+    @SequenceGenerator(name = "person_id", sequenceName = "id") // Attention : sequenceName = nom de la variable
     private Long id;
 
     private String name;
@@ -19,8 +19,18 @@ public class Person {
     private String description;
 
     private String imageUrl;
+    
+    private String log;
 
-    public Long getId() {
+    public String getLog() {
+		return log;
+	}
+
+	public void setLog(String log) {
+		this.log = log;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -50,22 +60,5 @@ public class Person {
 
     public void setImageUrl(String link) {
         this.imageUrl = link;
-    }
-
-    /*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
-
-        Person person = (Person) o;
-
-        return id.equals(person.id);
-    }
-	*/
-    
-    @Override
-    public int hashCode() {
-        return id.hashCode();
     }
 }

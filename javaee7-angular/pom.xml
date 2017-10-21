@@ -29,6 +29,7 @@
 
 		<!-- Dependencies -->
 		<version.dependency.javaee>7.0</version.dependency.javaee>
+
 	</properties>
 
 	<build>
@@ -185,6 +186,12 @@
 			<artifactId>javaee-api</artifactId>
 			<version>${version.dependency.javaee}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thetransactioncompany</groupId>
+			<artifactId>cors-filter</artifactId>
+			<version>2.1</version>
 		</dependency>
 	</dependencies>
 </project>

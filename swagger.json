@@ -128,6 +128,35 @@
         }
       }
     },
+    "/tables": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        }
+      }
+    },
     "/tables/{id}": {
       "get": {
         "consumes": [
@@ -173,33 +202,6 @@
           "204": {
             "description": "No Content",
             "headers": {}
-          }
-        }
-      },
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Table"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {},
-            "schema": {
-              "$ref": "#/definitions/Table"
-            }
           }
         }
       }

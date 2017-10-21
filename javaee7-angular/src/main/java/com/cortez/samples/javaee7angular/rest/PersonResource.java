@@ -10,6 +10,9 @@ import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 /**
@@ -72,32 +75,57 @@ public class PersonResource extends Application {
     @GET
     @Path("{id}")
     public Person getPerson(@PathParam("id") Long id) {
-        return entityManager.find(Person.class, id);
+    	Person p = null;
+    	try{	
+    		return entityManager.find(Person.class, id);
+    	}catch(Exception e){
+    		p = new Person();
+    		StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			p.setLog(e.getLocalizedMessage()+"/n"+errors.toString());
+    	}
+    	return p;
     }
     
     @GET
     @Path("{name}")
     public Person getPersonByName(@PathParam("name") String name) {
-        return entityManager.find(Person.class, name);
+    	Person p = new Person();
+    	try{	
+    		return entityManager.find(Person.class, name);
+    	}catch(Exception e){
+    		StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			p.setLog(e.getLocalizedMessage()+"/n"+errors.toString());
+    	}
+    	return p;
     }
 
     @POST
-    public Person savePerson(Person person) {
-        if (person.getId() == null) {
+    public Person savePerson(Person person) {  
+    	Person existingPerson = getPerson(person.getId());
+    	// Ajout
+        if (existingPerson == null) {
             Person personToSave = new Person();
             personToSave.setName(person.getName());
             personToSave.setDescription(person.getDescription());
             personToSave.setImageUrl(person.getImageUrl());
-            entityManager.persist(person);
-        } else {
-            Person personToUpdate = getPerson(person.getId());
-            personToUpdate.setName(person.getName());
-            personToUpdate.setDescription(person.getDescription());
-            personToUpdate.setImageUrl(person.getImageUrl());
-            person = entityManager.merge(personToUpdate);
+            
+            try{
+            	entityManager.persist(personToSave);
+            }catch(Exception e){
+            	StringWriter errors = new StringWriter();
+    			e.printStackTrace(new PrintWriter(errors));
+    			personToSave.setLog(e.getLocalizedMessage()+"/n"+errors.toString());
+            }
+            return personToSave;
+            
+        } else { // Modif
+        	existingPerson.setName(person.getName());
+        	existingPerson.setDescription(person.getDescription());
+        	existingPerson.setImageUrl(person.getImageUrl());
+            return entityManager.merge(existingPerson);
         }
-
-        return person;
     }
 
     @DELETE
