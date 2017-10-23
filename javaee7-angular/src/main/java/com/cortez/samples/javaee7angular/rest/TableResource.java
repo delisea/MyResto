@@ -14,12 +14,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import com.cortez.samples.javaee7angular.data.Person;
 import com.cortez.samples.javaee7angular.data.TableResto;
 
 @Stateless
@@ -34,22 +31,32 @@ public class TableResource extends Application {
 
 	@GET
 	@Path("{id}")
-	public TableResto getTable(@PathParam("id") Long id) {
-		TableResto t = new TableResto();
+	public Response getTable(@PathParam("id") Long id) {
+		TableResto table = null;
 		try {
-			return entityManager.find(TableResto.class, id);
+			table = entityManager.find(TableResto.class, id);
+			if(table == null){
+				return Response.status(Response.Status.NOT_FOUND)
+						.entity(table)
+						.build();
+			}
 		} catch (Exception e) {
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			t.setLog(e.getLocalizedMessage()+"/n"+errors.toString());
-			//throw new WebApplicationException(e.getLocalizedMessage() + "/n" + errors.toString());
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.entity(e.getLocalizedMessage()+"/n"+errors.toString())
+					.build();
 		}
-		return t;
+		return Response.ok(table).build();
 	}
 
+	/**
+	 * @param table
+	 * @return
+	 */
 	@POST
-	public TableResto saveTable(TableResto table) {
-		TableResto existingTable = getTable(table.getId());
+	public Response saveTable(TableResto table) {
+		TableResto existingTable = (TableResto) getTable(table.getId()).getEntity();
         if (existingTable == null) { // Ajout
             TableResto tableToSave = new TableResto();
             tableToSave.setAvailable_places(table.getAvailable_places());
@@ -60,21 +67,41 @@ public class TableResource extends Application {
             }catch(Exception e){
             	StringWriter errors = new StringWriter();
     			e.printStackTrace(new PrintWriter(errors));
-    			tableToSave.setLog(e.getLocalizedMessage()+"/n"+errors.toString());
+    			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+    					.entity(e.getLocalizedMessage()+"/n"+errors.toString())
+    					.build();
             }
-            return tableToSave;
+            return Response.ok(tableToSave).build();
             
         } else { // Modif
         	existingTable.setAvailable_places(table.getAvailable_places());
         	existingTable.setMovable(table.isMovable());
-        	existingTable.setNumber(table.getNumber());   
-            return entityManager.merge(existingTable);
+        	existingTable.setNumber(table.getNumber());  
+        	try{
+        		return Response.ok(entityManager.merge(existingTable)).build();
+        	}catch(Exception e){
+        		StringWriter errors = new StringWriter();
+    			e.printStackTrace(new PrintWriter(errors));
+    			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+    					.entity(e.getLocalizedMessage()+"/n"+errors.toString())
+    					.build();
+        	}        
         }
 	}
 
 	@DELETE
 	@Path("{id}")
-	public void deleteTable(@PathParam("id") Long id) {
-		entityManager.remove(getTable(id));
+	public Response deleteTable(@PathParam("id") Long id) {
+		try{
+			entityManager.remove(getTable(id).getEntity());
+		}catch(Exception e){
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.entity(e.getLocalizedMessage()+"/n"+errors.toString())
+					.build();
+		}
+		return Response.status(Response.Status.OK)
+				.build();
 	}
 }

@@ -2,4 +2,6 @@ com\cortez\samples\javaee7angular\data\Person.class
 com\cortez\samples\javaee7angular\rest\PersonResource.class
 com\cortez\samples\javaee7angular\data\TableResto.class
 com\cortez\samples\javaee7angular\rest\TableResource.class
+com\cortez\samples\javaee7angular\data\Restaurant.class
+com\cortez\samples\javaee7angular\rest\RestaurantResource.class
 com\cortez\samples\javaee7angular\pagination\PaginatedListWrapper.class
