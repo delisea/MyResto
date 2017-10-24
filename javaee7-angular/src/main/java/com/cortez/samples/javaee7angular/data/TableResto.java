@@ -24,6 +24,9 @@ public class TableResto{
 	// true si la table est déplacable 
 	private boolean movable;
 	
+	@ManyToOne
+	@JoinColumn(name = "RESTAURANT_ID")
+	private Restaurant restaurant;
 	
 	/* Constructeurs */
 	
@@ -63,5 +66,16 @@ public class TableResto{
 
 	public void setMovable(boolean movable) {
 		this.movable = movable;
+	}
+	
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+		if(!restaurant.getTables().contains(this)){
+			restaurant.addTable(this);
+		}
 	}
 }
