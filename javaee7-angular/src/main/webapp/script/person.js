@@ -14,7 +14,10 @@ app.controller('personsListController', function ($scope, $rootScope, personServ
         columnDefs: [
             { field: 'id', displayName: 'Id' },
             { field: 'name', displayName: 'Name' },
-            { field: 'description', displayName: 'Description' },
+            { field: 'adress', displayName: 'Adress' },
+            { field: 'speciality', displayName: 'Speciality' },
+            { field: 'email', displayName: 'Email' },
+            { field: 'tel', displayName: 'Telephon' },
             { field: '', width: 30, cellTemplate: '<span class="glyphicon glyphicon-remove remove" ng-click="deleteRow(row)"></span>' }
         ],
 
