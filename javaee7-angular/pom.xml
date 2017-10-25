@@ -197,17 +197,133 @@
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
             <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>${version.war.plugin}</version>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.plugin.compiler}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <debug>true</debug>
+                    <optimize>true</optimize>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${version.plugin.enforcer}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
                         <configuration>
-                            <outputDirectory>deployments</outputDirectory>
-                            <warName>ROOT</warName>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>${java.version}</version>
+                                </requireJavaVersion>
+                            </rules>
                         </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.plugin.war}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <outputDirectory>deployments</outputDirectory>
+                    <warName>ROOT</warName>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>external.atlassian.jgitflow</groupId>
+                <artifactId>jgitflow-maven-plugin</artifactId>
+                <version>${version.plugin.jgitflow}</version>
+                <configuration>
+                    <noDeploy>true</noDeploy>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>${version.plugin.jrebel}</version>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${version.plugin.wildfly}</version>
+                <configuration>
+                    <version>10.0.0.Final</version>
+                    <filename>deployments/ROOT.war</filename>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.glassfish.embedded</groupId>
+                <artifactId>maven-embedded-glassfish-plugin</artifactId>
+                <version>${version.plugin.glassfish}</version>
+                <configuration>
+                    <port>8080</port>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>deploy</id>
+                        <!-- Workaround to force the deploy goal to not execute on pre-integrations-tests -->
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                        <configuration>
+                            <app>deployments/ROOT.war</app>
+                            <contextRoot>javaee7-angular</contextRoot>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomee.maven</groupId>
+                <artifactId>tomee-maven-plugin</artifactId>
+                <version>7.0.1</version>
+                <configuration>
+                    <libs>
+                        <lib>remove:openjpa-</lib>
+                        <lib>org.hibernate:hibernate-core:5.2.0.Final</lib>
+                        <lib>org.hibernate.common:hibernate-commons-annotations:5.0.1.Final</lib>
+                        <lib>org.jboss.logging:jboss-logging:3.3.0.Final</lib>
+                        <lib>dom4j:dom4j:1.6.1</lib>
+                        <lib>org.javassist:javassist:3.18.1-GA</lib>
+                        <lib>com.fasterxml:classmate:1.1.0</lib>
+                        <lib>antlr:antlr:2.7.7</lib>
+                    </libs>
+                    <systemVariables>
+                        <javax.persistence.provider>
+                            org.hibernate.jpa.HibernatePersistenceProvider
+                        </javax.persistence.provider>
+                    </systemVariables>
+                    <warFile>deployments/ROOT.war</warFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
         </profile>
 
 </profiles>
