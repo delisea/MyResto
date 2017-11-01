@@ -1,6 +1,5 @@
 package com.cortez.samples.javaee7angular.pagination;
 
-import com.cortez.samples.javaee7angular.data.Person;
 import com.cortez.samples.javaee7angular.data.Restaurant;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -22,8 +21,6 @@ public class PaginatedListWrapper implements Serializable {
     private String sortFields;
     private String sortDirections;
     
-    @XmlElement
-    private List<Person> list;
     
     @XmlElement
     private List<Restaurant> restaurants;
@@ -74,13 +71,5 @@ public class PaginatedListWrapper implements Serializable {
 
     public void setSortDirections(String sortDirections) {
         this.sortDirections = sortDirections;
-    }
-
-    public List<Person> getList() {
-        return list;
-    }
-
-    public void setList(List<Person> list) {
-        this.list = list;
     }
 }

@@ -1,0 +1,11 @@
+# Mark the commands below to be run as a batch
+batch
+
+# Add MySQL driver
+/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource)
+
+# Add the datasource
+data-source add --name=MySqlDS --driver-name=mysql --jndi-name=java:/MySqlDS --connection-url=jdbc:mysql://sql4.cluster1.easy-hebergement.net/closed5?autoReconnect=true --user-name=closed5 --password=pouted --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=28800 --enabled=true
+
+# Execute the batch
+run-batch
