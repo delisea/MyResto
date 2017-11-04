@@ -25,7 +25,7 @@ public class TableResto{
 	private boolean movable;
 	
 	@ManyToOne
-	@JoinColumn(name = "RESTAURANT_ID")
+	@JoinColumn(name = "restaurant_id")
 	private Restaurant restaurant;
 	
 	/* Constructeurs */

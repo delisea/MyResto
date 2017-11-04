@@ -19,9 +19,6 @@ public class Restaurant {
 
 	private String name;
 	private String address;
-	private double latitude;
-	private double longitude;
-	private String speciality;
 	private String url_img;
 	private String tel_number;
 	private String email;
@@ -47,30 +44,6 @@ public class Restaurant {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public double getLatitude() {
-		return this.latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	public double getLongitude() {
-		return this.longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
-	public String getSpeciality() {
-		return this.speciality;
-	}
-
-	public void setSpeciality(String speciality) {
-		this.speciality = speciality;
 	}
 
 	public String getUrl_img() {

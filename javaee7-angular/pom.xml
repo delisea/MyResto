@@ -50,7 +50,7 @@
 				<plugin>
 					<groupId>com.sebastian-daschner</groupId>
 					<artifactId>jaxrs-analyzer-maven-plugin</artifactId>
-					<version>0.15</version>
+					<version>0.5</version>
 					<executions>
 						<execution>
 							<goals>
@@ -59,7 +59,7 @@
 							<configuration>
 								<!-- Available backends are plaintext (default), swagger and asciidoc -->
 								<backend>swagger</backend>
-								<deployedDomain>localhost:8080</deployedDomain>
+								<deployedDomain>localhost</deployedDomain>
 							</configuration>
 						</execution>
 					</executions>

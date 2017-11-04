@@ -21,8 +21,6 @@ public class PaginatedListWrapper implements Serializable {
     private String sortFields;
     private String sortDirections;
     
-    
-    @XmlElement
     private List<Restaurant> restaurants;
 
     public List<Restaurant> getRestaurants() {

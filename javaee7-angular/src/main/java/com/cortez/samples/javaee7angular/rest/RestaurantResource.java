@@ -61,7 +61,7 @@ public class RestaurantResource extends Application {
 	private List<Restaurant> findRestaurants(int startPosition, int maxResults, String sortFields,
 			String sortDirections) {
 		Query query = entityManager
-				.createQuery("SELECT r FROM Restaurant r ORDER BY r." + sortFields + " " + sortDirections);
+				.createQuery("SELECT r.id, r.name, r.address FROM Restaurant r ORDER BY r." + sortFields + " " + sortDirections);
 		query.setFirstResult(startPosition);
 		query.setMaxResults(maxResults);
 		return query.getResultList();
@@ -95,10 +95,7 @@ public class RestaurantResource extends Application {
 			Restaurant restaurantToSave = new Restaurant();
 			restaurantToSave.setAddress(restaurant.getAddress());
 			restaurantToSave.setEmail(restaurant.getEmail());
-			restaurantToSave.setLatitude(restaurant.getLatitude());
-			restaurantToSave.setLongitude(restaurant.getLongitude());
 			restaurantToSave.setName(restaurant.getName());
-			restaurantToSave.setSpeciality(restaurant.getSpeciality());
 			restaurantToSave.setTel_number(restaurant.getTel_number());
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
 			try {
@@ -113,11 +110,8 @@ public class RestaurantResource extends Application {
 
 		} else { // Modif
 			existingRestaurant.setAddress(restaurant.getAddress());
-			existingRestaurant.setEmail(restaurant.getEmail());
-			existingRestaurant.setLatitude(restaurant.getLatitude());
-			existingRestaurant.setLongitude(restaurant.getLongitude());
+			existingRestaurant.setEmail(restaurant.getEmail());			
 			existingRestaurant.setName(restaurant.getName());
-			existingRestaurant.setSpeciality(restaurant.getSpeciality());
 			existingRestaurant.setTel_number(restaurant.getTel_number());
 			existingRestaurant.setUrl_img(restaurant.getUrl_img());
 			try {
