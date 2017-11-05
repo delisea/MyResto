@@ -1,11 +1,14 @@
 # Mark the commands below to be run as a batch
 batch
 
-# Add MySQL driver
-/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource)
+#remove previous datasource with same driver
+data-source remove --name=ExampleDS
+
+# Add the driver
+/subsystem=datasources/jdbc-driver=h2:add(driver-name=h2,driver-module-name=com.h2database.h2,driver-xa-datasource-class-name=org.h2.jdbcx.JdbcDataSource)
 
 # Add the datasource
-data-source add --name=MySqlDS --driver-name=mysql --jndi-name=java:jboss/datasources/MySqlLocalDS --connection-url=jdbc:mysql://127.0.0.1:3306/myresto --user-name=root --password=pouted --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=14400 --enabled=true
+data-source add --name=h2embedded --driver-name=h2 --jndi-name=java:jboss/datasources/ExampleDS1 --connection-url=jdbc:h2:tcp://localhost/~/test --user-name=sa --use-ccm=true --enabled=true --use-java-context=true
 
 # Execute the batch
 run-batch

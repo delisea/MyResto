@@ -1,10 +1,13 @@
 FROM jboss/wildfly
 MAINTAINER Didier Donsez
 
-ADD customization /opt/jboss/wildfly/customization/
-ADD modules /opt/jboss/wildfly/modules/
 
-RUN /opt/jboss/wildfly/customization/execute.sh
+#decommenter pour ajouter une datasource mysql
+ADD customization /opt/jboss/wildfly/customization/
+#ADD modules /opt/jboss/wildfly/modules/
+
+# si erreur ici du genre bin/bash^M... ===> Changer le format des fins de lignes du fichier en UNIX
+#RUN /opt/jboss/wildfly/customization/execute.sh
 
 # Should be changed for your public domain name
 ENV SWAGGER_API_URL http://localhost:8080/swagger.json

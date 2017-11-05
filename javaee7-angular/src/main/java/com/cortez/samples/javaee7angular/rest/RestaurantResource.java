@@ -22,6 +22,7 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import com.cortez.samples.javaee7angular.data.Restaurant;
+import com.cortez.samples.javaee7angular.data.TableResto;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
 
 @Stateless
@@ -47,13 +48,11 @@ public class RestaurantResource extends Application {
 			rest = entityManager.find(Restaurant.class, id);
 			if (rest == null) {
 				return Response.status(Response.Status.NOT_FOUND)
-						.entity(rest).build();
+						.entity("le restaurant d'id : "+id+" est introuvable.").build();
 			}
 		} catch (Exception e) {
-			StringWriter errors = new StringWriter();
-			e.printStackTrace(new PrintWriter(errors));
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.entity(e.getLocalizedMessage() + "/n" + errors.toString()).build();
+					.entity(getExceptionMessage(e)).build();
 		}
 		return Response.ok(rest).build();
 	}
@@ -100,11 +99,9 @@ public class RestaurantResource extends Application {
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
 			try {
 				entityManager.persist(restaurantToSave);
-			} catch (Exception e) {
-				StringWriter errors = new StringWriter();
-				e.printStackTrace(new PrintWriter(errors));
+			} catch (Exception e) {			
 				return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-						.entity(e.getLocalizedMessage() + "/n" + errors.toString()).build();
+						.entity(getExceptionMessage(e)).build();
 			}
 			return Response.ok(restaurantToSave).build();
 
@@ -116,28 +113,49 @@ public class RestaurantResource extends Application {
 			existingRestaurant.setUrl_img(restaurant.getUrl_img());
 			try {
 				return Response.ok(entityManager.merge(existingRestaurant)).build();
-			} catch (Exception e) {
-				StringWriter errors = new StringWriter();
-				e.printStackTrace(new PrintWriter(errors));
+			} catch (Exception e) {				
 				return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-						.entity(e.getLocalizedMessage() + "/n" + errors.toString()).build();
+						.entity(getExceptionMessage(e)).build();
 			}
 		}
 	}
 
+
 	@DELETE
 	@Path("{id}")
-	public Response deleteRestaurant(@PathParam("id") Long id) {
-		try {
-			entityManager.remove(getRestaurant(id).getEntity());
-		} catch (Exception e) {
-			StringWriter errors = new StringWriter();
-			e.printStackTrace(new PrintWriter(errors));
+	public Response deleteRestaurant(@PathParam("id") Long id) {		
+		Response response = getRestaurant(id);
+		if(response.getStatus() != Response.Status.OK.getStatusCode()){
+			return response;
+		}
+		
+		Restaurant restaurantToDelete = (Restaurant)response.getEntity();
+		
+		// Supprimer d'abord les tables
+		List<TableResto> tablesToDelete = restaurantToDelete.getTables();
+		for(TableResto tr : tablesToDelete){
+			TableResto tableToDelete = entityManager.find(TableResto.class, tr.getId());
+			if(tableToDelete != null)
+				try{
+					entityManager.remove(tableToDelete);
+				}catch (Exception e) {			
+					return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+							.entity(getExceptionMessage(e)).build();
+				}				
+		}
+		try { // Suppression du restaurant
+			entityManager.remove(response.getEntity());
+		} catch (Exception e) {			
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.entity(e.getLocalizedMessage() + "/n" + errors.toString()).build();
+					.entity(getExceptionMessage(e)).build();
 		}
 		return Response.status(Response.Status.OK).build();
 	}
 	
+	private String getExceptionMessage(Exception e){
+		StringWriter errors = new StringWriter();
+		e.printStackTrace(new PrintWriter(errors));
+		return e.getLocalizedMessage() + "/n" + errors.toString();
+	}
 	
 }

@@ -10,6 +10,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -17,6 +18,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.cortez.samples.javaee7angular.data.Restaurant;
 import com.cortez.samples.javaee7angular.data.TableResto;
 
 @Stateless
@@ -37,14 +40,12 @@ public class TableResource extends Application {
 			table = entityManager.find(TableResto.class, id);
 			if(table == null){
 				return Response.status(Response.Status.NOT_FOUND)
-						.entity(table)
+						.entity("la table d'id : "+id+" est introuvable.")
 						.build();
 			}
-		} catch (Exception e) {
-			StringWriter errors = new StringWriter();
-			e.printStackTrace(new PrintWriter(errors));
+		} catch (Exception e) {			
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.entity(e.getLocalizedMessage()+"/n"+errors.toString())
+					.entity(getExceptionMessage(e))
 					.build();
 		}
 		return Response.ok(table).build();
@@ -55,20 +56,24 @@ public class TableResource extends Application {
 	 * @return
 	 */
 	@POST
-	public Response saveTable(TableResto table) {
+	public Response saveTable(@HeaderParam("restaurant_id") Long restaurant_id, TableResto table) {
+		Restaurant existingRestaurant = entityManager.find(Restaurant.class, restaurant_id);
+		if (existingRestaurant == null) {
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity("le restaurant d'id : "+restaurant_id+" est introuvable.").build();
+		}
 		TableResto existingTable = (TableResto) getTable(table.getId()).getEntity();
         if (existingTable == null) { // Ajout
             TableResto tableToSave = new TableResto();
             tableToSave.setAvailable_places(table.getAvailable_places());
             tableToSave.setMovable(table.isMovable());
-            tableToSave.setNumber(table.getNumber());         
+            tableToSave.setNumber(table.getNumber());    
+            tableToSave.setRestaurant(existingRestaurant);
             try{
             	entityManager.persist(tableToSave);
-            }catch(Exception e){
-            	StringWriter errors = new StringWriter();
-    			e.printStackTrace(new PrintWriter(errors));
+            }catch(Exception e){            
     			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-    					.entity(e.getLocalizedMessage()+"/n"+errors.toString())
+    					.entity(getExceptionMessage(e))
     					.build();
             }
             return Response.ok(tableToSave).build();
@@ -77,13 +82,12 @@ public class TableResource extends Application {
         	existingTable.setAvailable_places(table.getAvailable_places());
         	existingTable.setMovable(table.isMovable());
         	existingTable.setNumber(table.getNumber());  
+        	existingTable.setRestaurant(existingRestaurant);
         	try{
         		return Response.ok(entityManager.merge(existingTable)).build();
         	}catch(Exception e){
-        		StringWriter errors = new StringWriter();
-    			e.printStackTrace(new PrintWriter(errors));
     			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-    					.entity(e.getLocalizedMessage()+"/n"+errors.toString())
+    					.entity(getExceptionMessage(e))
     					.build();
         	}        
         }
@@ -92,16 +96,24 @@ public class TableResource extends Application {
 	@DELETE
 	@Path("{id}")
 	public Response deleteTable(@PathParam("id") Long id) {
+		Response response = getTable(id);
+		if(response.getStatus() != Response.Status.OK.getStatusCode()){
+			return response;
+		}
 		try{
-			entityManager.remove(getTable(id).getEntity());
-		}catch(Exception e){
-			StringWriter errors = new StringWriter();
-			e.printStackTrace(new PrintWriter(errors));
+			entityManager.remove(response.getEntity());
+		}catch(Exception e){			
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.entity(e.getLocalizedMessage()+"/n"+errors.toString())
+					.entity(getExceptionMessage(e))
 					.build();
 		}
-		return Response.status(Response.Status.OK)
+		return Response.status(Response.Status.NO_CONTENT)
 				.build();
+	}
+	
+	private String getExceptionMessage(Exception e){
+		StringWriter errors = new StringWriter();
+		e.printStackTrace(new PrintWriter(errors));
+		return e.getLocalizedMessage() + "/n" + errors.toString();
 	}
 }

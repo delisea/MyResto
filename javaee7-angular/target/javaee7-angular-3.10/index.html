@@ -106,21 +106,21 @@
                 <p class="help-block" ng-show="restaurantForm.adress.$error.maxlength">Description cannot be longer than 100 characters.</p>
             </div>
             
-                        <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+          <!--               Display an error if the input is invalid and is dirty (only when someone changes the value)
             <div class="form-group" ng-class="{'has-error' : restaurantForm.speciality.$invalid && restaurantForm.speciality.$dirty}">
                 <label for="speciality">Speciality:</label>
-                <!-- Display a check when the field is valid and was modified -->
+                Display a check when the field is valid and was modified
                 <span ng-class="{'glyphicon glyphicon-ok' : restaurantForm.speciality.$valid && restaurantForm.speciality.$dirty}"></span>
 
                 <input id="speciality" name="speciality" type="text" class="form-control" maxlength="100"
                        ng-model="restaurant.speciality"
                        required ng-minlength="5" ng-maxlength="100"/>
 
-                <!-- Validation messages to be displayed on required, minlength and maxlength -->
+                Validation messages to be displayed on required, minlength and maxlength
                 <p class="help-block" ng-show="restaurantForm.speciality.$error.required">Add Description.</p>
                 <p class="help-block" ng-show="restaurantForm.speciality.$error.minlength">Description must be at least 5 characters long.</p>
                 <p class="help-block" ng-show="restaurantForm.speciality.$error.maxlength">Description cannot be longer than 100 characters.</p>
-            </div>
+            </div> -->
 
             <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
             <div class="form-group" ng-class="{'has-error' : restaurantForm.imageUrl.$invalid && restaurantForm.imageUrl.$dirty}">

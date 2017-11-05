@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Entity implementation class for Entity: Restaurant
  *
  */
 @Entity
+@JsonIgnoreProperties(value = { "tables" })
 public class Restaurant {
 
 	@Id
@@ -23,7 +26,7 @@ public class Restaurant {
 	private String tel_number;
 	private String email;
 
-	@OneToMany(mappedBy = "restaurant")
+	@OneToMany(mappedBy = "restaurant")	
 	private List<TableResto> tables;
 
 	public Restaurant() {
@@ -87,6 +90,10 @@ public class Restaurant {
 
 	public List<TableResto> getTables() {
 		return tables;
+	}
+	
+	public boolean hasTables(){
+		return !tables.isEmpty();
 	}
 
 	public void setTables(List<TableResto> tables) {
