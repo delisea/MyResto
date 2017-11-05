@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 @Entity
-@JsonIgnoreProperties(value = { "tables" })
+@JsonIgnoreProperties(value = { "tables","disponibilities" })
 public class Restaurant {
 
 	@Id
@@ -28,6 +28,12 @@ public class Restaurant {
 
 	@OneToMany(mappedBy = "restaurant")	
 	private List<TableResto> tables;
+	
+	@OneToMany(mappedBy = "restaurant")	
+	private List<Disponibility> disponibilities;
+	
+	@OneToMany(mappedBy = "restaurant")	
+	private List<Speciality> specialities;
 
 	public Restaurant() {
 		super();
@@ -100,4 +106,43 @@ public class Restaurant {
 		this.tables = tables;
 	}
 
+	public void addDisponibility(Disponibility dispo) {
+		if(!this.disponibilities.contains(dispo))
+			this.disponibilities.add(dispo);
+		if (dispo.getRestaurant() != this) {
+			dispo.setRestaurant(this);
+		}
+	}
+	
+	public List<Disponibility> getDisponibilities() {
+		return disponibilities;
+	}
+
+	public void setDisponibilities(List<Disponibility> disponibilities) {
+		this.disponibilities = disponibilities;
+	}
+	
+	public boolean hasDisponibility(){
+		return !disponibilities.isEmpty();
+	}
+
+	public List<Speciality> getSpecialities() {
+		return specialities;
+	}
+
+	public void setSpecialities(List<Speciality> specialities) {
+		this.specialities = specialities;
+	}
+
+	public boolean hasSpecialities(){
+		return !specialities.isEmpty();
+	}
+	
+	public void addSpeciality(Speciality speciality) {
+		if(!this.specialities.contains(speciality))
+			this.specialities.add(speciality);
+		if (speciality.getRestaurant() != this) {
+			speciality.setRestaurant(this);
+		}
+	}
 }

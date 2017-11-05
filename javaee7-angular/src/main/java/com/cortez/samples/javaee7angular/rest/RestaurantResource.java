@@ -21,6 +21,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.cortez.samples.javaee7angular.data.Disponibility;
 import com.cortez.samples.javaee7angular.data.Restaurant;
 import com.cortez.samples.javaee7angular.data.TableResto;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
@@ -89,7 +91,8 @@ public class RestaurantResource extends Application {
 	
 	@POST
 	public Response saveRestaurant(Restaurant restaurant) {
-		Restaurant existingRestaurant = (Restaurant) getRestaurant(restaurant.getId()).getEntity();
+		Response response = getRestaurant(restaurant.getId());		
+		Restaurant existingRestaurant = (response.getStatus() == Response.Status.OK.getStatusCode()) ? (Restaurant) response.getEntity() : null;
 		if (existingRestaurant == null) { // Ajout
 			Restaurant restaurantToSave = new Restaurant();
 			restaurantToSave.setAddress(restaurant.getAddress());
@@ -131,7 +134,7 @@ public class RestaurantResource extends Application {
 		
 		Restaurant restaurantToDelete = (Restaurant)response.getEntity();
 		
-		// Supprimer d'abord les tables
+		// Supprimer les tables associées
 		List<TableResto> tablesToDelete = restaurantToDelete.getTables();
 		for(TableResto tr : tablesToDelete){
 			TableResto tableToDelete = entityManager.find(TableResto.class, tr.getId());
@@ -143,7 +146,23 @@ public class RestaurantResource extends Application {
 							.entity(getExceptionMessage(e)).build();
 				}				
 		}
-		try { // Suppression du restaurant
+		
+		// Supprimer les disponibilités associées
+		List<Disponibility> diponibilitiesToDelete = restaurantToDelete.getDisponibilities();
+		for(Disponibility dispo : diponibilitiesToDelete){
+			Disponibility dispoToDelete = entityManager.find(Disponibility.class, dispo.getId());
+			if(dispoToDelete != null)
+				try{
+					entityManager.remove(dispoToDelete);
+				}catch (Exception e) {			
+					return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+							.entity(getExceptionMessage(e)).build();
+				}				
+		}
+		
+		
+		// Suppression du restaurant
+		try { 
 			entityManager.remove(response.getEntity());
 		} catch (Exception e) {			
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)

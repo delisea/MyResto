@@ -19,28 +19,28 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.cortez.samples.javaee7angular.data.Disponibility;
 import com.cortez.samples.javaee7angular.data.Restaurant;
-import com.cortez.samples.javaee7angular.data.TableResto;
 
 @Stateless
 @ApplicationPath("/resources")
-@Path("tables")
+@Path("disponibilities")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class TableResource extends Application {
-
+public class DisponibilityResource extends Application{
+	
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	
 	@GET
 	@Path("{id}")
-	public Response getTable(@PathParam("id") Long id) {
-		TableResto table = null;
+	public Response getDisponibility(@PathParam("id") Long id) {
+		Disponibility dispo = null;
 		try {
-			table = entityManager.find(TableResto.class, id);
-			if(table == null){
+			dispo = entityManager.find(Disponibility.class, id);
+			if(dispo == null){
 				return Response.status(Response.Status.NOT_FOUND)
-						.entity("la table d'id : "+id+" est introuvable.")
+						.entity("la disponibilité d'id : "+id+" est introuvable.")
 						.build();
 			}
 		} catch (Exception e) {			
@@ -48,45 +48,37 @@ public class TableResource extends Application {
 					.entity(getExceptionMessage(e))
 					.build();
 		}
-		return Response.ok(table).build();
+		return Response.ok(dispo).build();
 	}
-
-	/**
-	 * @param table
-	 * @return
-	 */
+	
 	@POST
-	public Response saveTable(@HeaderParam("restaurant_id") Long restaurant_id, TableResto table) {
+	public Response saveDisponibility(@HeaderParam("restaurant_id") Long restaurant_id, Disponibility dispo) {
 		Restaurant existingRestaurant = entityManager.find(Restaurant.class, restaurant_id);
 		if (existingRestaurant == null) {
 			return Response.status(Response.Status.NOT_FOUND)
 					.entity("le restaurant d'id : "+restaurant_id+" est introuvable.").build();
 		}
 		
-		Response response = getTable(table.getId());
-		TableResto existingTable = (response.getStatus() == Response.Status.OK.getStatusCode()) ? (TableResto) response.getEntity() : null;
-        if (existingTable == null) { // Ajout
-            TableResto tableToSave = new TableResto();
-            tableToSave.setAvailable_places(table.getAvailable_places());
-            tableToSave.setMovable(table.isMovable());
-            tableToSave.setNumber(table.getNumber());    
-            tableToSave.setRestaurant(existingRestaurant);
+		Response response = getDisponibility(dispo.getId());		
+		Disponibility existingDispo = (response.getStatus() == Response.Status.OK.getStatusCode()) ? (Disponibility) response.getEntity() : null;
+        if (existingDispo == null) { // Ajout
+            Disponibility dispoToSave = new Disponibility();
+            dispoToSave.setPeriode(dispo.getPeriode());
+            dispoToSave.setRestaurant(existingRestaurant);
             try{
-            	entityManager.persist(tableToSave);
+            	entityManager.persist(dispoToSave);
             }catch(Exception e){            
     			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
     					.entity(getExceptionMessage(e))
     					.build();
             }
-            return Response.ok(tableToSave).build();
+            return Response.ok(dispoToSave).build();
             
         } else { // Modif
-        	existingTable.setAvailable_places(table.getAvailable_places());
-        	existingTable.setMovable(table.isMovable());
-        	existingTable.setNumber(table.getNumber());  
-        	existingTable.setRestaurant(existingRestaurant);
+        	existingDispo.setPeriode(dispo.getPeriode());  
+        	existingDispo.setRestaurant(existingRestaurant);
         	try{
-        		return Response.ok(entityManager.merge(existingTable)).build();
+        		return Response.ok(entityManager.merge(existingDispo)).build();
         	}catch(Exception e){
     			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
     					.entity(getExceptionMessage(e))
@@ -94,11 +86,11 @@ public class TableResource extends Application {
         	}        
         }
 	}
-
+	
 	@DELETE
 	@Path("{id}")
-	public Response deleteTable(@PathParam("id") Long id) {
-		Response response = getTable(id);
+	public Response deleteDisponibility(@PathParam("id") Long id) {
+		Response response = getDisponibility(id);
 		if(response.getStatus() != Response.Status.OK.getStatusCode()){
 			return response;
 		}
@@ -112,6 +104,7 @@ public class TableResource extends Application {
 		return Response.status(Response.Status.NO_CONTENT)
 				.build();
 	}
+	
 	
 	private String getExceptionMessage(Exception e){
 		StringWriter errors = new StringWriter();
