@@ -24,6 +24,7 @@ import javax.ws.rs.core.Response;
 
 import com.cortez.samples.javaee7angular.data.Disponibility;
 import com.cortez.samples.javaee7angular.data.Restaurant;
+import com.cortez.samples.javaee7angular.data.Speciality;
 import com.cortez.samples.javaee7angular.data.TableResto;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
 
@@ -154,6 +155,19 @@ public class RestaurantResource extends Application {
 			if(dispoToDelete != null)
 				try{
 					entityManager.remove(dispoToDelete);
+				}catch (Exception e) {			
+					return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+							.entity(getExceptionMessage(e)).build();
+				}				
+		}
+		
+		//Supprimer les spécialités associées
+		List<Speciality> specialitiesToDelete = restaurantToDelete.getSpecialities();
+		for(Speciality speciality : specialitiesToDelete){
+			Speciality specialityToDelete = entityManager.find(Speciality.class, speciality.getId());
+			if(specialityToDelete != null)
+				try{
+					entityManager.remove(specialityToDelete);
 				}catch (Exception e) {			
 					return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 							.entity(getExceptionMessage(e)).build();
