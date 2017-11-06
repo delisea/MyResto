@@ -247,7 +247,18 @@
             ],
             "in": "query",
             "required": true,
-          }
+          },
+          {
+            "type": "string",
+            "name": "speciality",
+            "enum": [
+              "ITALIAN",
+              "CHINESE",
+              "JAPANESE"
+            ],
+            "in": "query",
+            "required": true,
+          },
         ],
         "responses": {
           "200": {

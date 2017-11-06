@@ -78,5 +78,4 @@ public class Disponibility {
 			return Periode.valueOf(value);
 		}
 	}
-	
 }
