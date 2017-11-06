@@ -228,6 +228,38 @@
         }
       }
     },
+    "/restaurants/search": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "disponibility",
+            "enum": [
+              "MORNING",
+              "MIDDAY",
+              "MIDNIGHT"
+            ],
+            "in": "query",
+            "required": true,
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/PaginatedListWrapper"
+            }
+          }
+        }
+      }
+    },
     "/disponibilities": {
       "post": {
         "consumes": [

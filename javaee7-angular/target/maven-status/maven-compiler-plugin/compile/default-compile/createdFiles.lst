@@ -1,4 +1,5 @@
 com\cortez\samples\javaee7angular\data\Disponibility$Periode.class
+com\cortez\samples\javaee7angular\data\Disponibility$PeriodeConverter.class
 com\cortez\samples\javaee7angular\data\Restaurant.class
 com\cortez\samples\javaee7angular\rest\RestaurantResource.class
 com\cortez\samples\javaee7angular\data\Speciality$Speciality_label.class

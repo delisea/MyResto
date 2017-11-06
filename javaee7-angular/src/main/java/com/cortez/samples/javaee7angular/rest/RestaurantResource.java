@@ -59,6 +59,18 @@ public class RestaurantResource extends Application {
 		}
 		return Response.ok(rest).build();
 	}
+	@GET
+	@Path("/search")
+	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility/*, @QueryParam("speciality") String speciality, @QueryParam("address") String address*/){
+		List<Restaurant> results = null;
+		Query query = entityManager.createQuery("SELECT DISTINCT R.name FROM Restaurant R, Disponibility D "
+				//+ "INNER JOIN SPECIALITY S"
+				//+ "ON S.speciality_label = "+speciality
+				+ "WHERE D.restaurant.id = R.id "
+				+ "AND D.periode = '"+disponibility+"'");
+		results = query.getResultList();		
+		return Response.ok(results).build();
+	}
 
 	private List<Restaurant> findRestaurants(int startPosition, int maxResults, String sortFields,
 			String sortDirections) {
@@ -68,6 +80,7 @@ public class RestaurantResource extends Application {
 		query.setMaxResults(maxResults);
 		return query.getResultList();
 	}
+	
 
 	private PaginatedListWrapper findRestaurants(PaginatedListWrapper wrapper) {
 		wrapper.setTotalResults(countRestaurants());

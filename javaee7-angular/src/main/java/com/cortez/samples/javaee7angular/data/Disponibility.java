@@ -15,12 +15,14 @@ public class Disponibility {
     private Long id;
     
     public Disponibility(){}
+       
+    @Basic
+	@Convert( converter=PeriodeConverter.class )
+    private Periode periode;
     
     public enum Periode {
         MORNING, MIDDAY, EVENING
     }
-    
-    private Periode periode;
 
     public Long getId() {
         return id;
@@ -53,4 +55,28 @@ public class Disponibility {
 			restaurant.addDisponibility(this);
 		}
 	}
+	
+	@Converter(autoApply=true)
+	public static class PeriodeConverter
+			implements AttributeConverter<Periode,String> {
+
+		@Override
+		public String convertToDatabaseColumn(Periode value) {
+			if ( value == null ) {
+				return null;
+			}
+
+			return value.toString();
+		}
+
+		@Override
+		public Periode convertToEntityAttribute(String value) {
+			if ( value == null ) {
+				return null;
+			}
+
+			return Periode.valueOf(value);
+		}
+	}
+	
 }
