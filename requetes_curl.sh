@@ -1,22 +1,13 @@
 #Test filtrage par disponibilité
 $err=false
 
-#Ajout table
-$response=curl -X POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"type\": 0, \"name\": \"22\", \"in\": \"string\"}"
-
-#response=$(curl --write-out %{http_code} --silent --output /dev/null servername)
-
-http_status=$(echo "$response" | grep HTTP |  awk '{print $2}')
-echo $response
-if[ $http_status != 500 ] then
-	$err=true;
-	echo "POST /tables failed";
-endif
-
-
-
 #Ajout resto 1
-curl -X POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\"}"
+response=curl -s -I POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\"}"
+res=`echo $response | grep HTTP/1.1 | awk {'print $2'}`
+if [ $res -ne 200 ]
+then
+	echo "Error $res on $1"
+fi
 
 #Ajout Dispo morning sur resto 1
 curl -X POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: 1" -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"MORNING\"}"
