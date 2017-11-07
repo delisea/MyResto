@@ -1,14 +1,15 @@
 #Test filtrage par disponibilité
-$err = false
+$err=false
 
 #Ajout table
-$response = curl -X POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"type\": 0, \"name\": \"22\", \"in\": \"string\"}"
+$response=curl -X POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"type\": 0, \"name\": \"22\", \"in\": \"string\"}"
 
 #response=$(curl --write-out %{http_code} --silent --output /dev/null servername)
 
 http_status=$(echo "$response" | grep HTTP |  awk '{print $2}')
-if[ $http_status -neq 500 ]
-	$err = true;
+echo $response
+if[ $http_status != 500 ] then
+	$err=true;
 	echo "POST /tables failed";
 endif
 
