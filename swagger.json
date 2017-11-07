@@ -243,7 +243,7 @@
             "enum": [
               "MORNING",
               "MIDDAY",
-              "MIDNIGHT"
+              "EVENING"
             ],
             "in": "query",
             "required": true,
@@ -259,6 +259,39 @@
             "in": "query",
             "required": true,
           },
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/PaginatedListWrapper"
+            }
+          }
+        }
+      }
+    },
+    "/restaurants/isRestaurantAvailable/{nbCouverts}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "name": "nbCouverts",
+            "in": "query",
+            "required": true,
+          }        
         ],
         "responses": {
           "200": {
@@ -477,7 +510,7 @@
         "id": {
           "type": "integer"
         },
-        "available_places": {
+        "places": {
           "type": "integer"
         },
         "movable": {

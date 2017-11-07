@@ -13,6 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -196,6 +197,29 @@ public class RestaurantResource extends Application {
 					.entity(getExceptionMessage(e)).build();
 		}
 		return Response.status(Response.Status.OK).build();
+	}
+	
+	@GET
+	@Path("/isRestaurantAvailable/{nbCouverts}")
+	public Response isRestaurantAvailable(@HeaderParam("restaurant_id") Long restaurant_id, @QueryParam("nbCouverts") int nbCouverts){		
+		boolean available = false;
+		Response response = getRestaurant(restaurant_id);		
+		Restaurant existingRestaurant = (response.getStatus() == Response.Status.OK.getStatusCode()) ? (Restaurant) response.getEntity() : null;
+		if(existingRestaurant==null){
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity("le restaurant d'id : "+restaurant_id+" est introuvable.").build();
+		}
+		else{
+			List<TableResto> tableRestoList = existingRestaurant.getTables();
+			for(TableResto tr : tableRestoList){
+				if(tr.getPlaces()>=nbCouverts){
+					available = true;
+					break;
+				}
+			}
+		}
+		return Response.status(Response.Status.OK)
+				.entity(available).build();
 	}
 	
 	private String getExceptionMessage(Exception e){

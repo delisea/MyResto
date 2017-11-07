@@ -1,10 +1,8 @@
-#Test filtrage par disponibilité
-$err=false
-
 #Ajout resto 1
-response=curl -s -I POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\"}"
+response=$(curl -s -I POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\"}")
 res=`echo $response | grep HTTP/1.1 | awk {'print $2'}`
-if [ $res -ne 200 ]
+echo $response
+if [ $res = 200 ]
 then
 	echo "Error $res on $1"
 fi

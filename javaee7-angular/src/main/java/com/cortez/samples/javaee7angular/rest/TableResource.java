@@ -67,7 +67,7 @@ public class TableResource extends Application {
 		TableResto existingTable = (response.getStatus() == Response.Status.OK.getStatusCode()) ? (TableResto) response.getEntity() : null;
         if (existingTable == null) { // Ajout
             TableResto tableToSave = new TableResto();
-            tableToSave.setAvailable_places(table.getAvailable_places());
+            tableToSave.setPlaces(table.getPlaces());
             tableToSave.setMovable(table.isMovable());
             tableToSave.setNumber(table.getNumber());    
             tableToSave.setRestaurant(existingRestaurant);
@@ -81,7 +81,7 @@ public class TableResource extends Application {
             return Response.ok(tableToSave).build();
             
         } else { // Modif
-        	existingTable.setAvailable_places(table.getAvailable_places());
+        	existingTable.setPlaces(table.getPlaces());
         	existingTable.setMovable(table.isMovable());
         	existingTable.setNumber(table.getNumber());  
         	existingTable.setRestaurant(existingRestaurant);

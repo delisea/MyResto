@@ -18,8 +18,8 @@ public class TableResto{
 	// Le numéro de table
 	private int number;
 
-	// Nombre de couverts restants disponibles
-	private int available_places;
+	// Nombre de couverts de la table
+	private int places;
 	
 	// true si la table est déplacable 
 	private boolean movable;
@@ -52,12 +52,12 @@ public class TableResto{
 		this.number = number;
 	}
 
-	public int getAvailable_places() {
-		return available_places;
+	public int getPlaces() {
+		return places;
 	}
 
-	public void setAvailable_places(int available_places) {
-		this.available_places = available_places;
+	public void setPlaces(int places) {
+		this.places = places;
 	}
 
 	public boolean isMovable() {
