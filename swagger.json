@@ -259,6 +259,12 @@
             "in": "query",
             "required": true,
           },
+          {
+            "type": "integer",
+            "name": "nbCouverts",
+            "in": "query",
+            "required": true,
+          },
         ],
         "responses": {
           "200": {

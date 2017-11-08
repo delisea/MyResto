@@ -3,7 +3,6 @@ package com.cortez.samples.javaee7angular.rest;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,7 +21,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import com.cortez.samples.javaee7angular.data.Disponibility;
 import com.cortez.samples.javaee7angular.data.Restaurant;
 import com.cortez.samples.javaee7angular.data.Speciality;
@@ -62,14 +60,34 @@ public class RestaurantResource extends Application {
 	}
 	@GET
 	@Path("/search")
-	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility, @QueryParam("speciality") String speciality/*, @QueryParam("address") String address*/){
+	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility, @QueryParam("speciality") String speciality, @QueryParam("nbCouverts") int nbCouverts/*, @QueryParam("address") String address*/){
 		List<Restaurant> results = null;
+		
 		Query query = entityManager.createQuery("SELECT DISTINCT R.name FROM Restaurant R, Disponibility D, Speciality S "
 				+ "WHERE D.restaurant.id = R.id "
 				+ "AND D.periode = '"+disponibility+"'"
 				+ " AND S.restaurant.id = R.id"
 				+ " AND S.speciality_label = '"+speciality+"'");
-		results = query.getResultList();		
+		
+		results = query.getResultList();
+		
+		if(nbCouverts != 0)
+		{
+			for(Restaurant r : results){
+				Response response = isRestaurantAvailable(r.getId(), nbCouverts);
+				Object available_obj = (response.getStatus() == Response.Status.OK.getStatusCode()) ? response.getEntity() : null;
+				if(available_obj == null){
+					return Response.status(Response.Status.NOT_FOUND)
+							.entity("le restaurant d'id : "+r.getId()+" est introuvable.").build();
+				}
+				else{
+					boolean available_bool = (boolean)available_obj;
+					if(!available_bool){
+						results.remove(r);
+					}
+				}
+			}
+		}
 		return Response.ok(results).build();
 	}
 
