@@ -36,3 +36,6 @@ curl -X POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -
 
 #Requête de filtrage searchResto avec disponibility = MORNING > Sort resto 1
 curl -X GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?disponibility=MORNING&speciality=ITALIAN&nbCouverts=1" -H "accept: application/json"
+
+#Requete de filtrage ---> Pas de filtrage
+curl -X GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?nbCouverts=0" -H "accept: application/json"

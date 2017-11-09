@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -21,6 +23,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import com.cortez.samples.javaee7angular.data.Disponibility;
 import com.cortez.samples.javaee7angular.data.Restaurant;
 import com.cortez.samples.javaee7angular.data.Speciality;
@@ -63,12 +66,25 @@ public class RestaurantResource extends Application {
 	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility, @QueryParam("speciality") String speciality, @QueryParam("nbCouverts") int nbCouverts/*, @QueryParam("address") String address*/){
 		List<Restaurant> results = null;
 		
-		Query query = entityManager.createQuery("SELECT DISTINCT R.name FROM Restaurant R, Disponibility D, Speciality S "
-				+ "WHERE D.restaurant.id = R.id "
-				+ "AND D.periode = '"+disponibility+"'"
-				+ " AND S.restaurant.id = R.id"
-				+ " AND S.speciality_label = '"+speciality+"'");
+//		Query query = entityManager.createQuery("SELECT DISTINCT R.id, R.name FROM Restaurant R, Disponibility D, Speciality S "
+//				+ "WHERE D.restaurant.id = R.id "
+//				+ "AND D.periode = '"+disponibility+"'"
+//				+ " AND S.restaurant.id = R.id"
+//				+ " AND S.speciality_label = '"+speciality+"'");
 		
+		
+		
+		//results = query.getResultList();
+		String queryString = "SELECT r FROM Restaurant r";
+		if(disponibility != null){
+			queryString += " JOIN r.disponibilities d ON d.periode = '"+disponibility+"'";
+		}
+		
+		if(speciality != null){
+			queryString += " JOIN r.specialities s ON s.speciality_label = '"+speciality+"'";
+		}
+		
+		Query query = entityManager.createQuery(queryString);
 		results = query.getResultList();
 		
 		if(nbCouverts != 0)
