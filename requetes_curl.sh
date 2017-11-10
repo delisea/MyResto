@@ -13,20 +13,20 @@ curl -X POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "a
 #Ajout Table (5 places) sur resto 1
 curl -X POST "http://localhost:8080/javaee7-angular/resources/tables" -H "accept: application/json" -H "restaurant_id: 1" -H "Content-Type: application/json" -d "{ \"number\": 1, \"id\": 0, \"places\": 5, \"movable\": true}"
 
-#Ajout Dispo morning sur resto 1
-curl -X POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: 1" -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"MORNING\"}"
+#Ajout Dispo morning monday sur resto 1
+curl -X POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: 1" -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"MORNING\", \"day\": \"MONDAY\"}"
 
-#Ajout Dispo evening sur resto 1
-curl -X POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: 1" -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"EVENING\"}" 
+#Ajout Dispo evening monday sur resto 1
+curl -X POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: 1" -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"EVENING\", \"day\": \"MONDAY\"}" 
 
 #Ajout Speciality sur resto 1 ITALIAN
 curl -X POST "http://localhost:8080/javaee7-angular/resources/specialities" -H "accept: application/json" -H "restaurant_id: 1" -H "Content-Type: application/json" -d "{ \"id\": 0, \"speciality_label\": \"ITALIAN\"}"
 
-#Ajout Speciality sur resto 2 CHINESE
-curl -X POST "http://localhost:8080/javaee7-angular/resources/specialities" -H "accept: application/json" -H "restaurant_id: 2" -H "Content-Type: application/json" -d "{ \"id\": 0, \"speciality_label\": \"CHINESE\"}"
-
 #Ajout resto 2
 curl -X POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto 2\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\"}"
+
+#Ajout Speciality sur resto 2 CHINESE
+curl -X POST "http://localhost:8080/javaee7-angular/resources/specialities" -H "accept: application/json" -H "restaurant_id: 2" -H "Content-Type: application/json" -d "{ \"id\": 0, \"speciality_label\": \"CHINESE\"}"
 
 #Ajout Table (3 places) sur resto 2
 curl -X POST "http://localhost:8080/javaee7-angular/resources/tables" -H "accept: application/json" -H "restaurant_id: 2" -H "Content-Type: application/json" -d "{ \"number\": 1, \"id\": 0, \"places\": 3, \"movable\": true}"
@@ -34,8 +34,8 @@ curl -X POST "http://localhost:8080/javaee7-angular/resources/tables" -H "accept
 #Ajout dispo evening sur resto 2
 curl -X POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: 2" -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"EVENING\"}" 
 
-#Requête de filtrage searchResto avec disponibility = MORNING > Sort resto 1
-curl -X GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?disponibility=MORNING&speciality=ITALIAN&nbCouverts=1" -H "accept: application/json"
+#Requête de filtrage searchResto avec disponibility = MORNING et MONDAY > Sort resto 1
+curl -X GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?disponibility=MORNING&day=MONDAY&speciality=ITALIAN&nbCouverts=1" -H "accept: application/json"
 
 #Requete de filtrage ---> Pas de filtrage
 curl -X GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?nbCouverts=0" -H "accept: application/json"
