@@ -64,15 +64,7 @@ public class RestaurantResource extends Application {
 	@GET
 	@Path("/search")
 	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility, @QueryParam("speciality") String speciality, @QueryParam("nbCouverts") int nbCouverts/*, @QueryParam("address") String address*/){
-		List<Restaurant> results = null;
-		
-//		Query query = entityManager.createQuery("SELECT DISTINCT R.id, R.name FROM Restaurant R, Disponibility D, Speciality S "
-//				+ "WHERE D.restaurant.id = R.id "
-//				+ "AND D.periode = '"+disponibility+"'"
-//				+ " AND S.restaurant.id = R.id"
-//				+ " AND S.speciality_label = '"+speciality+"'");
-		
-		
+		List<Restaurant> results = null;	
 		
 		//results = query.getResultList();
 		String queryString = "SELECT r FROM Restaurant r";

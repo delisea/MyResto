@@ -250,6 +250,21 @@
           },
           {
             "type": "string",
+            "name": "day",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ],
+            "in": "query",
+            "required": false,
+          },
+          {
+            "type": "string",
             "name": "speciality",
             "enum": [
               "ITALIAN",
@@ -556,7 +571,19 @@
           "enum": [
             "MORNING",
             "MIDDAY",
-            "MIDNIGHT"
+            "EVENING"
+          ]
+        },
+        "day": {
+          "type": "string",
+          "enum": [
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY"
           ]
         }
       }

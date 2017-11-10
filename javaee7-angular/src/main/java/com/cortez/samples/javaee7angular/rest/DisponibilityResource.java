@@ -64,6 +64,7 @@ public class DisponibilityResource extends Application{
         if (existingDispo == null) { // Ajout
             Disponibility dispoToSave = new Disponibility();
             dispoToSave.setPeriode(dispo.getPeriode());
+            dispoToSave.setDay(dispo.getDay());
             dispoToSave.setRestaurant(existingRestaurant);
             try{
             	entityManager.persist(dispoToSave);
@@ -75,7 +76,8 @@ public class DisponibilityResource extends Application{
             return Response.ok(dispoToSave).build();
             
         } else { // Modif
-        	existingDispo.setPeriode(dispo.getPeriode());  
+        	existingDispo.setPeriode(dispo.getPeriode()); 
+        	existingDispo.setDay(dispo.getDay());
         	existingDispo.setRestaurant(existingRestaurant);
         	try{
         		return Response.ok(entityManager.merge(existingDispo)).build();

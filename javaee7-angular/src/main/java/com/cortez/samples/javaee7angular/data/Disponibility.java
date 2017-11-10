@@ -9,20 +9,28 @@ import javax.persistence.*;
  */
 @Entity
 public class Disponibility {
+	
+    public enum Periode {
+        MORNING, MIDDAY, EVENING
+    }
+    
+    public enum Day {
+    	MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    }
+	
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_dispo")
     @SequenceGenerator(name = "id_dispo", sequenceName = "id")
     private Long id;
     
-    public Disponibility(){}
-       
+    @Basic
+	@Convert( converter=DayConverter.class )
+    private Day day;
+    
     @Basic
 	@Convert( converter=PeriodeConverter.class )
     private Periode periode;
     
-    public enum Periode {
-        MORNING, MIDDAY, EVENING
-    }
 
     public Long getId() {
         return id;
@@ -32,6 +40,8 @@ public class Disponibility {
         this.id = id;
     }
 
+    public Disponibility(){}
+    
     @ManyToOne
 	@JoinColumn(name = "restaurant_id")
 	private Restaurant restaurant;
@@ -53,6 +63,37 @@ public class Disponibility {
 		this.restaurant = restaurant;
 		if(!restaurant.getTables().contains(this)){
 			restaurant.addDisponibility(this);
+		}
+	}	
+	
+	public Day getDay() {
+		return day;
+	}
+
+	public void setDay(Day day) {
+		this.day = day;
+	}
+
+	@Converter(autoApply=true)
+	public static class DayConverter
+			implements AttributeConverter<Day,String> {
+
+		@Override
+		public String convertToDatabaseColumn(Day value) {
+			if ( value == null ) {
+				return null;
+			}
+
+			return value.toString();
+		}
+
+		@Override
+		public Day convertToEntityAttribute(String value) {
+			if ( value == null ) {
+				return null;
+			}
+
+			return Day.valueOf(value);
 		}
 	}
 	
