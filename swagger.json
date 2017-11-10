@@ -243,7 +243,8 @@
             "enum": [
               "MORNING",
               "MIDDAY",
-              "EVENING"
+              "EVENING",
+              "NIGHT"
             ],
             "in": "query",
             "required": false,
@@ -571,7 +572,8 @@
           "enum": [
             "MORNING",
             "MIDDAY",
-            "EVENING"
+            "EVENING",
+            "NIGHT"
           ]
         },
         "day": {

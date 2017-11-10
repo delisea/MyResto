@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Disponibility {
 	
     public enum Periode {
-        MORNING, MIDDAY, EVENING
+        MORNING, MIDDAY, EVENING, NIGHT
     }
     
     public enum Day {
