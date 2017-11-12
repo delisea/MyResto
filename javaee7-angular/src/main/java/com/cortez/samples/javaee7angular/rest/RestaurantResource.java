@@ -3,12 +3,12 @@ package com.cortez.samples.javaee7angular.rest;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -39,7 +39,7 @@ public class RestaurantResource extends Application {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	
 	private Integer countRestaurants() {
 		Query query = entityManager.createQuery("SELECT COUNT(r.id) FROM Restaurant r");
 		return ((Long) query.getSingleResult()).intValue();
@@ -50,6 +50,7 @@ public class RestaurantResource extends Application {
 	public Response getRestaurant(@PathParam("id") Long id) {
 		Restaurant rest = null;
 		try {
+			
 			rest = entityManager.find(Restaurant.class, id);
 			if (rest == null) {
 				return Response.status(Response.Status.NOT_FOUND)
@@ -135,9 +136,10 @@ public class RestaurantResource extends Application {
 		paginatedListWrapper.setPageSize(10);
 		return findRestaurants(paginatedListWrapper);
 	}
-	
+
 	@POST
 	public Response saveRestaurant(Restaurant restaurant) {
+		
 		Response response = getRestaurant(restaurant.getId());		
 		Restaurant existingRestaurant = (response.getStatus() == Response.Status.OK.getStatusCode()) ? (Restaurant) response.getEntity() : null;
 		if (existingRestaurant == null) { // Ajout
@@ -147,8 +149,9 @@ public class RestaurantResource extends Application {
 			restaurantToSave.setName(restaurant.getName());
 			restaurantToSave.setTel_number(restaurant.getTel_number());
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
-			try {
-				entityManager.persist(restaurantToSave);
+			try {	
+				
+				entityManager.persist(restaurantToSave);			
 			} catch (Exception e) {			
 				return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 						.entity(getExceptionMessage(e)).build();

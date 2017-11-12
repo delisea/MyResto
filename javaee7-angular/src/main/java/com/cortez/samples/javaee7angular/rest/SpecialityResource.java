@@ -19,8 +19,8 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.cortez.samples.javaee7angular.data.Speciality;
 import com.cortez.samples.javaee7angular.data.Restaurant;
+import com.cortez.samples.javaee7angular.data.Speciality;
 
 @Stateless
 @ApplicationPath("/resources")
