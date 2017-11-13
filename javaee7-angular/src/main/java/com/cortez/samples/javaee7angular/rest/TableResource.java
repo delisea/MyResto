@@ -32,6 +32,14 @@ public class TableResource extends Application {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/***
+	 * Get table by id
+	 * @param id
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 500 INTERNAL SERVER ERROR
+	 */
 	@GET
 	@Path("{id}")
 	public Response getTable(@PathParam("id") Long id) {
@@ -51,9 +59,15 @@ public class TableResource extends Application {
 		return Response.ok(table).build();
 	}
 
-	/**
-	 * @param table
-	 * @return
+	/***
+	 * Save a new table in db
+	 * or update existing one
+	 * @param restaurant_id
+	 * @param dispo
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 500 INTERNAL SERVER ERROR
 	 */
 	@POST
 	public Response saveTable(@HeaderParam("restaurant_id") Long restaurant_id, TableResto table) {
@@ -95,6 +109,14 @@ public class TableResource extends Application {
         }
 	}
 
+	/***
+	 * delete a table
+	 * @param id
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 204 NO CONTENT
+	 */
 	@DELETE
 	@Path("{id}")
 	public Response deleteTable(@PathParam("id") Long id) {

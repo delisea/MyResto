@@ -32,6 +32,14 @@ public class DisponibilityResource extends Application{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	/***
+	 * Get disponibility by id
+	 * @param id
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 500 INTERNAL SERVER ERROR
+	 */
 	@GET
 	@Path("{id}")
 	public Response getDisponibility(@PathParam("id") Long id) {
@@ -51,6 +59,16 @@ public class DisponibilityResource extends Application{
 		return Response.ok(dispo).build();
 	}
 	
+	/***
+	 * Save a new disponibility in db
+	 * or update existing one
+	 * @param restaurant_id
+	 * @param dispo
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 500 INTERNAL SERVER ERROR
+	 */
 	@POST
 	public Response saveDisponibility(@HeaderParam("restaurant_id") Long restaurant_id, Disponibility dispo) {
 		Restaurant existingRestaurant = entityManager.find(Restaurant.class, restaurant_id);
@@ -89,6 +107,14 @@ public class DisponibilityResource extends Application{
         }
 	}
 	
+	/***
+	 * delete a disponibility
+	 * @param id
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 204 NO CONTENT
+	 */
 	@DELETE
 	@Path("{id}")
 	public Response deleteDisponibility(@PathParam("id") Long id) {
@@ -107,7 +133,11 @@ public class DisponibilityResource extends Application{
 				.build();
 	}
 	
-	
+	/***
+	 * return an JSON adapted exception message
+	 * @param e
+	 * @return String
+	 */
 	private String getExceptionMessage(Exception e){
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));

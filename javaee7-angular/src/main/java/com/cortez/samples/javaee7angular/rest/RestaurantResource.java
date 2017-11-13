@@ -40,11 +40,24 @@ public class RestaurantResource extends Application {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	/***
+	 * Count the total number of restaurant
+	 * used for pagination
+	 * @return Integer
+	 */
 	private Integer countRestaurants() {
 		Query query = entityManager.createQuery("SELECT COUNT(r.id) FROM Restaurant r");
 		return ((Long) query.getSingleResult()).intValue();
 	}
 
+	/***
+	 * Get a restaurant by id
+	 * @param id
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 500 INTERNAL SERVER ERROR
+	 */
 	@GET
 	@Path("{id}")
 	public Response getRestaurant(@PathParam("id") Long id) {
@@ -62,12 +75,21 @@ public class RestaurantResource extends Application {
 		}
 		return Response.ok(rest).build();
 	}
+	
+	/***
+	 * Get a list of restaurant filtered by criterias
+	 * @param disponibility
+	 * @param speciality
+	 * @param day
+	 * @param nbCouverts
+	 * @return Response
+	 */
 	@GET
 	@Path("/search")
 	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility, @QueryParam("speciality") String speciality,@QueryParam("day") String day, @QueryParam("nbCouverts") int nbCouverts/*, @QueryParam("address") String address*/){
 		List<Restaurant> results = null;	
 		
-		//results = query.getResultList();
+		// Constitution de la requête
 		String queryString = "SELECT distinct r FROM Restaurant r";
 		if(disponibility != null){
 			queryString += " JOIN r.disponibilities d ON d.periode = '"+disponibility+"'";
@@ -86,9 +108,11 @@ public class RestaurantResource extends Application {
 		Query query = entityManager.createQuery(queryString);
 		results = query.getResultList();
 		
+		// Filtre sur le nombre de couverts désirés, le cas échéant
 		if(nbCouverts != 0)
 		{
 			for(Restaurant r : results){
+				// Si le restaurant r est disponible pour le nombre de couverts désirés
 				Response response = isRestaurantAvailable(r.getId(), nbCouverts);
 				Object available_obj = (response.getStatus() == Response.Status.OK.getStatusCode()) ? response.getEntity() : null;
 				if(available_obj == null){
@@ -97,7 +121,7 @@ public class RestaurantResource extends Application {
 				}
 				else{
 					boolean available_bool = (boolean)available_obj;
-					if(!available_bool){
+					if(!available_bool){ // Si non disponible, on enleve de la liste
 						results.remove(r);
 					}
 				}
@@ -106,6 +130,14 @@ public class RestaurantResource extends Application {
 		return Response.ok(results).build();
 	}
 
+	/***
+	 * Return restaurant list filtered by pagination attributes
+	 * @param startPosition
+	 * @param maxResults
+	 * @param sortFields
+	 * @param sortDirections
+	 * @return List<Restaurant>
+	 */
 	private List<Restaurant> findRestaurants(int startPosition, int maxResults, String sortFields,
 			String sortDirections) {
 		Query query = entityManager
@@ -116,6 +148,12 @@ public class RestaurantResource extends Application {
 	}
 	
 
+	/***
+	 * Return Restaurant PaginatedListWrapper
+	 * used for pagination
+	 * @param wrapper
+	 * @return PaginatedListWrapper
+	 */
 	private PaginatedListWrapper findRestaurants(PaginatedListWrapper wrapper) {
 		wrapper.setTotalResults(countRestaurants());
 		int start = (wrapper.getCurrentPage() - 1) * wrapper.getPageSize();
@@ -124,6 +162,13 @@ public class RestaurantResource extends Application {
 		return wrapper;
 	}
 
+	/***
+	 * Restaurant paginated list get WS
+	 * @param page
+	 * @param sortFields
+	 * @param sortDirections
+	 * @return PaginatedListWrapper
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public PaginatedListWrapper listRestaurants(@DefaultValue("1") @QueryParam("page") Integer page,
@@ -137,6 +182,14 @@ public class RestaurantResource extends Application {
 		return findRestaurants(paginatedListWrapper);
 	}
 
+	/***
+	 * Save a restaurant in db
+	 * or update existing one
+	 * @param restaurant
+	 * @return Response
+	 * 200 OK
+	 * 500 INTERNAL SERVER ERROR
+	 */
 	@POST
 	public Response saveRestaurant(Restaurant restaurant) {
 		
@@ -174,6 +227,14 @@ public class RestaurantResource extends Application {
 	}
 
 
+	/***
+	 * delete a restaurant
+	 * delete associated disponibilites, tables and specialities
+	 * @param id
+	 * @return Response
+	 * 200 OK
+	 * 500 INTERNAL SERVER ERROR
+	 */
 	@DELETE
 	@Path("{id}")
 	public Response deleteRestaurant(@PathParam("id") Long id) {		
@@ -210,7 +271,7 @@ public class RestaurantResource extends Application {
 				}				
 		}
 		
-		//Supprimer les spécialités associées
+		//Supprimer les spécialités associées => A changer ?
 		List<Speciality> specialitiesToDelete = restaurantToDelete.getSpecialities();
 		for(Speciality speciality : specialitiesToDelete){
 			Speciality specialityToDelete = entityManager.find(Speciality.class, speciality.getId());
@@ -234,6 +295,14 @@ public class RestaurantResource extends Application {
 		return Response.status(Response.Status.OK).build();
 	}
 	
+	/***
+	 * return true if the restaurant is available for nbCouverts
+	 * @param restaurant_id
+	 * @param nbCouverts
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 */
 	@GET
 	@Path("/isRestaurantAvailable/{nbCouverts}")
 	public Response isRestaurantAvailable(@HeaderParam("restaurant_id") Long restaurant_id, @QueryParam("nbCouverts") int nbCouverts){		
@@ -257,6 +326,11 @@ public class RestaurantResource extends Application {
 				.entity(available).build();
 	}
 	
+	/***
+	 * return an JSON adapted exception message
+	 * @param e
+	 * @return String
+	 */
 	private String getExceptionMessage(Exception e){
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));

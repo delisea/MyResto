@@ -85,7 +85,13 @@ public class Disponibility {
 	public void setDay(Day day) {
 		this.day = day;
 	}
+	
+	/*** CLASSES STATIQUES DE CONVERSION ENUM <---> STRING ***/
 
+	/*
+	 * Classe statique qui convertit l'enum Jour en string et inversement 
+	 * suivant si on fait un POST ou un GET
+	 */
 	@Converter(autoApply=true)
 	public static class DayConverter
 			implements AttributeConverter<Day,String> {
@@ -109,6 +115,10 @@ public class Disponibility {
 		}
 	}
 	
+	/*
+	 * Classe statique qui convertit l'enum Periode en string et inversement 
+	 * suivant si on fait un POST ou un GET
+	 */
 	@Converter(autoApply=true)
 	public static class PeriodeConverter
 			implements AttributeConverter<Periode,String> {

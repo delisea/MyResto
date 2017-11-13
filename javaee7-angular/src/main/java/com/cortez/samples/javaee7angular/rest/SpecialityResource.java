@@ -32,6 +32,14 @@ public class SpecialityResource extends Application{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	/***
+	 * Get speciality by id
+	 * @param id
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 500 INTERNAL SERVER ERROR
+	 */
 	@GET
 	@Path("{id}")
 	public Response getSpeciality(@PathParam("id") Long id) {
@@ -51,6 +59,16 @@ public class SpecialityResource extends Application{
 		return Response.ok(speciality).build();
 	}
 	
+	/***
+	 * Save a new speciality in db
+	 * or update existing one
+	 * @param restaurant_id
+	 * @param dispo
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 500 INTERNAL SERVER ERROR
+	 */
 	@POST
 	public Response saveSpeciality(@HeaderParam("restaurant_id") Long restaurant_id, Speciality speciality) {
 		Restaurant existingRestaurant = entityManager.find(Restaurant.class, restaurant_id);
@@ -87,6 +105,14 @@ public class SpecialityResource extends Application{
         }
 	}
 	
+	/***
+	 * delete a speciality
+	 * @param id
+	 * @return Response
+	 * 200 OK
+	 * 404 NOT FOUND
+	 * 204 NO CONTENT
+	 */
 	@DELETE
 	@Path("{id}")
 	public Response deleteSpeciality(@PathParam("id") Long id) {
@@ -105,6 +131,11 @@ public class SpecialityResource extends Application{
 				.build();
 	}
 	
+	/***
+	 * return an JSON adapted exception message
+	 * @param e
+	 * @return String
+	 */
 	private String getExceptionMessage(Exception e){
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
