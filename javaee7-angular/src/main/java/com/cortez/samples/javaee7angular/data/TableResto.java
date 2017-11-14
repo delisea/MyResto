@@ -68,8 +68,6 @@ public class TableResto{
 		this.movable = movable;
 	}
 	
-	/*** RESTAURANT ***/
-	
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}

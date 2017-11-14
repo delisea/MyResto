@@ -58,13 +58,6 @@ public class Speciality {
 		}
 	}
 	
-
-	/*** CLASSES STATIQUES DE CONVERSION ENUM <---> STRING ***/
-
-	/*
-	 * Classe statique qui convertit l'enum Speciality en string et inversement 
-	 * suivant si on fait un POST ou un GET
-	 */
 	@Converter(autoApply=true)
 	public static class SpecialityConverter
 			implements AttributeConverter<Speciality_label,String> {

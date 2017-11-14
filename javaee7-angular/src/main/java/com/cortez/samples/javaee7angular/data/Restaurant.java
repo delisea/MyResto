@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 @Entity
-@JsonIgnoreProperties(value = { "tables","disponibilities","specialities" }) // Ne pas retourner au format JSON
+@JsonIgnoreProperties(value = { "tables","disponibilities","specialities" })
 public class Restaurant {
 
 	@Id
@@ -42,8 +42,6 @@ public class Restaurant {
 	public Restaurant() {
 		super();
 	}
-	
-	/*** GETTERS/SETTERS ***/
 
 	public String getName() {
 		return this.name;
@@ -93,8 +91,6 @@ public class Restaurant {
 		this.id = id;
 	}
 
-	/*** TABLES ***/
-	
 	public void addTable(TableResto table) {
 		this.tables.add(table);
 		if (table.getRestaurant() != this) {
@@ -114,8 +110,6 @@ public class Restaurant {
 		this.tables = tables;
 	}
 
-	/*** DISPONIBILITIES ***/
-	
 	public void addDisponibility(Disponibility dispo) {
 		if(!this.disponibilities.contains(dispo))
 			this.disponibilities.add(dispo);
