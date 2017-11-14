@@ -11,8 +11,7 @@ import javax.persistence.*;
 public class Speciality {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_speciality")
-	@SequenceGenerator(name = "id_speciality", sequenceName = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	public Speciality() {}

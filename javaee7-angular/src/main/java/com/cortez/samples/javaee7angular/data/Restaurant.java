@@ -20,8 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Restaurant {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_id")
-	@SequenceGenerator(name = "restaurant_id", sequenceName = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String name;

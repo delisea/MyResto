@@ -237,50 +237,62 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "type": "string",
+          {          
             "name": "disponibility",
-            "enum": [
-              "MORNING",
-              "MIDDAY",
-              "EVENING",
-              "NIGHT"
-            ],
+            "type": "array",
             "in": "query",
             "required": false,
+            "collectionFormat": "csv",    
+            "items":{
+              "type": "string",
+              "enum": [
+                "MORNING",
+                "MIDDAY",
+                "EVENING",
+                "NIGHT"
+              ]
+            }          
           },
-          {
-            "type": "string",
+          {           
             "name": "day",
-            "enum": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY",
-              "SUNDAY"
-            ],
+            "type": "array",
             "in": "query",
             "required": false,
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "MONDAY",
+                "TUESDAY",
+                "WEDNESDAY",
+                "THURSDAY",
+                "FRIDAY",
+                "SATURDAY",
+                "SUNDAY"
+              ]     
+            }
           },
           {
-            "type": "string",
             "name": "speciality",
-            "enum": [
-              "ITALIAN",
-              "CHINESE",
-              "JAPANESE"
-            ],
             "in": "query",
+            "type": "array",
             "required": false,
+            "collectionFormat": "csv",
+            "items":{
+              "type": "string",
+              "enum": [
+                "ITALIAN",
+                "CHINESE",
+                "JAPANESE"
+              ]
+            }          
           },
           {
             "type": "integer",
             "name": "nbCouverts",
             "in": "query",
             "required": true,
-          },
+          }
         ],
         "responses": {
           "200": {
@@ -289,7 +301,15 @@
             "schema": {
               "$ref": "#/definitions/PaginatedListWrapper"
             }
-          }
+          },
+          "404": {
+          "description": "NOT FOUND",
+          "headers": {}
+          }, 
+          "500": {
+          "description": "INTERNAL SERVER ERROR",
+          "headers": {}
+          }      
         }
       }
     },
@@ -311,7 +331,7 @@
           {
             "type": "integer",
             "name": "nbCouverts",
-            "in": "query",
+            "in": "path",
             "required": true,
           }        
         ],

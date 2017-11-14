@@ -31,8 +31,7 @@ public class Disponibility {
     }
 	
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_dispo")
-    @SequenceGenerator(name = "id_dispo", sequenceName = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Basic

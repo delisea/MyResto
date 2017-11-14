@@ -2,6 +2,8 @@ package com.cortez.samples.javaee7angular.rest;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -29,7 +31,7 @@ import com.cortez.samples.javaee7angular.data.Restaurant;
 import com.cortez.samples.javaee7angular.data.Speciality;
 import com.cortez.samples.javaee7angular.data.TableResto;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
-
+import java.util.regex.*;
 @Stateless
 @ApplicationPath("/resources")
 @Path("restaurants")
@@ -67,20 +69,48 @@ public class RestaurantResource extends Application {
 	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility, @QueryParam("speciality") String speciality,@QueryParam("day") String day, @QueryParam("nbCouverts") int nbCouverts/*, @QueryParam("address") String address*/){
 		List<Restaurant> results = null;	
 		
-		//results = query.getResultList();
+		String patternString1 = ",";
+
+        List<String> disponibilities = Arrays.asList(disponibility.split("\\s*,\\s*"));
+        if(disponibilities.get(0).isEmpty()){
+        	disponibilities = disponibilities.subList(1, disponibilities.size());
+        }
+		
+        List<String> specialities = Arrays.asList(speciality.split("\\s*,\\s*"));
+        if(specialities.get(0).isEmpty()){
+        	specialities = specialities.subList(1, specialities.size());
+        }
+        
+        List<String> days = Arrays.asList(day.split("\\s*,\\s*"));
+        if(days.get(0).isEmpty()){
+        	days = days.subList(1, days.size());
+        }
+        
 		String queryString = "SELECT distinct r FROM Restaurant r";
-		if(disponibility != null){
-			queryString += " JOIN r.disponibilities d ON d.periode = '"+disponibility+"'";
-			if(day != null){
-				queryString+=" AND d.day = '"+day+"'";
+		if(disponibility != null && !disponibilities.isEmpty()){
+			queryString += " JOIN r.disponibilities d ON d.periode = '"+disponibilities.get(0)+"'";
+			for(int i = 1;i<disponibilities.size();i++){
+				queryString+=" OR d.periode = '"+disponibilities.get(i)+"'";
+			}
+			if(day != null && !days.isEmpty()){
+				queryString+=" AND d.day = '"+days.get(0)+"'";
+				for(int i = 1;i<days.size();i++){
+					queryString+=" OR d.day = '"+days.get(i)+"'";
+				}
 			}
 		}
-		else if(day != null){
-			queryString += " JOIN r.disponibilities d ON d.day = '"+day+"'";
+		else if(day != null && !days.isEmpty()){
+			queryString += " JOIN r.disponibilities d ON d.day = '"+days.get(0)+"'";
+			for(int i = 1;i<days.size();i++){
+				queryString+=" OR d.day = '"+days.get(i)+"'";
+			}
 		}
 		
-		if(speciality != null){
-			queryString += " JOIN r.specialities s ON s.speciality_label = '"+speciality+"'";
+		if(speciality != null && !specialities.isEmpty()){
+			queryString += " JOIN r.specialities s ON s.speciality_label = '"+specialities.get(0)+"'";
+			for(int i = 1;i<specialities.size();i++){
+				queryString+=" OR d.day = '"+specialities.get(i)+"'";
+			}
 		}				
 		
 		Query query = entityManager.createQuery(queryString);
@@ -149,9 +179,8 @@ public class RestaurantResource extends Application {
 			restaurantToSave.setName(restaurant.getName());
 			restaurantToSave.setTel_number(restaurant.getTel_number());
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
-			try {	
-				
-				entityManager.persist(restaurantToSave);			
+			try {				
+				entityManager.persist(restaurantToSave);
 			} catch (Exception e) {			
 				return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 						.entity(getExceptionMessage(e)).build();

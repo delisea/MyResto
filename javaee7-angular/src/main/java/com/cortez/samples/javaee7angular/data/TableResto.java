@@ -11,8 +11,7 @@ public class TableResto{
 
 	/* Attributs */
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "table_id")
-    @SequenceGenerator(name = "table_id", sequenceName = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
 	// Le numéro de table
