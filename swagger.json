@@ -291,7 +291,7 @@
             "type": "integer",
             "name": "nbCouverts",
             "in": "query",
-            "required": true,
+            "required": false,
           }
         ],
         "responses": {

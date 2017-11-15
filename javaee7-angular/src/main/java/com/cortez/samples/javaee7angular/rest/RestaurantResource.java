@@ -32,6 +32,7 @@ import com.cortez.samples.javaee7angular.data.Speciality;
 import com.cortez.samples.javaee7angular.data.TableResto;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
 import java.util.regex.*;
+
 @Stateless
 @ApplicationPath("/resources")
 @Path("restaurants")
@@ -41,7 +42,7 @@ public class RestaurantResource extends Application {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	private Integer countRestaurants() {
 		Query query = entityManager.createQuery("SELECT COUNT(r.id) FROM Restaurant r");
 		return ((Long) query.getSingleResult()).intValue();
@@ -52,82 +53,93 @@ public class RestaurantResource extends Application {
 	public Response getRestaurant(@PathParam("id") Long id) {
 		Restaurant rest = null;
 		try {
-			
+
 			rest = entityManager.find(Restaurant.class, id);
 			if (rest == null) {
 				return Response.status(Response.Status.NOT_FOUND)
-						.entity("le restaurant d'id : "+id+" est introuvable.").build();
+						.entity("le restaurant d'id : " + id + " est introuvable.").build();
 			}
 		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.entity(getExceptionMessage(e)).build();
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e)).build();
 		}
 		return Response.ok(rest).build();
 	}
+
 	@GET
 	@Path("/search")
-	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility, @QueryParam("speciality") String speciality,@QueryParam("day") String day, @QueryParam("nbCouverts") int nbCouverts/*, @QueryParam("address") String address*/){
-		List<Restaurant> results = null;	
+	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility,
+			@QueryParam("speciality") String speciality, @QueryParam("day") String day,
+			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts /*
+													 * , @QueryParam("address")
+													 * String address
+													 */) {
 		
-		String patternString1 = ",";
+		List<Restaurant> results = null;
+		List<String> disponibilities = new ArrayList<String>();
+		List<String> specialities = new ArrayList<String>();
+		List<String> days = new ArrayList<String>();
 
-        List<String> disponibilities = Arrays.asList(disponibility.split("\\s*,\\s*"));
-        if(disponibilities.get(0).isEmpty()){
-        	disponibilities = disponibilities.subList(1, disponibilities.size());
-        }
-		
-        List<String> specialities = Arrays.asList(speciality.split("\\s*,\\s*"));
-        if(specialities.get(0).isEmpty()){
-        	specialities = specialities.subList(1, specialities.size());
-        }
-        
-        List<String> days = Arrays.asList(day.split("\\s*,\\s*"));
-        if(days.get(0).isEmpty()){
-        	days = days.subList(1, days.size());
-        }
-        
-		String queryString = "SELECT distinct r FROM Restaurant r";
-		if(disponibility != null && !disponibilities.isEmpty()){
-			queryString += " JOIN r.disponibilities d ON d.periode = '"+disponibilities.get(0)+"'";
-			for(int i = 1;i<disponibilities.size();i++){
-				queryString+=" OR d.periode = '"+disponibilities.get(i)+"'";
+		if (disponibility != null) {
+			disponibilities = Arrays.asList(disponibility.split("\\s*,\\s*"));
+			if (disponibilities.get(0).isEmpty()) {
+				disponibilities = disponibilities.subList(1, disponibilities.size());
 			}
-			if(day != null && !days.isEmpty()){
-				queryString+=" AND d.day = '"+days.get(0)+"'";
-				for(int i = 1;i<days.size();i++){
-					queryString+=" OR d.day = '"+days.get(i)+"'";
+		}
+
+		if (speciality != null) {
+			specialities = Arrays.asList(speciality.split("\\s*,\\s*"));
+			if (specialities.get(0).isEmpty()) {
+				specialities = specialities.subList(1, specialities.size());
+			}
+		}
+
+		if (day != null) {
+			days = Arrays.asList(day.split("\\s*,\\s*"));
+			if (days.get(0).isEmpty()) {
+				days = days.subList(1, days.size());
+			}
+		}
+
+		String queryString = "SELECT distinct r FROM Restaurant r";
+		if (disponibility != null && !disponibilities.isEmpty()) {
+			queryString += " JOIN r.disponibilities d ON d.periode = '" + disponibilities.get(0) + "'";
+			for (int i = 1; i < disponibilities.size(); i++) {
+				queryString += " OR d.periode = '" + disponibilities.get(i) + "'";
+			}
+			if (day != null && !days.isEmpty()) {
+				queryString += " AND d.day = '" + days.get(0) + "'";
+				for (int i = 1; i < days.size(); i++) {
+					queryString += " OR d.day = '" + days.get(i) + "'";
 				}
 			}
-		}
-		else if(day != null && !days.isEmpty()){
-			queryString += " JOIN r.disponibilities d ON d.day = '"+days.get(0)+"'";
-			for(int i = 1;i<days.size();i++){
-				queryString+=" OR d.day = '"+days.get(i)+"'";
+		} else if (day != null && !days.isEmpty()) {
+			queryString += " JOIN r.disponibilities d ON d.day = '" + days.get(0) + "'";
+			for (int i = 1; i < days.size(); i++) {
+				queryString += " OR d.day = '" + days.get(i) + "'";
 			}
 		}
-		
-		if(speciality != null && !specialities.isEmpty()){
-			queryString += " JOIN r.specialities s ON s.speciality_label = '"+specialities.get(0)+"'";
-			for(int i = 1;i<specialities.size();i++){
-				queryString+=" OR d.day = '"+specialities.get(i)+"'";
+
+		if (speciality != null && !specialities.isEmpty()) {
+			queryString += " JOIN r.specialities s ON s.speciality_label = '" + specialities.get(0) + "'";
+			for (int i = 1; i < specialities.size(); i++) {
+				queryString += " OR d.day = '" + specialities.get(i) + "'";
 			}
-		}				
-		
+		}
+
 		Query query = entityManager.createQuery(queryString);
 		results = query.getResultList();
-		
-		if(nbCouverts != 0)
-		{
-			for(Restaurant r : results){
+
+		if (nbCouverts != 0) {
+			for (Restaurant r : results) {
 				Response response = isRestaurantAvailable(r.getId(), nbCouverts);
-				Object available_obj = (response.getStatus() == Response.Status.OK.getStatusCode()) ? response.getEntity() : null;
-				if(available_obj == null){
+				Object available_obj = (response.getStatus() == Response.Status.OK.getStatusCode())
+						? response.getEntity() : null;
+				if (available_obj == null) {
 					return Response.status(Response.Status.NOT_FOUND)
-							.entity("le restaurant d'id : "+r.getId()+" est introuvable.").build();
-				}
-				else{
-					boolean available_bool = (boolean)available_obj;
-					if(!available_bool){
+							.entity("le restaurant d'id : " + r.getId() + " est introuvable.").build();
+				} else {
+					boolean available_bool = (boolean) available_obj;
+					if (!available_bool) {
 						results.remove(r);
 					}
 				}
@@ -138,13 +150,12 @@ public class RestaurantResource extends Application {
 
 	private List<Restaurant> findRestaurants(int startPosition, int maxResults, String sortFields,
 			String sortDirections) {
-		Query query = entityManager
-				.createQuery("SELECT r.id, r.name, r.address FROM Restaurant r ORDER BY r." + sortFields + " " + sortDirections);
+		Query query = entityManager.createQuery(
+				"SELECT r.id, r.name, r.address FROM Restaurant r ORDER BY r." + sortFields + " " + sortDirections);
 		query.setFirstResult(startPosition);
 		query.setMaxResults(maxResults);
 		return query.getResultList();
 	}
-	
 
 	private PaginatedListWrapper findRestaurants(PaginatedListWrapper wrapper) {
 		wrapper.setTotalResults(countRestaurants());
@@ -169,9 +180,10 @@ public class RestaurantResource extends Application {
 
 	@POST
 	public Response saveRestaurant(Restaurant restaurant) {
-		
-		Response response = getRestaurant(restaurant.getId());		
-		Restaurant existingRestaurant = (response.getStatus() == Response.Status.OK.getStatusCode()) ? (Restaurant) response.getEntity() : null;
+
+		Response response = getRestaurant(restaurant.getId());
+		Restaurant existingRestaurant = (response.getStatus() == Response.Status.OK.getStatusCode())
+				? (Restaurant) response.getEntity() : null;
 		if (existingRestaurant == null) { // Ajout
 			Restaurant restaurantToSave = new Restaurant();
 			restaurantToSave.setAddress(restaurant.getAddress());
@@ -179,117 +191,112 @@ public class RestaurantResource extends Application {
 			restaurantToSave.setName(restaurant.getName());
 			restaurantToSave.setTel_number(restaurant.getTel_number());
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
-			try {				
+			try {
 				entityManager.persist(restaurantToSave);
-			} catch (Exception e) {			
-				return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-						.entity(getExceptionMessage(e)).build();
+			} catch (Exception e) {
+				return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e)).build();
 			}
 			return Response.ok(restaurantToSave).build();
 
 		} else { // Modif
 			existingRestaurant.setAddress(restaurant.getAddress());
-			existingRestaurant.setEmail(restaurant.getEmail());			
+			existingRestaurant.setEmail(restaurant.getEmail());
 			existingRestaurant.setName(restaurant.getName());
 			existingRestaurant.setTel_number(restaurant.getTel_number());
 			existingRestaurant.setUrl_img(restaurant.getUrl_img());
 			try {
 				return Response.ok(entityManager.merge(existingRestaurant)).build();
-			} catch (Exception e) {				
-				return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-						.entity(getExceptionMessage(e)).build();
+			} catch (Exception e) {
+				return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e)).build();
 			}
 		}
 	}
 
-
 	@DELETE
 	@Path("{id}")
-	public Response deleteRestaurant(@PathParam("id") Long id) {		
+	public Response deleteRestaurant(@PathParam("id") Long id) {
 		Response response = getRestaurant(id);
-		if(response.getStatus() != Response.Status.OK.getStatusCode()){
+		if (response.getStatus() != Response.Status.OK.getStatusCode()) {
 			return response;
 		}
-		
-		Restaurant restaurantToDelete = (Restaurant)response.getEntity();
-		
+
+		Restaurant restaurantToDelete = (Restaurant) response.getEntity();
+
 		// Supprimer les tables associées
 		List<TableResto> tablesToDelete = restaurantToDelete.getTables();
-		for(TableResto tr : tablesToDelete){
+		for (TableResto tr : tablesToDelete) {
 			TableResto tableToDelete = entityManager.find(TableResto.class, tr.getId());
-			if(tableToDelete != null)
-				try{
+			if (tableToDelete != null)
+				try {
 					entityManager.remove(tableToDelete);
-				}catch (Exception e) {			
-					return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-							.entity(getExceptionMessage(e)).build();
-				}				
+				} catch (Exception e) {
+					return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e))
+							.build();
+				}
 		}
-		
+
 		// Supprimer les disponibilités associées
 		List<Disponibility> diponibilitiesToDelete = restaurantToDelete.getDisponibilities();
-		for(Disponibility dispo : diponibilitiesToDelete){
+		for (Disponibility dispo : diponibilitiesToDelete) {
 			Disponibility dispoToDelete = entityManager.find(Disponibility.class, dispo.getId());
-			if(dispoToDelete != null)
-				try{
+			if (dispoToDelete != null)
+				try {
 					entityManager.remove(dispoToDelete);
-				}catch (Exception e) {			
-					return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-							.entity(getExceptionMessage(e)).build();
-				}				
+				} catch (Exception e) {
+					return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e))
+							.build();
+				}
 		}
-		
-		//Supprimer les spécialités associées
+
+		// Supprimer les spécialités associées
 		List<Speciality> specialitiesToDelete = restaurantToDelete.getSpecialities();
-		for(Speciality speciality : specialitiesToDelete){
+		for (Speciality speciality : specialitiesToDelete) {
 			Speciality specialityToDelete = entityManager.find(Speciality.class, speciality.getId());
-			if(specialityToDelete != null)
-				try{
+			if (specialityToDelete != null)
+				try {
 					entityManager.remove(specialityToDelete);
-				}catch (Exception e) {			
-					return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-							.entity(getExceptionMessage(e)).build();
-				}				
+				} catch (Exception e) {
+					return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e))
+							.build();
+				}
 		}
-		
-		
+
 		// Suppression du restaurant
-		try { 
+		try {
 			entityManager.remove(response.getEntity());
-		} catch (Exception e) {			
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.entity(getExceptionMessage(e)).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e)).build();
 		}
 		return Response.status(Response.Status.OK).build();
 	}
-	
+
 	@GET
 	@Path("/isRestaurantAvailable/{nbCouverts}")
-	public Response isRestaurantAvailable(@HeaderParam("restaurant_id") Long restaurant_id, @QueryParam("nbCouverts") int nbCouverts){		
+	public Response isRestaurantAvailable(@HeaderParam("restaurant_id") Long restaurant_id,
+			@QueryParam("nbCouverts") int nbCouverts) {
 		boolean available = false;
-		Response response = getRestaurant(restaurant_id);		
-		Restaurant existingRestaurant = (response.getStatus() == Response.Status.OK.getStatusCode()) ? (Restaurant) response.getEntity() : null;
-		if(existingRestaurant==null){
+		Response response = getRestaurant(restaurant_id);
+		Restaurant existingRestaurant = (response.getStatus() == Response.Status.OK.getStatusCode())
+				? (Restaurant) response.getEntity() : null;
+		if (existingRestaurant == null) {
 			return Response.status(Response.Status.NOT_FOUND)
-					.entity("le restaurant d'id : "+restaurant_id+" est introuvable.").build();
-		}
-		else{
+					.entity("le restaurant d'id : " + restaurant_id + " est introuvable.").build();
+		} else {
 			List<TableResto> tableRestoList = existingRestaurant.getTables();
-			for(TableResto tr : tableRestoList){
-				if(tr.getPlaces()>=nbCouverts){
+			for (TableResto tr : tableRestoList) {
+				if (tr.getPlaces() >= nbCouverts) {
 					available = true;
 					break;
 				}
 			}
 		}
-		return Response.status(Response.Status.OK)
-				.entity(available).build();
+		return Response.status(Response.Status.OK).entity(available).build();
 	}
-	
-	private String getExceptionMessage(Exception e){
+
+	private String getExceptionMessage(Exception e) {
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
 		return e.getLocalizedMessage() + "/n" + errors.toString();
 	}
-	
+
 }
