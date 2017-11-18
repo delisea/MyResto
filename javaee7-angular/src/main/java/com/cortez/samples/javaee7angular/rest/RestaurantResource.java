@@ -278,20 +278,31 @@ public class RestaurantResource extends Application {
 
 	@GET
 	@Path("/getTables/{restaurant_id}")
-	public Response getTables(@PathParam("restaurant_id") Long restaurant_id){
-		/*Response response = getRestaurant(restaurant_id);
-		Restaurant restaurant = (response.getStatus() == Response.Status.OK.getStatusCode())
-				? (Restaurant) response.getEntity() : null;
-		if (restaurant == null) {
-			return Response.status(Response.Status.NOT_FOUND)
-					.entity("le restaurant d'id : " + restaurant_id + " est introuvable.").build();
-		} else {	
-			List<TableResto> tables = restaurant.getTables();
-			return Response.status(Response.Status.OK)
-					.entity(tables).build();
-		}*/
+	public Response getTables(@PathParam("restaurant_id") Long restaurant_id){		
 		List<TableResto> requestResults = null;
 		String queryString = "SELECT t FROM TableResto t where t.restaurant.id="+restaurant_id;
+		Query query = entityManager.createQuery(queryString);
+		requestResults = query.getResultList();
+		return Response.status(Response.Status.OK)
+				.entity(requestResults).build();
+	}
+	
+	@GET
+	@Path("/getSpecialities/{restaurant_id}")
+	public Response getSpecialities(@PathParam("restaurant_id") Long restaurant_id){
+		List<TableResto> requestResults = null;
+		String queryString = "SELECT s FROM Speciality s where s.restaurant.id="+restaurant_id;
+		Query query = entityManager.createQuery(queryString);
+		requestResults = query.getResultList();
+		return Response.status(Response.Status.OK)
+				.entity(requestResults).build();
+	}
+	
+	@GET
+	@Path("/getDisponibilities/{restaurant_id}")
+	public Response getDisponibilities(@PathParam("restaurant_id") Long restaurant_id){
+		List<TableResto> requestResults = null;
+		String queryString = "SELECT d FROM Disponibility d where d.restaurant.id="+restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
 		return Response.status(Response.Status.OK)
