@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -275,6 +276,28 @@ public class RestaurantResource extends Application {
 		return Response.status(Response.Status.NO_CONTENT).build();
 	}
 
+	@GET
+	@Path("/getTables/{restaurant_id}")
+	public Response getTables(@PathParam("restaurant_id") Long restaurant_id){
+		/*Response response = getRestaurant(restaurant_id);
+		Restaurant restaurant = (response.getStatus() == Response.Status.OK.getStatusCode())
+				? (Restaurant) response.getEntity() : null;
+		if (restaurant == null) {
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity("le restaurant d'id : " + restaurant_id + " est introuvable.").build();
+		} else {	
+			List<TableResto> tables = restaurant.getTables();
+			return Response.status(Response.Status.OK)
+					.entity(tables).build();
+		}*/
+		List<TableResto> requestResults = null;
+		String queryString = "SELECT t FROM TableResto t where t.restaurant.id="+restaurant_id;
+		Query query = entityManager.createQuery(queryString);
+		requestResults = query.getResultList();
+		return Response.status(Response.Status.OK)
+				.entity(requestResults).build();
+	}
+	
 	@GET
 	@Path("/isRestaurantAvailable/{nbCouverts}")
 	public Response isRestaurantAvailable(@HeaderParam("restaurant_id") Long restaurant_id,

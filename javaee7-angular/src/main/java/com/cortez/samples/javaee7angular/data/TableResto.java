@@ -2,11 +2,14 @@ package com.cortez.samples.javaee7angular.data;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Entity implementation class for Entity: Table
  *
  */
 @Entity
+/*@JsonIgnoreProperties(value = { "restaurant" })*/
 public class TableResto{
 
 	/* Attributs */
