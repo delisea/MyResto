@@ -33,6 +33,16 @@ echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/ta
 echo -e "\nAjout d'une table de 2 places bougeable sur resto1 \n"
 echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/tables" -H "accept: application/json" -H "restaurant_id: "+$idResto1 -H "Content-Type: application/json" -d "{ \"number\": 2, \"id\": 0, \"places\": 2, \"movable\": true}")
 
+#	Ajout d'une table de 3 places bougeable sur resto1
+echo -e "\nAjout d'une table de 2 places bougeable sur resto1 \n"
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/tables" -H "accept: application/json" -H "restaurant_id: "+$idResto1 -H "Content-Type: application/json" -d "{ \"number\": 2, \"id\": 0, \"places\": 3, \"movable\": true}")
+
+
+#	Ajout d'une table de 7 places non bougeable sur resto2
+echo -e "\nAjout d'une table de 2 places non bougeable sur resto2 \n"
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/tables" -H "accept: application/json" -H "restaurant_id: "+$idResto2 -H "Content-Type: application/json" -d "{ \"number\": 2, \"id\": 0, \"places\": 7, \"movable\": false}")
+
+
 #	Ajout d'une table de 2 places non bougeable sur resto2
 echo -e "\nAjout d'une table de 2 places non bougeable sur resto2 \n"
 echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/tables" -H "accept: application/json" -H "restaurant_id: "+$idResto2 -H "Content-Type: application/json" -d "{ \"number\": 2, \"id\": 0, \"places\": 2, \"movable\": false}")
@@ -109,24 +119,28 @@ echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/res
 echo -e "\nFiltrage (day=TUESDAY : speciality = ITALIAN) => Ressort rien \n"
 echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?disponibility=&day=TUESDAY&speciality=ITALIAN" -H "accept: application/json")
 
-#	Filtrage (nbCouverts=6) => Ressort resto1
-echo -e "\nFiltrage (nbCouverts=6) => Ressort resto1 \n"
-echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?nbCouverts=6" -H "accept: application/json")
+#	Filtrage (nbCouverts=10) => Ressort resto1
+echo -e "\nFiltrage (nbCouverts=10) => Ressort resto1 \n"
+echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?nbCouverts=10" -H "accept: application/json")
 
 #	Filtrage (nbCouverts=2) => Ressort resto1 et resto 2
-echo -e "\nFiltrage (nbCouverts=2) => Ressort resto1 et resto 2 \n"
+echo -e "\nFiltrage (nbCouverts=2) => Ressort resto1 et resto2 \n"
 echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?nbCouverts=2" -H "accept: application/json")
 
-#	Filtrage (nbCouverts=8) => Ressort rien
-echo -e "\nFiltrage (nbCouverts=8) => Ressort rien \n"
-echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?nbCouverts=8" -H "accept: application/json")
+#	Filtrage (nbCouverts=12) => Ressort rien
+echo -e "\nFiltrage (nbCouverts=12) => Ressort rien \n"
+echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?nbCouverts=12" -H "accept: application/json")
 
-#	Suppression restaurant resto1 => OK
-echo -e "\nSuppression restaurant resto1 => OK \n"
-echo -e $(curl --silent DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idResto1 -H "accept: application/json")
+#	Suppression restaurant resto1 => OK (Si on met pas -X il ne supprime pas) 
+echo -e "\nSuppression restaurant resto1 => NO CONTENT \n"
+echo -e $(curl -X DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idResto1 -H "accept: application/json")
 
-#	Suppression restaurant resto2 => OK
-echo -e "\nSuppression restaurant resto2 => OK \n"
-echo -e $(curl --silent DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idResto2 -H "accept: application/json")
+#	Suppression restaurant resto2 => OK (Si on met pas -X il ne supprime pas)
+echo -e "\nSuppression restaurant resto2 => NO CONTENT \n"
+echo -e $(curl -X DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idResto2 -H "accept: application/json")
+
+#	Suppression restaurant resto3 => OK (Si on met pas -X il ne supprime pas)
+echo -e "\nSuppression restaurant resto3 => NO CONTENT \n"
+echo -e $(curl -X DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idResto3 -H "accept: application/json")
 
 ###

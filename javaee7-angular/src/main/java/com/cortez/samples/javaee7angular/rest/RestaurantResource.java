@@ -69,12 +69,12 @@ public class RestaurantResource extends Application {
 	@Path("/search")
 	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility,
 			@QueryParam("speciality") String speciality, @QueryParam("day") String day,
-			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts /*
+			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts/*
 													 * , @QueryParam("address")
 													 * String address
 													 */) {
 		
-		List<Restaurant> results = null;
+		List<Restaurant> requestResults = null;
 		List<String> disponibilities = new ArrayList<String>();
 		List<String> specialities = new ArrayList<String>();
 		List<String> days = new ArrayList<String>();
@@ -127,25 +127,30 @@ public class RestaurantResource extends Application {
 		}
 
 		Query query = entityManager.createQuery(queryString);
-		results = query.getResultList();
+		requestResults = query.getResultList();
 
 		if (nbCouverts != 0) {
-			for (Restaurant r : results) {
+			List<Restaurant> returnList = new ArrayList<Restaurant>();
+			for (Restaurant r : requestResults) {
 				Response response = isRestaurantAvailable(r.getId(), nbCouverts);
 				Object available_obj = (response.getStatus() == Response.Status.OK.getStatusCode())
-						? response.getEntity() : null;
+						? response.getEntity() : null; // true/false or null
 				if (available_obj == null) {
 					return Response.status(Response.Status.NOT_FOUND)
 							.entity("le restaurant d'id : " + r.getId() + " est introuvable.").build();
 				} else {
 					boolean available_bool = (boolean) available_obj;
-					if (!available_bool) {
-						results.remove(r);
+					if (available_bool) {
+						returnList.add(r);
 					}
 				}
 			}
+			return Response.ok(returnList).build();
 		}
-		return Response.ok(results).build();
+		else{
+			return Response.ok(requestResults).build();
+		}
+		
 	}
 
 	private List<Restaurant> findRestaurants(int startPosition, int maxResults, String sortFields,
@@ -267,13 +272,13 @@ public class RestaurantResource extends Application {
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e)).build();
 		}
-		return Response.status(Response.Status.OK).build();
+		return Response.status(Response.Status.NO_CONTENT).build();
 	}
 
 	@GET
 	@Path("/isRestaurantAvailable/{nbCouverts}")
 	public Response isRestaurantAvailable(@HeaderParam("restaurant_id") Long restaurant_id,
-			@QueryParam("nbCouverts") int nbCouverts) {
+			@PathParam("nbCouverts") int nbCouverts) {
 		boolean available = false;
 		Response response = getRestaurant(restaurant_id);
 		Restaurant existingRestaurant = (response.getStatus() == Response.Status.OK.getStatusCode())
@@ -283,8 +288,17 @@ public class RestaurantResource extends Application {
 					.entity("le restaurant d'id : " + restaurant_id + " est introuvable.").build();
 		} else {
 			List<TableResto> tableRestoList = existingRestaurant.getTables();
+			int nbAvailablePlaces = 0;
+			boolean alreadyUnmovable = false; // si une table non bougeable à déjà été rencontrée
 			for (TableResto tr : tableRestoList) {
-				if (tr.getPlaces() >= nbCouverts) {
+				if(tr.isMovable()) nbAvailablePlaces+=tr.getPlaces();
+				else{					
+					if(!alreadyUnmovable){
+						alreadyUnmovable = true;
+						nbAvailablePlaces+=tr.getPlaces();
+					}					
+				}
+				if (nbAvailablePlaces >= nbCouverts) {
 					available = true;
 					break;
 				}
