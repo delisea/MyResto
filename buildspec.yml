@@ -6,6 +6,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Compiling the Go code...
+      - ./rebuild.sh
   post_build:
     commands:
       - echo Build completed on `date`
