@@ -1,0 +1,754 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.10",
+    "title": "javaee7-angular"
+  },
+  "host": "localhost:8080",
+  "basePath": "/javaee7-angular/resources",
+  "schemes": [
+    "http"
+  ],
+  "paths": {    
+    "/tables": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/tables/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }           
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restaurants": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "default": "1"
+          },
+          {
+            "type": "string",
+            "name": "sortDirections",
+            "in": "query",
+            "required": false,
+            "default": "asc"
+          },
+          {
+            "type": "string",
+            "name": "sortFields",
+            "in": "query",
+            "required": false,
+            "default": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/PaginatedListWrapper"
+            }
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restaurants/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restaurants/search": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {          
+            "name": "disponibility",
+            "type": "array",
+            "in": "query",
+            "required": false,
+            "collectionFormat": "csv",    
+            "items":{
+              "type": "string",
+              "enum": [
+                "MORNING",
+                "MIDDAY",
+                "EVENING",
+                "NIGHT"
+              ]
+            }          
+          },
+          {           
+            "name": "day",
+            "type": "array",
+            "in": "query",
+            "required": false,
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "MONDAY",
+                "TUESDAY",
+                "WEDNESDAY",
+                "THURSDAY",
+                "FRIDAY",
+                "SATURDAY",
+                "SUNDAY"
+              ]     
+            }
+          },
+          {
+            "name": "speciality",
+            "in": "query",
+            "type": "array",
+            "required": false,
+            "collectionFormat": "csv",
+            "items":{
+              "type": "string",
+              "enum": [
+                "ITALIAN",
+                "CHINESE",
+                "JAPANESE"
+              ]
+            }          
+          },
+          {
+            "type": "integer",
+            "name": "nbCouverts",
+            "in": "query",
+            "required": false,
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/PaginatedListWrapper"
+            }
+          },
+          "404": {
+          "description": "NOT FOUND",
+          "headers": {}
+          }, 
+          "500": {
+          "description": "INTERNAL SERVER ERROR",
+          "headers": {}
+          }      
+        }
+      }
+    },
+    "/restaurants/isRestaurantAvailable/{nbCouverts}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "name": "nbCouverts",
+            "in": "path",
+            "required": true,
+          }        
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}         
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restaurants/getTables/{restaurant_id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "path",
+            "required": true
+          }       
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restaurants/getSpecialities/{restaurant_id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "path",
+            "required": true
+          }       
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/restaurants/getDisponibilities/{restaurant_id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "path",
+            "required": true
+          }       
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/disponibilities": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Disponibility"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Disponibility"
+            }
+          }
+        }
+      }
+    },
+    "/disponibilities/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Disponibility"
+            }
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/specialities": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Speciality"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Disponibility"
+            }
+          }
+        }
+      }
+    },
+    "/specialities/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Speciality"
+            }
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Object": {
+      "properties": {}
+    },
+    "PaginatedListWrapper": {
+      "properties": {
+        "currentPage": {
+          "type": "integer"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Object"
+          }
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "sortDirections": {
+          "type": "string"
+        },
+        "sortFields": {
+          "type": "string"
+        },
+        "totalResults": {
+          "type": "integer"
+        }
+      }
+    },
+    "Table": {
+      "properties": {
+        "number": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "places": {
+          "type": "integer"
+        },
+        "movable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Restaurant": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },     
+        "url_img": {
+          "type": "string"
+        },
+        "tel_number": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "Disponibility": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "periode": {
+          "type": "string",
+          "enum": [
+            "MORNING",
+            "MIDDAY",
+            "EVENING",
+            "NIGHT"
+          ]
+        },
+        "day": {
+          "type": "string",
+          "enum": [
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY"
+          ]
+        }
+      }
+    },
+    "Speciality": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "speciality_label": {
+          "type": "string",
+          "enum": [
+            "ITALIAN",
+            "CHINESE",
+            "JAPANESE"
+          ]
+        }
+      }
+    }
+  }
+}

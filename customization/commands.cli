@@ -1,0 +1,20 @@
+# Mark the commands below to be run as a batch
+batch
+
+#remove previous datasource with same driver
+#data-source remove --name=ExampleDS
+
+# Add the driver
+/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-xa-datasource-class-name=com.mysql.jdbc.Driver)
+
+# Add the datasource
+data-source add --name=mysqlembedded --driver-name=mysql --jndi-name=java:jboss/datasources/Mysql --connection-url=jdbc:mysql://sql4.cluster1.easy-hebergement.net/closed5?autoReconnect=true --user-name=closed5 --password=pouted --use-ccm=true --enabled=true --use-java-context=true --max-pool-size=10 --valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker --validate-on-match=true --background-validation=false 
+
+# Add the driver
+#/subsystem=datasources/jdbc-driver=h2:add(driver-name=h2,driver-module-name=com.h2database.h2,driver-xa-datasource-class-name=org.h2.jdbcx.JdbcDataSource)
+
+# Add the datasource
+#data-source add --name=h2embedded --driver-name=h2 --jndi-name=java:jboss/datasources/ExampleDS1 --connection-url=jdbc:h2:tcp://localhost/~/test --user-name=sa --use-ccm=true --enabled=true --use-java-context=true
+
+# Execute the batch
+run-batch
