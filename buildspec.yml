@@ -5,8 +5,12 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Compiling the Go code...
-      - ./rebuild.sh
+      - cd javaee7-angular
+      - mvn clean install
+      - cd ..
+      - cp javaee7-angular/target/javaee7-angular.war .
+      - docker pull jboss/wildfly
+      - docker build -t wildfly-app:1.0 -f $DOCKERFILE .
   post_build:
     commands:
       - echo Build completed on `date`
