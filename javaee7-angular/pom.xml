@@ -48,24 +48,6 @@
 				</plugin>
 
 				<plugin>
-					<groupId>com.sebastian-daschner</groupId>
-					<artifactId>jaxrs-analyzer-maven-plugin</artifactId>
-					<version>0.5</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>analyze-jaxrs</goal>
-							</goals>
-							<configuration>
-								<!-- Available backends are plaintext (default), swagger and asciidoc -->
-								<backend>swagger</backend>
-								<deployedDomain>localhost</deployedDomain>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-
-				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
 					<version>${version.plugin.enforcer}</version>
@@ -164,7 +146,7 @@
 							<lib>org.hibernate.common:hibernate-commons-annotations:5.0.1.Final</lib>
 							<lib>org.jboss.logging:jboss-logging:3.3.0.Final</lib>
 							<lib>dom4j:dom4j:1.6.1</lib>
-							<lib>org.javassist:javassist:3.18.1-GA</lib>
+							<lib>org.javassist:javassist:3.21.1-GA</lib>
 							<lib>com.fasterxml:classmate:1.1.0</lib>
 							<lib>antlr:antlr:2.7.7</lib>
 						</libs>
@@ -216,99 +198,110 @@
 			<artifactId>junit-vintage-engine</artifactId>
 			<version>4.12.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>LATEST</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<profiles>
-        <profile>
-            <!-- When built in OpenShift the 'openshift' profile will be used when
-                invoking mvn. -->
-            <!-- Use this profile for any OpenShift specific customization your app
-                will need. -->
-            <!-- By default that is to put the resulting archive into the 'deployments'
-                folder. -->
-            <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-            <id>openshift</id>
-            <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${version.plugin.compiler}</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <debug>true</debug>
-                    <optimize>true</optimize>
-                </configuration>
-            </plugin>
+		<profile>
+			<!-- When built in OpenShift the 'openshift' profile will be used when 
+				invoking mvn. -->
+			<!-- Use this profile for any OpenShift specific customization your app 
+				will need. -->
+			<!-- By default that is to put the resulting archive into the 'deployments' 
+				folder. -->
+			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
+			<id>openshift</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>${version.plugin.compiler}</version>
+						<configuration>
+							<source>${java.version}</source>
+							<target>${java.version}</target>
+							<debug>true</debug>
+							<optimize>true</optimize>
+						</configuration>
+					</plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>${version.plugin.enforcer}</version>
-                <executions>
-                    <execution>
-                        <id>enforce-maven</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireJavaVersion>
-                                    <version>${java.version}</version>
-                                </requireJavaVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-enforcer-plugin</artifactId>
+						<version>${version.plugin.enforcer}</version>
+						<executions>
+							<execution>
+								<id>enforce-maven</id>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<rules>
+										<requireJavaVersion>
+											<version>${java.version}</version>
+										</requireJavaVersion>
+									</rules>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.plugin.war}</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <outputDirectory>deployments</outputDirectory>
-                    <warName>ROOT</warName>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-        </profile>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>${version.plugin.war}</version>
+						<configuration>
+							<failOnMissingWebXml>false</failOnMissingWebXml>
+							<outputDirectory>deployments</outputDirectory>
+							<warName>ROOT</warName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
-</profiles>
+	</profiles>
 </project>
