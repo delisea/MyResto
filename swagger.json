@@ -261,6 +261,27 @@
           "application/json"
         ],
         "parameters": [
+        	{
+            "type": "integer",
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "default": "1"
+          },
+          {
+            "type": "string",
+            "name": "sortDirections",
+            "in": "query",
+            "required": false,
+            "default": "asc"
+          },
+          {
+            "type": "string",
+            "name": "sortFields",
+            "in": "query",
+            "required": false,
+            "default": "id"
+          },
           {          
             "name": "disponibility",
             "type": "array",
@@ -652,7 +673,7 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Object"
+            "$ref": "#/definitions/Restaurant"
           }
         },
         "pageSize": {

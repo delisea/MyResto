@@ -19,13 +19,12 @@ public class Restaurant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
 	private String name;
 	private String address;
 	private String url_img;
 	private String tel_number;
 	private String email;
-
+		
 	@OneToMany(mappedBy = "restaurant")	
 	private List<TableResto> tables;
 	
