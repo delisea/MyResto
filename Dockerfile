@@ -32,5 +32,9 @@ ADD javaee7-angular.war $SWAGGER_DEPLOY_DIR/
 RUN /opt/jboss/wildfly/bin/add-user.sh admin Admin#70365 --silent
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
 
+USER root
+RUN chgrp -R 0 $JBOSS_HOME
+RUN chmod -R g+rw $JBOSS_HOME
+
 EXPOSE 8080
 EXPOSE 9990
