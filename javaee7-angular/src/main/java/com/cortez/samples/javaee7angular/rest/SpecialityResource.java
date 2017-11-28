@@ -54,7 +54,7 @@ public class SpecialityResource extends Application{
 	
 	@GET
 	public Response getSpecialities() {
-		String queryString = "SELECT distinct s.speciality_label FROM Speciality";
+		String queryString = "SELECT distinct s.speciality_label FROM Speciality s";
 		Query query = entityManager.createQuery(queryString);
 		return Response.ok(query.getResultList()).build();
 	}
