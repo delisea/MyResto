@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -50,6 +51,14 @@ public class SpecialityResource extends Application{
 		}
 		return Response.ok(speciality).build();
 	}
+	
+	@GET
+	public Response getSpecialities() {
+		String queryString = "SELECT distinct s.speciality_label FROM Speciality";
+		Query query = entityManager.createQuery(queryString);
+		return Response.ok(query.getResultList()).build();
+	}
+	
 	
 	@POST
 	public Response saveSpeciality(@HeaderParam("restaurant_id") Long restaurant_id, Speciality speciality) {

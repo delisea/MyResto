@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -49,6 +50,20 @@ public class DisponibilityResource extends Application{
 					.build();
 		}
 		return Response.ok(dispo).build();
+	}
+	
+	@GET
+	public Response getPeriodes() {
+		String queryString = "SELECT distinct d.periode FROM Disponibility d";
+		Query query = entityManager.createQuery(queryString);
+		return Response.ok(query.getResultList()).build();
+	}
+	
+	@GET
+	public Response getDays() {
+		String queryString = "SELECT distinct d.day FROM Disponibility d";
+		Query query = entityManager.createQuery(queryString);
+		return Response.ok(query.getResultList()).build();
 	}
 	
 	@POST
