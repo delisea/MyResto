@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Restaurant} from "./Restaurant";
+import {PaginatedListWrapper} from "./PaginatedListWrapper";
 import {Subject} from "rxjs/Subject";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
@@ -14,8 +15,8 @@ export class MockRestaurantsService {
 
   constructor(private http: HttpClient) {}
 
-  getRestaurants(url): Observable<Restaurant[]> {
-    return(this.http.get<Restaurant[]>(url))
+  getRestaurants(url): Observable<PaginatedListWrapper> {
+    return(this.http.get<PaginatedListWrapper>(url))
 
   }
 

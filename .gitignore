@@ -1,1 +1,4 @@
 /bin/
+javaee7-angular.war
+javaee7-angular/target/javaee7-angular.war
+javaee7-angular/target/maven-archiver/pom.properties
