@@ -73,7 +73,8 @@ public class RestaurantResource extends Application {
 			@DefaultValue("asc") @QueryParam("sortDirections") String sortDirections,
 			@QueryParam("disponibility") String disponibility,
 			@QueryParam("speciality") String speciality, @QueryParam("day") String day,
-			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts/*
+			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts,
+			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude, @QueryParam("rayon") Float rayon/*
 																		 * , @QueryParam
 																		 * (
 																		 * "address")
@@ -144,6 +145,16 @@ public class RestaurantResource extends Application {
 			for (int i = 1; i < specialities.size(); i++) {
 				queryString += " OR d.day = '" + specialities.get(i) + "'";
 			}
+		}
+
+		//Geosearh
+		if (latitude != null && longitude != null && rayon != null){
+			float maxlatitude = latitude + offsetLat(latitude, rayon);
+			float minlatitude = latitude - offsetLat(latitude, rayon);
+			float maxlongitude = longitude + offsetLong(latitude, longitude, rayon);
+			float minlongitude = longitude - offsetLong(latitude, longitude, rayon);
+
+			queryString += " WHERE r.latitude <= " + maxlatitude + " AND r.latitude >= "  + minlatitude + " AND r.longitude <= " + maxlongitude + " AND r.longitude >= " + minlongitude;	
 		}
 		
 		// Elements de pagination
@@ -225,6 +236,7 @@ public class RestaurantResource extends Application {
 			restaurantToSave.setName(restaurant.getName());
 			restaurantToSave.setTel_number(restaurant.getTel_number());
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
+			restaurantToSave.setLocalisation(restaurant.getLatitude(), restaurant.getLongitude());
 			try {
 				entityManager.persist(restaurantToSave);
 			} catch (Exception e) {
@@ -238,6 +250,7 @@ public class RestaurantResource extends Application {
 			existingRestaurant.setName(restaurant.getName());
 			existingRestaurant.setTel_number(restaurant.getTel_number());
 			existingRestaurant.setUrl_img(restaurant.getUrl_img());
+			existingRestaurant.setLocalisation(restaurant.getLatitude(), restaurant.getLongitude());
 			try {
 				return Response.ok(entityManager.merge(existingRestaurant)).build();
 			} catch (Exception e) {
@@ -372,6 +385,18 @@ public class RestaurantResource extends Application {
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
 		return e.getLocalizedMessage() + "/n" + errors.toString();
+	}
+
+	//For geoSearch
+	private float offsetLat(float latitude, float rayon){
+		float oneLatitudeDegree = 111.110f;
+		return (rayon / oneLatitudeDegree);
+	}
+
+	private float offsetLong(float latitude, float longitude, float rayon){
+		float oneLatitudeDegree = 111.110f;
+		float oneLongitudeDegree =  111.110f *  (float) Math.cos(latitude);
+		return (rayon / oneLongitudeDegree);
 	}
 
 }
