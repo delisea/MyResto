@@ -25,6 +25,21 @@ idResto3=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/r
 idResto3=$(echo -e $idResto3 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto3 = $idResto3 \n"
 
+#	Ajout d'un restaurant (nom = "Hippopotamus Gières")
+idHippo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Hippopotamus Gières\", \"address\": \"string\", \"url_img\": \"https://i.ytimg.com/vi/uLF1e4wziTA/maxresdefault.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1896624, \"longitude\": 5.7766054 }")
+idHippo=$(echo -e $idHippo | cut -d':' -f 2 | cut -d',' -f 1)
+echo -e "\n idHippo = $idHippo \n"
+
+#	Ajout d'un restaurant (nom = "MacDo de l'aigle")
+idMacDo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"MacDo de l'aigle\", \"address\": \"string\", \"url_img\": \"http://static.pix-geeks.com/2016/03/mcdonalds-burger-king-troll-twitter-42676-1.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1830954, \"longitude\": 5.7155548 }")
+idMacDo=$(echo -e $idMacDo | cut -d':' -f 2 | cut -d',' -f 1)
+echo -e "\n idMacDo = $idMacDo \n"
+
+#	Ajout d'un restaurant (nom = "La tour Eiffel")
+idEiffel=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"La tour Eiffel\", \"address\": \"string\", \"url_img\": \"http://img0.svstatic.com/tour-eiffel/la-tour-eiffel-aux-couleurs-de-la-france-en-hommage-aux-victimes-des-attentats_12518_wide.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 48.8583701, \"longitude\": 2.2922873 }")
+idEiffel=$(echo -e $idEiffel | cut -d':' -f 2 | cut -d',' -f 1)
+echo -e "\n idEiffel = $idEiffel \n"
+
 # 	Ajout d'une table de 5 places non bougeable sur resto1 
 echo -e "\nAjout d'une table de 5 places non bougeable sur resto1 \n"
 echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/tables" -H "accept: application/json" -H "restaurant_id: "+$idResto1 -H "Content-Type: application/json" -d "{ \"number\": 1, \"id\": 0, \"places\": 5, \"movable\": false}")
@@ -131,6 +146,10 @@ echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/res
 echo -e "\nFiltrage (nbCouverts=12) => Ressort rien \n"
 echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?nbCouverts=12" -H "accept: application/json")
 
+#	Filtrage (A 5 km autour de la mairie de grenoble) => Ressort l'hippo et le macdo
+echo -e "\nFiltrage (A 5 km autour de la mairie de grenoble) => Ressort  l'hippo et le macdo\n"	
+echo -e $(curl --silent GET "http://localhost:8080/javaee7-angular/resources/restaurants/search?page=1&sortDirections=asc&sortFields=id&latitude=45.1865182&longitude=5.7339694&rayon=5" -H "accept: application/json")
+
 #	Suppression restaurant resto1 => OK (Si on met pas -X il ne supprime pas) 
 echo -e "\nSuppression restaurant resto1 => NO CONTENT \n"
 echo -e $(curl -X DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idResto1 -H "accept: application/json")
@@ -142,5 +161,15 @@ echo -e $(curl -X DELETE "http://localhost:8080/javaee7-angular/resources/restau
 #	Suppression restaurant resto3 => OK (Si on met pas -X il ne supprime pas)
 echo -e "\nSuppression restaurant resto3 => NO CONTENT \n"
 echo -e $(curl -X DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idResto3 -H "accept: application/json")
+
+#   Suppression des resto avec des pos.
+echo -e "\nSuppression restaurant Hippo => NO CONTENT \n"
+echo -e $(curl -X DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idHippo -H "accept: application/json")
+
+echo -e "\nSuppression restaurant MacDo => NO CONTENT \n"
+echo -e $(curl -X DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idMacDo -H "accept: application/json")
+
+echo -e "\nSuppression restaurant Eiffel => NO CONTENT \n"
+echo -e $(curl -X DELETE "http://localhost:8080/javaee7-angular/resources/restaurants/"+$idEiffel -H "accept: application/json")
 
 ###

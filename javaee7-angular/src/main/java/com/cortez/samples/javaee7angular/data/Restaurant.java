@@ -25,6 +25,9 @@ public class Restaurant {
 	private String url_img;
 	private String tel_number;
 	private String email;
+	//Degree
+	private float latitude;
+	private float longitude;
 
 	@OneToMany(mappedBy = "restaurant")	
 	private List<TableResto> tables;
@@ -85,6 +88,19 @@ public class Restaurant {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public void setLocalisation(float latitude, float longitude){
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	
+	public float getLatitude(){
+		return latitude;
+	}
+	
+	public float getLongitude(){
+		return longitude;
 	}
 
 	public void addTable(TableResto table) {

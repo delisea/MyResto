@@ -68,12 +68,32 @@ public class RestaurantResource extends Application {
 
 	@GET
 	@Path("/search")
-	public Response searchRestaurantsByCriteria(@QueryParam("disponibility") String disponibility,
+	public Response searchRestaurantsByCriteria(@DefaultValue("1") @QueryParam("page") Integer page,
+			@DefaultValue("id") @QueryParam("sortFields") String sortFields,
+			@DefaultValue("asc") @QueryParam("sortDirections") String sortDirections,
+			@QueryParam("disponibility") String disponibility,
 			@QueryParam("speciality") String speciality, @QueryParam("day") String day,
-			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts/*
-													 * , @QueryParam("address")
-													 * String address
-													 */) {
+			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts,
+			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude, @QueryParam("rayon") Float rayon/*
+																		 * , @QueryParam
+																		 * (
+																		 * "address")
+																		 * String
+																		 * address
+																		 */) {
+
+		// Préparation du wrapper
+		
+		PaginatedListWrapper paginatedListWrapper = new PaginatedListWrapper();
+		paginatedListWrapper.setCurrentPage(page);
+		paginatedListWrapper.setSortFields(sortFields);
+		paginatedListWrapper.setSortDirections(sortDirections);
+		paginatedListWrapper.setPageSize(10);
+		paginatedListWrapper.setTotalResults(countRestaurants());
+		int start = (paginatedListWrapper.getCurrentPage() - 1) * paginatedListWrapper.getPageSize();
+				
+		////////////////////////////
+		
 		
 		List<Restaurant> requestResults = null;
 		List<String> disponibilities = new ArrayList<String>();
@@ -127,7 +147,22 @@ public class RestaurantResource extends Application {
 			}
 		}
 
+		//Geosearh
+		if (latitude != null && longitude != null && rayon != null){
+			float maxlatitude = latitude + offsetLat(latitude, rayon);
+			float minlatitude = latitude - offsetLat(latitude, rayon);
+			float maxlongitude = longitude + offsetLong(latitude, longitude, rayon);
+			float minlongitude = longitude - offsetLong(latitude, longitude, rayon);
+
+			queryString += " WHERE r.latitude <= " + maxlatitude + " AND r.latitude >= "  + minlatitude + " AND r.longitude <= " + maxlongitude + " AND r.longitude >= " + minlongitude;	
+		}
+		
+		// Elements de pagination
+		queryString += " ORDER BY r." + sortFields + " " + sortDirections;
+		
 		Query query = entityManager.createQuery(queryString);
+		query.setFirstResult(start);
+		query.setMaxResults(paginatedListWrapper.getPageSize());
 		requestResults = query.getResultList();
 
 		if (nbCouverts != 0) {
@@ -146,13 +181,17 @@ public class RestaurantResource extends Application {
 					}
 				}
 			}
-			return Response.ok(returnList).build();
+			paginatedListWrapper.setRestaurants(returnList);
+			return Response.ok(paginatedListWrapper).build();
+		} else {
+			paginatedListWrapper.setRestaurants(requestResults);
+			return Response.ok(paginatedListWrapper).build();
 		}
-		else{
-			return Response.ok(requestResults).build();
-		}
-		
 	}
+
+	/*
+	 * Retourne la liste paginée de tous les restaurants de la base
+	 */
 
 	private List<Restaurant> findRestaurants(int startPosition, int maxResults, String sortFields,
 			String sortDirections) {
@@ -197,6 +236,7 @@ public class RestaurantResource extends Application {
 			restaurantToSave.setName(restaurant.getName());
 			restaurantToSave.setTel_number(restaurant.getTel_number());
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
+			restaurantToSave.setLocalisation(restaurant.getLatitude(), restaurant.getLongitude());
 			try {
 				entityManager.persist(restaurantToSave);
 			} catch (Exception e) {
@@ -210,6 +250,7 @@ public class RestaurantResource extends Application {
 			existingRestaurant.setName(restaurant.getName());
 			existingRestaurant.setTel_number(restaurant.getTel_number());
 			existingRestaurant.setUrl_img(restaurant.getUrl_img());
+			existingRestaurant.setLocalisation(restaurant.getLatitude(), restaurant.getLongitude());
 			try {
 				return Response.ok(entityManager.merge(existingRestaurant)).build();
 			} catch (Exception e) {
@@ -278,37 +319,34 @@ public class RestaurantResource extends Application {
 
 	@GET
 	@Path("/getTables/{restaurant_id}")
-	public Response getTables(@PathParam("restaurant_id") Long restaurant_id){		
+	public Response getTables(@PathParam("restaurant_id") Long restaurant_id) {
 		List<TableResto> requestResults = null;
-		String queryString = "SELECT t FROM TableResto t where t.restaurant.id="+restaurant_id;
+		String queryString = "SELECT t FROM TableResto t where t.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK)
-				.entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).build();
 	}
-	
+
 	@GET
 	@Path("/getSpecialities/{restaurant_id}")
-	public Response getSpecialities(@PathParam("restaurant_id") Long restaurant_id){
+	public Response getSpecialities(@PathParam("restaurant_id") Long restaurant_id) {
 		List<TableResto> requestResults = null;
-		String queryString = "SELECT s FROM Speciality s where s.restaurant.id="+restaurant_id;
+		String queryString = "SELECT s FROM Speciality s where s.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK)
-				.entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).build();
 	}
-	
+
 	@GET
 	@Path("/getDisponibilities/{restaurant_id}")
-	public Response getDisponibilities(@PathParam("restaurant_id") Long restaurant_id){
+	public Response getDisponibilities(@PathParam("restaurant_id") Long restaurant_id) {
 		List<TableResto> requestResults = null;
-		String queryString = "SELECT d FROM Disponibility d where d.restaurant.id="+restaurant_id;
+		String queryString = "SELECT d FROM Disponibility d where d.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK)
-				.entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).build();
 	}
-	
+
 	@GET
 	@Path("/isRestaurantAvailable/{nbCouverts}")
 	public Response isRestaurantAvailable(@HeaderParam("restaurant_id") Long restaurant_id,
@@ -323,14 +361,16 @@ public class RestaurantResource extends Application {
 		} else {
 			List<TableResto> tableRestoList = existingRestaurant.getTables();
 			int nbAvailablePlaces = 0;
-			boolean alreadyUnmovable = false; // si une table non bougeable à déjà été rencontrée
+			boolean alreadyUnmovable = false; // si une table non bougeable à
+												// déjà été rencontrée
 			for (TableResto tr : tableRestoList) {
-				if(tr.isMovable()) nbAvailablePlaces+=tr.getPlaces();
-				else{					
-					if(!alreadyUnmovable){
+				if (tr.isMovable())
+					nbAvailablePlaces += tr.getPlaces();
+				else {
+					if (!alreadyUnmovable) {
 						alreadyUnmovable = true;
-						nbAvailablePlaces+=tr.getPlaces();
-					}					
+						nbAvailablePlaces += tr.getPlaces();
+					}
 				}
 				if (nbAvailablePlaces >= nbCouverts) {
 					available = true;
@@ -345,6 +385,18 @@ public class RestaurantResource extends Application {
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
 		return e.getLocalizedMessage() + "/n" + errors.toString();
+	}
+
+	//For geoSearch
+	private float offsetLat(float latitude, float rayon){
+		float oneLatitudeDegree = 111.110f;
+		return (rayon / oneLatitudeDegree);
+	}
+
+	private float offsetLong(float latitude, float longitude, float rayon){
+		float oneLatitudeDegree = 111.110f;
+		float oneLongitudeDegree =  111.110f *  (float) Math.cos(latitude);
+		return (rayon / oneLongitudeDegree);
 	}
 
 }
