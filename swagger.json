@@ -9,7 +9,7 @@
   "schemes": [
     "http"
   ],
-  "paths": {    
+  "paths": {
     "/tables": {
       "post": {
         "consumes": [
@@ -75,7 +75,7 @@
             "headers": {},
             "schema": {
               "$ref": "#/definitions/Table"
-            }           
+            }
           },
           "404": {
             "description": "NOT FOUND",
@@ -261,7 +261,7 @@
           "application/json"
         ],
         "parameters": [
-        	{
+          {
             "type": "integer",
             "name": "page",
             "in": "query",
@@ -282,13 +282,13 @@
             "required": false,
             "default": "id"
           },
-          {          
+          {
             "name": "disponibility",
             "type": "array",
             "in": "query",
             "required": false,
-            "collectionFormat": "csv",    
-            "items":{
+            "collectionFormat": "csv",
+            "items": {
               "type": "string",
               "enum": [
                 "MORNING",
@@ -296,9 +296,9 @@
                 "EVENING",
                 "NIGHT"
               ]
-            }          
+            }
           },
-          {           
+          {
             "name": "day",
             "type": "array",
             "in": "query",
@@ -314,7 +314,7 @@
                 "FRIDAY",
                 "SATURDAY",
                 "SUNDAY"
-              ]     
+              ]
             }
           },
           {
@@ -323,20 +323,38 @@
             "type": "array",
             "required": false,
             "collectionFormat": "csv",
-            "items":{
+            "items": {
               "type": "string",
               "enum": [
                 "ITALIAN",
                 "CHINESE",
                 "JAPANESE"
               ]
-            }          
+            }
           },
           {
             "type": "integer",
             "name": "nbCouverts",
             "in": "query",
-            "required": false,
+            "required": false
+          },
+          {
+            "type": "number",
+            "name": "latitude",
+            "in": "query",
+            "required": false
+          },
+          {
+            "type": "number",
+            "name": "longitude",
+            "in": "query",
+            "required": false
+          },
+          {
+            "type": "number",
+            "name": "rayon",
+            "in": "query",
+            "required": false
           }
         ],
         "responses": {
@@ -348,13 +366,13 @@
             }
           },
           "404": {
-          "description": "NOT FOUND",
-          "headers": {}
-          }, 
+            "description": "NOT FOUND",
+            "headers": {}
+          },
           "500": {
-          "description": "INTERNAL SERVER ERROR",
-          "headers": {}
-          }      
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          }
         }
       }
     },
@@ -377,13 +395,13 @@
             "type": "integer",
             "name": "nbCouverts",
             "in": "path",
-            "required": true,
-          }        
+            "required": true
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "headers": {}         
+            "headers": {}
           },
           "404": {
             "description": "NOT FOUND",
@@ -410,7 +428,7 @@
             "name": "restaurant_id",
             "in": "path",
             "required": true
-          }       
+          }
         ],
         "responses": {
           "200": {
@@ -442,7 +460,7 @@
             "name": "restaurant_id",
             "in": "path",
             "required": true
-          }       
+          }
         ],
         "responses": {
           "200": {
@@ -474,7 +492,7 @@
             "name": "restaurant_id",
             "in": "path",
             "required": true
-          }       
+          }
         ],
         "responses": {
           "200": {
@@ -716,7 +734,7 @@
         },
         "address": {
           "type": "string"
-        },     
+        },
         "url_img": {
           "type": "string"
         },
@@ -725,6 +743,12 @@
         },
         "email": {
           "type": "string"
+        },
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
         }
       }
     },
