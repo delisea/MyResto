@@ -607,9 +607,7 @@
           "200": {
             "description": "OK",
             "headers": {},
-            "schema": {
-              "$ref": "#/definitions/Speciality"
-            }
+            "schema": {}
           }
         }
       },
