@@ -1,5 +1,8 @@
 
-<label for="typeahead-basic">Search for a state:</label>
+<label for="typeahead-basic">Entrez une adresse</label>
 <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"/>
+<button (click)="geocode()">Geocode</button>
 <hr>
 <pre>Model: {{ model | json }}</pre>
+<pre>Lat: {{ lat | json }}</pre>
+<pre>Lng: {{ lng | json }}</pre>

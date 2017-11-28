@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {GeoCodingService} from '../geocoding.service'
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -21,11 +22,28 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
 })
 export class LocalisationFilterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private geocodeService: GeoCodingService) { }
 
   ngOnInit() {
   }
   public model: any;
+  public lat: number;
+  public lng: number;
+
+  geocode(){
+    this.geocodeService.geocodeAddress(this.model).then((results) => {
+      console.log('results', results);
+      const result   = results[0],
+      location = result.geometry.location;
+
+      // @types/googlemaps describe the Javascript API not the JSON object on the response
+      // there a sublte difference like lat/lng beeing number not functions, making this `<any>` cast necessary
+        this.lat = <any>location.lat;
+        this.lng = <any>location.lng;
+    });
+  }
+  
+  
 
   search = (text$: Observable<string>) =>
     text$
@@ -34,3 +52,4 @@ export class LocalisationFilterComponent implements OnInit {
       .map(term => term.length < 2 ? []
         : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 }
+

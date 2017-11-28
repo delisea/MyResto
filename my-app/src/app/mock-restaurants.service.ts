@@ -19,16 +19,9 @@ export class MockRestaurantsService {
     return(this.http.get<PaginatedListWrapper>(url))
 
   }
-
   addFilter(url): void {
     console.log(url);
     this.getRestaurants(url);
     this.filterAddedSource.next(url);
   }
-
-
-
-
-
-
 }

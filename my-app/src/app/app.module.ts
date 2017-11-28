@@ -18,6 +18,7 @@ import { RestaurantsListComponent } from './restaurants-list/restaurants-list.co
 import { RestaurantPreviewComponent } from './restaurant-preview/restaurant-preview.component';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { MockRestaurantsService } from './mock-restaurants.service';
+import { GeoCodingService } from './geocoding.service';
 
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -91,7 +92,7 @@ import {
     MatCardModule,
     MatToolbarModule,
   ],
-  providers: [ HeroService, MessageService, MockRestaurantsService, HttpClientModule ],
+  providers: [ HeroService, MessageService, MockRestaurantsService, GeoCodingService, HttpClientModule ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
