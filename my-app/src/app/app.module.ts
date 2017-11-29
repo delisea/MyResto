@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroService } from './hero.service';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
+
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LocalisationFilterComponent } from './localisation-filter/localisation-filter.component';
 import { FiltersComponent } from './filters/filters.component';
@@ -17,9 +19,10 @@ import { RestaurantPreviewComponent } from './restaurant-preview/restaurant-prev
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { MockRestaurantsService } from './mock-restaurants.service';
 import { GeoCodingService } from './geocoding.service';
+
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { AgmCoreModule } from '@agm/core';
+
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import {
@@ -75,10 +78,6 @@ import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.c
     SpecialityFilterComponent,
   ],
   imports: [
-    AgmCoreModule.forRoot({
-      apiKey: "AIzaSyAMAiC8zck-0vAdoaFnZx9Y2e-Z-TK1PVU",
-      libraries: ["places"]
-    }),
     BrowserModule,
     FormsModule,
     NgbModule.forRoot(),
@@ -88,6 +87,7 @@ import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.c
     MatNativeDateModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     MatNativeDateModule,
     ReactiveFormsModule,
