@@ -56,8 +56,10 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatStepperModule,
+  MatStepperModule, MatOptionModule,
 } from '@angular/material';
+import {DisponibilityFilterComponent} from './disponibility-filter/disponibility-filter.component';
+import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import {
     RestaurantsListComponent,
     RestaurantPreviewComponent,
     RestaurantDetailsComponent,
+    DisponibilityFilterComponent,
+    SpecialityFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +95,8 @@ import {
     FlexLayoutModule,
     MatCardModule,
     MatToolbarModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   providers: [ HeroService, MessageService, MockRestaurantsService, GeoCodingService, HttpClientModule ],
   bootstrap: [ AppComponent ]

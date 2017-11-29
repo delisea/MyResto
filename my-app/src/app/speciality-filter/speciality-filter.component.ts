@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from "@angular/forms";
+import {MockRestaurantsService} from "../mock-restaurants.service";
+
 
 @Component({
   selector: 'app-speciality-filter',
@@ -9,11 +11,14 @@ import {FormControl} from "@angular/forms";
 })
 export class SpecialityFilterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private restaurantService: MockRestaurantsService) { }
 
   ngOnInit() {
     this.specialities.valueChanges.subscribe(
-      form => console.log(form)
+      form => {
+        console.log({"disponibility":form});
+        this.restaurantService.addFilter("speciality",form)
+      }
     )
   }
 

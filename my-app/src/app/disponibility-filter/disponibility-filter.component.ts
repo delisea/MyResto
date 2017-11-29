@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from "@angular/forms";
+import {MockRestaurantsService} from "../mock-restaurants.service";
 
 @Component({
   selector: 'app-disponibility-filter',
@@ -9,11 +10,14 @@ import {FormControl} from "@angular/forms";
 })
 export class DisponibilityFilterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private restaurantService: MockRestaurantsService) { }
 
   ngOnInit() {
     this.disponibilities.valueChanges.subscribe(
-      form => console.log(form)
+      form => {
+        console.log({"disponibility":form});
+        this.restaurantService.addFilter("disponibility",form)
+      }
     )
   }
 
