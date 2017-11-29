@@ -24,5 +24,5 @@ export class SpecialityFilterComponent implements OnInit {
 
   specialities = new FormControl();
 
-  specialityList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  specialityList = ['ITALIAN', 'CHINESE', 'JAPANESE'];
 }
