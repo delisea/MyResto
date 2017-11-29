@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {GeoCodingService} from '../geocoding.service'
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/distinctUntilChanged';
+import { Component, ViewEncapsulation, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { } from 'googlemaps';
+import { MapsAPILoader } from '@agm/core';
 
 const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
   'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
@@ -22,34 +20,73 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
 })
 export class LocalisationFilterComponent implements OnInit {
 
-  constructor(private geocodeService: GeoCodingService) { }
+  public latitude: number;
+  public longitude: number;
+  public searchControl: FormControl;
+  public zoom: number;
+  public hideMap: boolean;
 
-  ngOnInit() {
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
+  constructor(
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
+  ) {}
+
+  showMapBool(){
+    this.hideMap = false;
   }
-  public model: any;
-  public lat: number;
-  public lng: number;
+  hideMapBool(){
+    this.hideMap = true;
+  }
+  ngOnInit() {
+    //set google maps defaults
+    this.zoom = 4;
+    this.latitude = 39.8282;
+    this.longitude = -98.5795;
+    this.hideMap = false;
 
-  geocode(){
-    this.geocodeService.geocodeAddress(this.model).then((results) => {
-      console.log('results', results);
-      const result   = results[0],
-      location = result.geometry.location;
+    //create search FormControl
+    this.searchControl = new FormControl();
 
-      // @types/googlemaps describe the Javascript API not the JSON object on the response
-      // there a sublte difference like lat/lng beeing number not functions, making this `<any>` cast necessary
-        this.lat = <any>location.lat;
-        this.lng = <any>location.lng;
+    //set current position
+    this.setCurrentPosition();
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.setComponentRestrictions(
+        {'country': ['fr']});
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
     });
   }
-  
-  
 
-  search = (text$: Observable<string>) =>
-    text$
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .map(term => term.length < 2 ? []
-        : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 12;
+      });
+    }
+  }
 }
 
