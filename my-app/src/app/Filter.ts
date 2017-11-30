@@ -5,4 +5,5 @@ export class Filter {
   nb_person : number;
   latitude : number;
   longitude : number;
+  rayon : number;
 }

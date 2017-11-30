@@ -18,7 +18,8 @@ export class MockRestaurantsService {
     speciality: [],
     nb_person: null,
     latitude: null,
-    longitude: null
+    longitude: null,
+    rayon : null
   };
 
   private filterAddedSource = new Subject<string>();
@@ -29,7 +30,7 @@ export class MockRestaurantsService {
   getRestaurants(url): Observable<PaginatedListWrapper> {
     return (this.http.get<PaginatedListWrapper>(url))
   }
-  
+
   addFilter(type, value): void {
     console.log(type);
     console.log(value);
@@ -45,7 +46,7 @@ export class MockRestaurantsService {
     else if (type == "coordinates") {
       this.filter.latitude = value.latitude;
       this.filter.longitude = value.longitude;
-      console.log(this.filter);
+      this.filter.rayon = value.rayon;
     }
 
     console.log(this.filter);
@@ -79,7 +80,10 @@ export class MockRestaurantsService {
       url = url.concat("&nbCouverts=" + this.filter.nb_person);
     }
     if (this.filter.latitude != null && this.filter.longitude != null) {
-      url = url.concat("&latitude=" + this.filter.latitude + "&longitude=" + this.filter.longitude+"&rayon=10");
+      url = url.concat("&latitude=" + this.filter.latitude + "&longitude=" + this.filter.longitude);
+      if(this.filter.rayon != null){
+        url = url.concat("&rayon="+this.filter.rayon)
+      }
     }
 
     console.log("ici");

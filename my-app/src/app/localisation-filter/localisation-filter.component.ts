@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import {MockRestaurantsService} from "../mock-restaurants.service";
-import {Coordinates} from '../Coordinates';
+import {LocalisationFilter} from '../LocalisationFilter';
 import { $ } from 'protractor';
 
 @Component({
@@ -17,10 +17,11 @@ export class LocalisationFilterComponent implements OnInit {
  
   public latitude: number;
   public longitude: number;
+  public rayon: number;
   public searchControl: FormControl;
   public zoom: number;
   public hideMap: boolean;
-  private coordinates : Coordinates;
+  private localisationFilter : LocalisationFilter;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -42,13 +43,11 @@ export class LocalisationFilterComponent implements OnInit {
   ngOnInit() {
     //set google maps defaults
     this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
     this.hideMap = false;
 
     //create search FormControl
     this.searchControl = new FormControl();
-    this.coordinates = new Coordinates();
+    this.localisationFilter = new LocalisationFilter();
 
     //set current position
     this.setCurrentPosition();
@@ -76,13 +75,27 @@ export class LocalisationFilterComponent implements OnInit {
           this.zoom = 12;
 
           // call search
-          this.coordinates.latitude = this.latitude;
-          this.coordinates.longitude = this.longitude;
-          this.restaurantService.addFilter("coordinates",this.coordinates);
+          this.localisationFilter.latitude = this.latitude;
+          this.localisationFilter.longitude = this.longitude;
+          this.restaurantService.addFilter("coordinates",this.localisationFilter);
 
         });
       });
     });
+  }
+
+  rayonAdded(){
+    this.localisationFilter.rayon = this.rayon;
+    this.restaurantService.addFilter("coordinates",this.localisationFilter);
+  }
+
+  clearSearch(){
+    this.rayon = null;
+    this.searchElementRef.nativeElement.value = null;
+    this.localisationFilter.rayon = null;
+    this.localisationFilter.latitude = null;
+    this.localisationFilter.longitude = null;
+    this.restaurantService.addFilter("coordinates",this.localisationFilter);
   }
 
   private setCurrentPosition() {
