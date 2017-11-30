@@ -74,13 +74,7 @@ public class RestaurantResource extends Application {
 			@QueryParam("disponibility") String disponibility,
 			@QueryParam("speciality") String speciality, @QueryParam("day") String day,
 			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts,
-			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude, @QueryParam("rayon") Float rayon/*
-																		 * , @QueryParam
-																		 * (
-																		 * "address")
-																		 * String
-																		 * address
-																		 */) {
+			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude, @QueryParam("rayon") Float rayon) {
 
 		// Préparation du wrapper
 		

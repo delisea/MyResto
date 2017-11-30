@@ -1,8 +1,12 @@
-
-<label for="typeahead-basic">Entrez une adresse</label>
-<input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"/>
-<button (click)="geocode()">Geocode</button>
-<hr>
-<pre>Model: {{ model | json }}</pre>
-<pre>Lat: {{ lat | json }}</pre>
-<pre>Lng: {{ lng | json }}</pre>
+<div class="container">
+    <div class="form-group">
+      <input placeholder="Entrez une adresse" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+    </div>
+      <button [hidden]="!hideMap" (click)="showMapBool()">Montrer la carte</button>
+      <button [hidden]="hideMap" (click)="hideMapBool()">Cacher la carte</button>
+      <agm-map [hidden]="hideMap" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+      </agm-map>
+    <pre>Lat: {{ latitude | json }}</pre>
+    <pre>Lng: {{ longitude | json }}</pre>
+  </div>

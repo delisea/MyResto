@@ -19,7 +19,7 @@ import { RestaurantPreviewComponent } from './restaurant-preview/restaurant-prev
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { MockRestaurantsService } from './mock-restaurants.service';
 import { GeoCodingService } from './geocoding.service';
-
+import { AgmCoreModule } from '@agm/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
@@ -78,6 +78,10 @@ import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.c
     SpecialityFilterComponent,
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyAMAiC8zck-0vAdoaFnZx9Y2e-Z-TK1PVU",
+      libraries: ["places"]
+    }),
     BrowserModule,
     FormsModule,
     NgbModule.forRoot(),

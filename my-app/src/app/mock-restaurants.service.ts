@@ -17,6 +17,8 @@ export class MockRestaurantsService {
     day : [],
     speciality : [],
     nb_person : null,
+    latitude : null,
+    longitude : null
   };
 
   private filterAddedSource = new Subject<string>();
@@ -40,9 +42,14 @@ export class MockRestaurantsService {
     } else if (type == "speciality") {
       this.filter.speciality = value;
     }
+    else if (type == "coordinates") {
+      this.filter.latitude = value.latitude;
+      this.filter.longitude= value.longitude;
+    }
 
     console.log(this.filter);
     var url = this.base_search_url;
+    console.log(this.filter.speciality)
     if (this.filter.speciality != []) {
       url = url.concat("&speciality=");
       for (let speciality of this.filter.speciality){
@@ -55,6 +62,9 @@ export class MockRestaurantsService {
     } else if (this.filter.speciality != []) {
 
     } else if (this.filter.nb_person != null) {
+
+    }
+    else if(this.filter.latitude != null && this.filter.longitude != null){
 
     }
 
