@@ -137,7 +137,7 @@ public class RestaurantResource extends Application {
 		if (speciality != null && !specialities.isEmpty()) {
 			queryString += " JOIN r.specialities s ON s.speciality_label = '" + specialities.get(0) + "'";
 			for (int i = 1; i < specialities.size(); i++) {
-				queryString += " OR d.day = '" + specialities.get(i) + "'";
+				queryString += " OR s.speciality_label = '" + specialities.get(i) + "'";
 			}
 		}
 
