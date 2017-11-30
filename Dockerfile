@@ -7,6 +7,7 @@ ADD customization /opt/jboss/wildfly/customization/
 ADD modules /opt/jboss/wildfly/modules/
 
 # si erreur ici du genre bin/bash^M... ===> Changer le format des fins de lignes du fichier en UNIX
+RUN ["chmod", "+x", "/opt/jboss/wildfly/customization/execute.sh”]
 RUN /opt/jboss/wildfly/customization/execute.sh
 
 # Should be changed for your public domain name

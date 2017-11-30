@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Usage: execute.sh [WildFly mode] [configuration file]
 #
