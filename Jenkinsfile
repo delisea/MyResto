@@ -12,7 +12,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-					cat customization/execute.sh | tr -d "\r" | sh
+					cat customization/execute.sh | tr -d "\r" > customization/temp.sh
+					mv customization/temp.sh customization/execute.sh
 				
 					COMPONENT_VERSION="1.0"
 					COMPONENT_NAME="wildfly-app"
