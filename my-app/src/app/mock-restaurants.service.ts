@@ -1,35 +1,35 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
-import {Restaurant} from "./Restaurant";
-import {PaginatedListWrapper} from "./PaginatedListWrapper";
-import {Subject} from "rxjs/Subject";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
-import {Filter} from './Filter';
+import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Restaurant } from "./Restaurant";
+import { PaginatedListWrapper } from "./PaginatedListWrapper";
+import { Subject } from "rxjs/Subject";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+import { Filter } from './Filter';
 
 @Injectable()
 export class MockRestaurantsService {
-  restaurants : Restaurant[] = [];
+  restaurants: Restaurant[] = [];
 
-  base_search_url : string = 'http://localhost:8080/javaee7-angular/resources/restaurants/search?page=1&sortDirections=asc&sortFields=id';
+  base_search_url: string = 'http://localhost:8080/javaee7-angular/resources/restaurants/search?page=1&sortDirections=asc&sortFields=id';
 
-  filter : Filter = {
-    disponibility : [],
-    day : [],
-    speciality : [],
-    nb_person : null,
-    latitude : null,
-    longitude : null
+  filter: Filter = {
+    disponibility: [],
+    day: [],
+    speciality: [],
+    nb_person: null,
+    latitude: null,
+    longitude: null
   };
 
   private filterAddedSource = new Subject<string>();
   filterAdded = this.filterAddedSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getRestaurants(url): Observable<PaginatedListWrapper> {
-    return(this.http.get<PaginatedListWrapper>(url))
-
+    return (this.http.get<PaginatedListWrapper>(url))
   }
+  
   addFilter(type, value): void {
     console.log(type);
     console.log(value);
@@ -44,28 +44,42 @@ export class MockRestaurantsService {
     }
     else if (type == "coordinates") {
       this.filter.latitude = value.latitude;
-      this.filter.longitude= value.longitude;
+      this.filter.longitude = value.longitude;
+      console.log(this.filter);
     }
 
     console.log(this.filter);
     var url = this.base_search_url;
     console.log(this.filter.speciality)
-    if (this.filter.speciality != []) {
+    if (this.filter.speciality.length != 0) {
       url = url.concat("&speciality=");
-      for (let speciality of this.filter.speciality){
-          url = url.concat(speciality+",");
+      for (let speciality of this.filter.speciality) {
+        url = url.concat(speciality + ",");
       }
-      url = url.slice(0,-1);
-
-    } else if (this.filter.day != []) {
-
-    } else if (this.filter.speciality != []) {
-
-    } else if (this.filter.nb_person != null) {
+      url = url.slice(0, -1);
 
     }
-    else if(this.filter.latitude != null && this.filter.longitude != null){
+    if (this.filter.day.length != 0) {
+      url = url.concat("&day=");
+      for (let day of this.filter.day) {
+        url = url.concat(day + ",");
+      }
+      // enlever la virgule
+      url = url.slice(0, -1);
 
+    } if (this.filter.disponibility.length != 0) {
+      url = url.concat("&disponibility=");
+      for (let disponibility of this.filter.disponibility) {
+        url = url.concat(disponibility + ",");
+      }
+      // enlever la virgule
+      url = url.slice(0, -1);
+
+    } if (this.filter.nb_person != null) {
+      url = url.concat("&nbCouverts=" + this.filter.nb_person);
+    }
+    if (this.filter.latitude != null && this.filter.longitude != null) {
+      url = url.concat("&latitude=" + this.filter.latitude + "&longitude=" + this.filter.longitude+"&rayon=10");
     }
 
     console.log("ici");

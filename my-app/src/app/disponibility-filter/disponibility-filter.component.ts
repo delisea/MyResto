@@ -23,6 +23,6 @@ export class DisponibilityFilterComponent implements OnInit {
 
   disponibilities = new FormControl();
 
-  disponibilityList = ['Matin', 'Midi', 'Soir', 'Nuit'];
+  disponibilityList = ['MORNING', 'MIDDAY', 'EVENING', 'NIGHT'];
 
 }
