@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {MockRestaurantsService} from "../mock-restaurants.service";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-disponibility-filter',
@@ -10,11 +12,17 @@ import {MockRestaurantsService} from "../mock-restaurants.service";
 })
 export class DisponibilityFilterComponent implements OnInit {
 
-  constructor(private restaurantService: MockRestaurantsService) { }
+  constructor(private restaurantService: MockRestaurantsService, private http: HttpClient) { }
 
   disponibilities = new FormControl();
   
-  disponibilityList = ['MORNING', 'MIDDAY', 'EVENING', 'NIGHT'];
+  periodeList = [];
+
+  periodeUrl = "http://localhost:8080/javaee7-angular/resources/disponibilities/getPeriodes";
+
+  dayList = [];
+  
+  dayUrl = "http://localhost:8080/javaee7-angular/resources/disponibilities/getDays";
 
   ngOnInit() {
     this.disponibilities.valueChanges.subscribe(
@@ -23,5 +31,18 @@ export class DisponibilityFilterComponent implements OnInit {
         this.restaurantService.addFilter("disponibility",form)
       }
     )
+    this.getPeriodes()
+    .subscribe(periodeList => this.periodeList = periodeList)
+
+    this.getDays()
+    .subscribe(daylist => this.dayList = daylist)
+  }
+
+  getPeriodes():Observable<String[]>{
+    return this.http.get<String[]>(this.periodeUrl);
+  }
+
+  getDays():Observable<String[]>{
+    return this.http.get<String[]>(this.dayUrl);
   }
 }
