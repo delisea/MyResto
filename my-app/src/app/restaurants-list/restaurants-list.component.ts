@@ -33,4 +33,8 @@ export class RestaurantsListComponent implements OnInit {
       .subscribe(paginatedListWrapper => this.restaurants = paginatedListWrapper.restaurants);
       console.log(this.restaurants)
   }
+
+  click(){
+    alert("click");
+  }
 }

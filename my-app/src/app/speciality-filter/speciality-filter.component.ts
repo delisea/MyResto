@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {MockRestaurantsService} from "../mock-restaurants.service";
-
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-speciality-filter',
@@ -11,18 +12,28 @@ import {MockRestaurantsService} from "../mock-restaurants.service";
 })
 export class SpecialityFilterComponent implements OnInit {
 
-  constructor(private restaurantService: MockRestaurantsService) { }
+  constructor(private restaurantService: MockRestaurantsService, private http: HttpClient) { }
+
+  
+  specialities = new FormControl();
+  
+  specialityList = [];
+
+  url = "http://localhost:8080/javaee7-angular/resources/specialities";
 
   ngOnInit() {
     this.specialities.valueChanges.subscribe(
       form => {
-        console.log({"disponibility":form});
         this.restaurantService.addFilter("speciality",form)
-      }
+      }     
     )
+    this.getSpecialities()
+    .subscribe(list => this.specialityList = list)
+
+    console.log(this.specialityList);
   }
 
-  specialities = new FormControl();
-
-  specialityList = ['ITALIAN', 'CHINESE', 'JAPANESE'];
+  getSpecialities():Observable<String[]>{
+    return this.http.get<String[]>(this.url);
+  }
 }
