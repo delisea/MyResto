@@ -511,6 +511,7 @@
       }
     },
     "/disponibilities": {
+
       "post": {
         "consumes": [
           "application/json"
@@ -591,6 +592,58 @@
             "description": "No Content",
             "headers": {}
           }
+        }
+      }
+    },
+    "/disponibilities/getDays": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [         
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          },
+        }
+      }
+    },
+    "/disponibilities/getPeriodes": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [         
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "headers": {}
+          },
+          "500": {
+            "description": "INTERNAL SERVER ERROR",
+            "headers": {}
+          },
         }
       }
     },

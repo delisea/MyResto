@@ -52,6 +52,22 @@ public class DisponibilityResource extends Application{
 		return Response.ok(dispo).build();
 	}
 	
+	@GET
+	@Path("/getDays")
+	public Response getDays() {
+		String queryString = "SELECT distinct d.day FROM Disponibility d";
+		Query query = entityManager.createQuery(queryString);
+		return Response.ok(query.getResultList()).build();
+	}
+	
+	@GET
+	@Path("/getPeriodes")
+	public Response getPeriodes() {
+		String queryString = "SELECT distinct d.periode FROM Disponibility d";
+		Query query = entityManager.createQuery(queryString);
+		return Response.ok(query.getResultList()).build();
+	}
+	
 	@POST
 	public Response saveDisponibility(@HeaderParam("restaurant_id") Long restaurant_id, Disponibility dispo) {
 		Restaurant existingRestaurant = entityManager.find(Restaurant.class, restaurant_id);
