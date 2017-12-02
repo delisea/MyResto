@@ -1,1 +1,11 @@
-.mat-card{background:#CBEFB6;color:rgba(0,0,0,.87)}
+.mat-card{background:#ECEFE0;color:rgba(0,0,0,.87)}
+
+mat-card{
+  font-family:Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-card-title{font-size:24px;font-weight:400;color:#232629}
+.mat-card-content,.mat-card-header .mat-card-title,.mat-card-subtitle{font-size:14px}
+.example-image{
+  max-height : 300px;
+}

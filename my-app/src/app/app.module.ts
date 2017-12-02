@@ -43,6 +43,7 @@ import {
   MatRippleModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSidenavContainer,
   MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
@@ -51,10 +52,12 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatStepperModule, MatOptionModule,
+  MatStepperModule,
+  MatOptionModule,
 } from '@angular/material';
 import {DisponibilityFilterComponent} from './disponibility-filter/disponibility-filter.component';
 import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.component';
+import {NavbarComponent} from "./navbar/navbar.component";
 
 @NgModule({
   declarations: [
@@ -68,6 +71,7 @@ import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.c
     RestaurantDetailsComponent,
     DisponibilityFilterComponent,
     SpecialityFilterComponent,
+    NavbarComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -93,6 +97,7 @@ import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.c
     MatToolbarModule,
     MatOptionModule,
     MatSelectModule,
+    MatSidenavModule,
   ],
   providers: [ MockRestaurantsService, GeoCodingService, HttpClientModule ],
   bootstrap: [ AppComponent ]
