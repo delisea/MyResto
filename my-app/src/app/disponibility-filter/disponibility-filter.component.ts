@@ -15,6 +15,7 @@ export class DisponibilityFilterComponent implements OnInit {
   constructor(private restaurantService: MockRestaurantsService, private http: HttpClient) { }
 
   disponibilities = new FormControl();
+  days = new FormControl();
   
   periodeList = [];
 
@@ -31,6 +32,14 @@ export class DisponibilityFilterComponent implements OnInit {
         this.restaurantService.addFilter("disponibility",form)
       }
     )
+
+    this.days.valueChanges.subscribe(
+      form => {
+        console.log({"day":form});
+        this.restaurantService.addFilter("day",form)
+      }
+    )
+
     this.getPeriodes()
     .subscribe(periodeList => this.periodeList = periodeList)
 
