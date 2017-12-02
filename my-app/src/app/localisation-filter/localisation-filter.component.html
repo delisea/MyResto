@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">-->
     <div class="form-group">
       <input placeholder="Entrez une adresse" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
       <input placeholder="Entrez un rayon (km)" type="number" [(ngModel)]="rayon" min="0" (ngModelChange)="rayonAdded()">
@@ -9,4 +9,4 @@
       <agm-map [hidden]="hideMap" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
         <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
       </agm-map>
-  </div>
+<!--</div>-->
