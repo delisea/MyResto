@@ -85,6 +85,8 @@ import {
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatInputModule,
+    MatSliderModule,
+    MatIconModule,
     MatNativeDateModule,
     BrowserModule,
     BrowserAnimationsModule,

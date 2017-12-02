@@ -29,7 +29,7 @@ export class LocalisationFilterComponent implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private restaurantService: MockRestaurantsService
+    private restaurantService: MockRestaurantsService,
 
   ) {}
 
@@ -42,8 +42,8 @@ export class LocalisationFilterComponent implements OnInit {
 
   ngOnInit() {
     //set google maps defaults
-    this.zoom = 5;
-    this.hideMap = false;
+    this.zoom = 4;
+    this.hideMap = true;
 
     //create search FormControl
     this.searchControl = new FormControl();
