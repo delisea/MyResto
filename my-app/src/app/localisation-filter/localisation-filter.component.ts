@@ -42,7 +42,7 @@ export class LocalisationFilterComponent implements OnInit {
 
   ngOnInit() {
     //set google maps defaults
-    this.zoom = 4;
+    this.zoom = 5;
     this.hideMap = false;
 
     //create search FormControl
