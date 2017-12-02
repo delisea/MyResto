@@ -1,12 +1,13 @@
-<!--<div class="container">-->
-    <div class="form-group">
-      <input placeholder="Entrez une adresse" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-      <input placeholder="Entrez un rayon (km)" type="number" [(ngModel)]="rayon" min="0" (ngModelChange)="rayonAdded()">
-      <button (click)="clearSearch()">Clear</button>
-    </div>
-      <button [hidden]="!hideMap" (click)="showMapBool()">Montrer la carte</button>
-      <button [hidden]="hideMap" (click)="hideMapBool()">Cacher la carte</button>
-      <agm-map [hidden]="hideMap" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
-        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-      </agm-map>
-<!--</div>-->
+<div class="container">
+  <div class="form-group">
+    <input placeholder="Enter an address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+           #search [formControl]="searchControl">
+    <button (click)="clearSearch()">Clear</button>
+    <mat-slider style="width:250px" thumbLabel min="0" max="50" step="5" [(ngModel)]="rayon" (ngModelChange)="rayonAdded()"></mat-slider>
+  </div>
+  <button [hidden]="!hideMap" (click)="showMapBool()">Show map</button>
+  <button [hidden]="hideMap" (click)="hideMapBool()">Hide map</button>
+  <agm-map style="width:250px" *ngIf="!hideMap" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+</div>
