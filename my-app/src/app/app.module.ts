@@ -4,11 +4,7 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Router} from '@angular/router';
 import { AppRoutingModule }        from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { HeroService } from './hero.service';
-import { MessageService } from './message.service';
-import { MessagesComponent } from './messages/messages.component';
+import {NavbarComponent} from "./navbar/navbar.component";
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LocalisationFilterComponent } from './localisation-filter/localisation-filter.component';
 import { FiltersComponent } from './filters/filters.component';
@@ -49,6 +45,7 @@ import {
   MatRippleModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSidenavContainer,
   MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
@@ -57,15 +54,14 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatStepperModule, MatOptionModule,
+  MatStepperModule,
+  MatOptionModule,
 } from '@angular/material';
+
 
 @NgModule({
   declarations: [  
     AppComponent,
-    HeroesComponent,
-    HeroDetailComponent,
-    MessagesComponent,
     LocalisationFilterComponent,
     FiltersComponent,
     PriceFilterComponent,
@@ -75,6 +71,7 @@ import {
     RestaurantDetailsComponent,
     DisponibilityFilterComponent,
     SpecialityFilterComponent,
+    NavbarComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -101,8 +98,9 @@ import {
     MatToolbarModule,
     MatOptionModule,
     MatSelectModule,
+    MatSidenavModule,
   ],
-  providers: [ HeroService, MessageService, MockRestaurantsService, GeoCodingService, HttpClientModule ],
+  providers: [ MockRestaurantsService, GeoCodingService, HttpClientModule ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { 

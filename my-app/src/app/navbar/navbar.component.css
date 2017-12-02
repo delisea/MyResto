@@ -1,0 +1,15 @@
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%  !important;
+}
+
+.mat-toolbar{background:#f5f5f5;color:rgba(0,0,0,.87)}
+
+.mat-toolbar.mat-primary{background:#589244;color:rgba(255,255,255,.87)}
+
+.mat-toolbar.mat-accent{background:#ffd740;color:rgba(0,0,0,.87)}
+
+.mat-toolbar.mat-warn{background:#f44336;color:#fff}
