@@ -176,10 +176,13 @@ public class RestaurantResource extends Application {
 				}
 			}
 			paginatedListWrapper.setRestaurants(returnList);
-			return Response.ok(paginatedListWrapper).build();
+		
+			return Response.ok(paginatedListWrapper).header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 		} else {
 			paginatedListWrapper.setRestaurants(requestResults);
-			return Response.ok(paginatedListWrapper).build();
+			return Response.ok(paginatedListWrapper).header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 		}
 	}
 

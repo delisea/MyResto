@@ -56,7 +56,8 @@ public class SpecialityResource extends Application{
 	public Response getSpecialities() {
 		String queryString = "SELECT distinct s.speciality_label FROM Speciality s";
 		Query query = entityManager.createQuery(queryString);
-		return Response.ok(query.getResultList()).build();
+		return Response.ok(query.getResultList()).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 	
 	

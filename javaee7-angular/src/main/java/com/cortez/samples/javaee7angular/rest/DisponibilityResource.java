@@ -57,7 +57,8 @@ public class DisponibilityResource extends Application{
 	public Response getDays() {
 		String queryString = "SELECT distinct d.day FROM Disponibility d";
 		Query query = entityManager.createQuery(queryString);
-		return Response.ok(query.getResultList()).build();
+		return Response.ok(query.getResultList()).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 	
 	@GET
@@ -65,7 +66,8 @@ public class DisponibilityResource extends Application{
 	public Response getPeriodes() {
 		String queryString = "SELECT distinct d.periode FROM Disponibility d";
 		Query query = entityManager.createQuery(queryString);
-		return Response.ok(query.getResultList()).build();
+		return Response.ok(query.getResultList()).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 	
 	@POST
