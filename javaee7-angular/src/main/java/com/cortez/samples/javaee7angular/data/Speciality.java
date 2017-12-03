@@ -21,7 +21,7 @@ public class Speciality {
     private Speciality_label speciality_label;
 
     public enum Speciality_label {
-        ITALIAN, CHINESE, JAPANESE
+        ITALIAN, CHINESE, JAPANESE, FASTFOOD, GRILS, BREWERY, CREPERIE, FRENCH, MEDITERRANEAN, SEAFOOD 
     }
     
     public Long getId() {

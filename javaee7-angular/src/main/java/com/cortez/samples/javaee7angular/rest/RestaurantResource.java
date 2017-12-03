@@ -257,6 +257,23 @@ public class RestaurantResource extends Application {
 	}
 
 	@DELETE
+	@Path("/deleteAllRestaurants")
+	public Response deleteAllRestaurants(){
+		Response response;
+		Query query = entityManager.createQuery(
+				"SELECT r.id FROM Restaurant r" );
+		List<Long> restaurant_ids = query.getResultList();
+		for(Long l : restaurant_ids){
+			response = deleteRestaurant(l);
+			if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
+				return response;
+			}
+		}
+		return Response.status(Response.Status.NO_CONTENT).build();
+	}
+	
+	
+	@DELETE
 	@Path("{id}")
 	public Response deleteRestaurant(@PathParam("id") Long id) {
 		Response response = getRestaurant(id);
