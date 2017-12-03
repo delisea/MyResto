@@ -1,5 +1,5 @@
 based on :
-git clone https://github.com/nicolargo/docker-influxdb-grafana.git
+https://github.com/nicolargo/docker-influxdb-grafana.git
 
 usage :
 - docker-compose up -d
