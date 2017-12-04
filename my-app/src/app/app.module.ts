@@ -21,6 +21,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {DisponibilityFilterComponent} from './disponibility-filter/disponibility-filter.component';
 import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import {PersonFilterComponent} from './person-filter/person-filter.component';
 
 import {
   MatAutocompleteModule,
@@ -72,6 +73,7 @@ import {
     DisponibilityFilterComponent,
     SpecialityFilterComponent,
     NavbarComponent,
+    PersonFilterComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

@@ -21,6 +21,7 @@ export class LocalisationFilterComponent implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
   public hideMap: boolean;
+  private hideRadiusFilter: boolean;
   private localisationFilter : LocalisationFilter;
 
   @ViewChild("search")
@@ -44,7 +45,7 @@ export class LocalisationFilterComponent implements OnInit {
     //set google maps defaults
     this.zoom = 4;
     this.hideMap = true;
-
+    this.hideRadiusFilter = true;
     //create search FormControl
     this.searchControl = new FormControl();
     this.localisationFilter = new LocalisationFilter();
@@ -75,6 +76,7 @@ export class LocalisationFilterComponent implements OnInit {
           this.zoom = 12;
 
           // call search
+          this.hideRadiusFilter = false;
           this.localisationFilter.latitude = this.latitude;
           this.localisationFilter.longitude = this.longitude;
           this.restaurantService.addFilter("coordinates",this.localisationFilter);
@@ -90,6 +92,7 @@ export class LocalisationFilterComponent implements OnInit {
   }
 
   clearSearch(){
+    this.hideRadiusFilter = true
     this.rayon = null;
     this.searchElementRef.nativeElement.value = null;
     this.localisationFilter.rayon = null;

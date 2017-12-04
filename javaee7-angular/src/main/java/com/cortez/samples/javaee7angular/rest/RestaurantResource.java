@@ -142,7 +142,7 @@ public class RestaurantResource extends Application {
 		}
 
 		//Geosearh
-		if (latitude != null && longitude != null && rayon != null){
+		if (latitude != null && longitude != null && rayon != null && rayon != 0){
 			float maxlatitude = latitude + offsetLat(latitude, rayon);
 			float minlatitude = latitude - offsetLat(latitude, rayon);
 			float maxlongitude = longitude + offsetLong(latitude, longitude, rayon);
