@@ -9,3 +9,7 @@ mat-card{
 .example-image{
   max-height : 300px;
 }
+
+.filter{
+  max-width: 300px;
+}
