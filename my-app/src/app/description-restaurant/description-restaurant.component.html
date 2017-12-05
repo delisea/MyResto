@@ -1,17 +1,70 @@
 <mat-card class="example-card">
   <mat-card-header>
-    description
+
+
+    <div fxFlex fxLayout="column">
+    <mat-card class="description" fxFlex fxLayoutAlign="center center">
+    <div >
+      Description
+    </div>
+    </mat-card>
+
+    <mat-card fxFlex fxLayoutAlign="start center">
+      <div>
+        texte de  dakdza dazd zd
+      </div>
+    </mat-card>
+    </div>
+
   </mat-card-header>
   <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+
   <mat-card-content>
-    <p>
-     Maps
-    </p>
-    <p>
-      Votre réservation
-    </p>
+
+
+
+      <div fxFlex fxLayout="column">
+
+        <mat-card fxFlex fxLayoutAlign="center center">
+          <div >
+            Maps
+          </div>
+        </mat-card>
+
+
+        <mat-card fxFlex fxLayoutAlign="center center">
+          <div >
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-radio-group>
+              <mat-radio-button value="1">Morning</mat-radio-button>
+              <mat-radio-button value="2">Evening</mat-radio-button>
+            </mat-radio-group>
+
+          </div>
+        </mat-card>
+
+      <mat-card class="description" fxFlex fxLayoutAlign="center center">
+        <div >
+          Votre réservation
+        </div>
+      </mat-card>
+
+      <mat-card fxFlex fxLayoutAlign="start center">
+        <div>
+          date
+          horaire
+          nb de personnes
+        </div>
+      </mat-card>
+    </div>
+
+
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>Réserver et payer</button>
+    <button mat-button fxFlex fxLayoutAlign="center center">Réserver et payer</button>
   </mat-card-actions>
 </mat-card>

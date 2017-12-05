@@ -1,6 +1,8 @@
-<a  routerLink="/restaurants" routerLinkActive="active">back</a>
+<a  routerLink="/restaurants" routerLinkActive="active">
+  <button mat-button fxFlex="70px" fxLayoutAlign="center center">Retour</button>
+</a>
 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class = "content">
 
-  <div fxFlex = calc(50%-10)><app-description-restaurant></app-description-restaurant></div>
-  <div fxFlex = calc(50%-10)><app-menu></app-menu></div>
+  <div fxFlex = calc(30%-10)><app-description-restaurant></app-description-restaurant></div>
+  <div fxFlex = calc(70%-10)><app-menu></app-menu></div>
 </div>

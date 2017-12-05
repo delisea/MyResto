@@ -60,10 +60,11 @@ import {
 } from '@angular/material';
 import { DescriptionRestaurantComponent } from './description-restaurant/description-restaurant.component';
 import { MenuComponent } from './menu/menu.component';
+import { InscriptionConnexionComponent } from './inscription-connexion/inscription-connexion.component';
 
 
 @NgModule({
-  declarations: [  
+  declarations: [
     AppComponent,
     LocalisationFilterComponent,
     FiltersComponent,
@@ -77,7 +78,8 @@ import { MenuComponent } from './menu/menu.component';
     NavbarComponent,
     PersonFilterComponent,
     DescriptionRestaurantComponent,
-    MenuComponent
+    MenuComponent,
+    InscriptionConnexionComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -107,11 +109,13 @@ import { MenuComponent } from './menu/menu.component';
     MatOptionModule,
     MatSelectModule,
     MatSidenavModule,
+    MatTabsModule,
+    MatRadioModule
   ],
   providers: [ MockRestaurantsService, GeoCodingService, HttpClientModule ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { 
+export class AppModule {
   // Diagnostic only: inspect router configuration
   constructor(router: Router) {
     console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
