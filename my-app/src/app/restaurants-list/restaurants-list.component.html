@@ -1,26 +1,22 @@
-<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutWrap>
-  <!-- <mat-card *ngFor="let restaurant of restaurants"
-            fxFlex.xs = calc(100%) fxFlex.sm = calc(50%-10px) fxFlex.md = calc(33%-10px) fxFlex.lg = calc(25%-10px) fxFlex.xl = "calc(25%-10px)"
-            style="margin: 10px;"> -->
-
-  <mat-card class="mat-elevation-z4" *ngFor="let restaurant of restaurants"
-            fxFlex.xs = calc(100%) fxFlex.sm = calc(50%-20px) fxFlex.md = calc(33%-20px) fxFlex.lg = calc(25%-20px) fxFlex.xl = "calc(25%-20px)"
-            style=" margin-bottom: 20px; margin-right : 20px">
-    <!-- <mat-card-header>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header> -->
-    <!--
-    <span class="badge"><img src="https://media-cdn.tripadvisor.com/media/photo-s/0a/7b/7b/c6/restaurant-view.jpg" alt="img resto!" height="100" width="200" /></span>
+<div fxLayout="row" fxLayoutWrap>
+  <mat-card class="mat-elevation-z4" *ngFor="let restaurant of restaurants" fxFlex.xs = calc(100%) fxFlex.sm = calc(50%-10) fxFlex.md= calc(33%-10px) fxFlex.lg= calc(25%-10px) fxFlex.xl= calc(25%-10px) style="margin-bottom: 10px; margin-right : 10px" routerLink="/restaurant/{{restaurant.id}}"
+    routerLinkActive="active" ng-style="hoverActive ? {'background':#ECEFE0} : {}">
+    <mat-card-title>{{restaurant.name}}</mat-card-title>
+    <img mat-card-image src={{restaurant.url_img}} alt="Photo du restaurant" class="example-image">
     <mat-card-content>
-    -->
-    <img mat-card-image src="http://www.wien.info/media/images/41993-das-loft-sofitel-19to1.jpeg" alt="Photo du restaurant">
-    <mat-card-content>
-      <div>nom : {{restaurant.name}}</div>
-      <div>id : {{restaurant.id}}</div>
-      <div>telephone : {{restaurant.tel_number}}</div>
-      <div>adresse :{{restaurant.address}}</div>
-      <span class="badge">email : {{restaurant.email}}</span>
+      <img src="/assets/location.png" alt="location-icon" width="20px"height="20px"> {{restaurant.address}}
+      <div>
+        <span class="badge">
+          <img src="/assets/arobase.png" alt="location-icon" width="17px"height="17px">
+          {{restaurant.email}}
+        </span>
+      </div>
+      <div>
+        <span class="badge">
+          <img src="/assets/phone.png" alt="location-icon" width="17px"height="17px">
+          {{restaurant.tel_number}}
+        </span>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

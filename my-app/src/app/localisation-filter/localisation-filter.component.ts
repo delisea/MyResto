@@ -1,17 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/distinctUntilChanged';
-
-const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
-  'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
-  'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
-  'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
-  'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
-  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
-  'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+import { Component, ViewEncapsulation, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { } from 'googlemaps';
+import { MapsAPILoader } from '@agm/core';
+import {MockRestaurantsService} from "../mock-restaurants.service";
+import {LocalisationFilter} from '../LocalisationFilter';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-localisation-filter',
@@ -21,16 +14,101 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
 })
 export class LocalisationFilterComponent implements OnInit {
 
-  constructor() { }
+ 
+  public latitude: number;
+  public longitude: number;
+  public rayon: number;
+  public searchControl: FormControl;
+  public zoom: number;
+  public hideMap: boolean;
+  private hideRadiusFilter: boolean;
+  private localisationFilter : LocalisationFilter;
+
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
+  constructor(
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
+    private restaurantService: MockRestaurantsService,
+
+  ) {}
+
+  showMapBool(){
+    this.hideMap = false;
+  }
+  hideMapBool(){
+    this.hideMap = true;
+  }
 
   ngOnInit() {
-  }
-  public model: any;
+    //set google maps defaults
+    this.zoom = 4;
+    this.hideMap = true;
+    this.hideRadiusFilter = true;
+    //create search FormControl
+    this.searchControl = new FormControl();
+    this.localisationFilter = new LocalisationFilter();
 
-  search = (text$: Observable<string>) =>
-    text$
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .map(term => term.length < 2 ? []
-        : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+    //set current position
+    this.setCurrentPosition();
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.setComponentRestrictions(
+        {'country': ['fr']});
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+
+          // call search
+          this.hideRadiusFilter = false;
+          this.localisationFilter.latitude = this.latitude;
+          this.localisationFilter.longitude = this.longitude;
+          this.restaurantService.addFilter("coordinates",this.localisationFilter);
+
+        });
+      });
+    });
+  }
+
+  rayonAdded(){
+    this.localisationFilter.rayon = this.rayon;
+    this.restaurantService.addFilter("coordinates",this.localisationFilter);
+  }
+
+  clearSearch(){
+    this.hideRadiusFilter = true
+    this.rayon = null;
+    this.searchElementRef.nativeElement.value = null;
+    this.localisationFilter.rayon = null;
+    this.localisationFilter.latitude = null;
+    this.localisationFilter.longitude = null;
+    this.restaurantService.addFilter("coordinates",this.localisationFilter);
+  }
+
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 12;
+      });
+    }
+  }
+
 }

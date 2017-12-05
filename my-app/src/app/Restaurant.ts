@@ -17,4 +17,6 @@ export class Restaurant {
   name : string;
   tel_number : string;
   url_img: string;
+  latitude: number;
+  longitude: number;
 }

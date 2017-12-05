@@ -1,5 +1,17 @@
-
-<label for="typeahead-basic">Search for a state:</label>
-<input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"/>
-<hr>
-<pre>Model: {{ model | json }}</pre>
+<div class="form-group">
+  <input style="width:70%; display:inline-block" placeholder="Enter an address" autocorrect="off" autocapitalize="off" spellcheck="off"
+    type="text" class="form-control" #search [formControl]="searchControl">
+  <button (click)="clearSearch()">Clear</button>
+</div>
+<div *ngIf="!hideRadiusFilter">
+  Radius
+  <mat-slider style="display:inline-block; width:30%" thumbLabel min="0" max="50" step="5" [(ngModel)]="rayon" (ngModelChange)="rayonAdded()"></mat-slider>
+  {{rayon}}
+</div>
+<div>
+  <button [hidden]="!hideMap" (click)="showMapBool()">Show map</button>
+  <button [hidden]="hideMap" (click)="hideMapBool()">Hide map</button>
+<agm-map style="width:250px" *ngIf="!hideMap" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
+  <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+</agm-map>
+</div>

@@ -1,32 +1,24 @@
-#Ajout resto 1
-#response=$(curl -s -I POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\"}")
-#res=`echo -e $response | grep HTTP/1.1 | awk {'print $2'}`
-#echo -e $response
-#if [ $res = 200 ]
-#then
-#	echo -e "Error $res on $1"
-#fi
-
+#!/bin/bash
 
 ### Scénario de test pour le filtrage d'un restaurant
 
 #	Ajout d'un restaurant (nom = "resto1")
-idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto1\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\"}")
+idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto1\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1871598, \"longitude\": 5.7367073}")
 idResto1=$(echo -e $idResto1 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto1 = $idResto1 \n"
 
 #	Ajout d'un restaurant (nom = "resto2")
-idResto2=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto2\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\"}")
+idResto2=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto2\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1855057, \"longitude\": 5.7405284}")
 idResto2=$(echo -e $idResto2 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto2 = $idResto2 \n"
 
 #	Ajout d'un restaurant (nom = "resto3")
-idResto3=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto3\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\"}")
+idResto3=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto3\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1845394, \"longitude\": 5.7421717}")
 idResto3=$(echo -e $idResto3 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto3 = $idResto3 \n"
 
 #	Ajout d'un restaurant (nom = "Hippopotamus Gières")
-idHippo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Hippopotamus Gières\", \"address\": \"string\", \"url_img\": \"https://i.ytimg.com/vi/uLF1e4wziTA/maxresdefault.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1896624, \"longitude\": 5.7766054 }")
+idHippo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Hippopotamus Gieres\", \"address\": \"string\", \"url_img\": \"https://i.ytimg.com/vi/uLF1e4wziTA/maxresdefault.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1896624, \"longitude\": 5.7766054 }")
 idHippo=$(echo -e $idHippo | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idHippo = $idHippo \n"
 

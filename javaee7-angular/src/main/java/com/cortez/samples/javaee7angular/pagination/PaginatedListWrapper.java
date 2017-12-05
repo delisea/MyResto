@@ -16,12 +16,12 @@ import java.util.List;
 public class PaginatedListWrapper implements Serializable {
     private Integer currentPage;
     private Integer pageSize;
-    private Integer totalResults;
+	private Integer totalResults;
 
-    private String sortFields;
-    private String sortDirections;
-    
-    private List<Restaurant> restaurants;
+	private String sortFields;
+	private String sortDirections;
+
+	private List<Restaurant> restaurants;
 
     public List<Restaurant> getRestaurants() {
 		return restaurants;

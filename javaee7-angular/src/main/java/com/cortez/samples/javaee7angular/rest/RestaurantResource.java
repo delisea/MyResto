@@ -74,13 +74,7 @@ public class RestaurantResource extends Application {
 			@QueryParam("disponibility") String disponibility,
 			@QueryParam("speciality") String speciality, @QueryParam("day") String day,
 			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts,
-			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude, @QueryParam("rayon") Float rayon/*
-																		 * , @QueryParam
-																		 * (
-																		 * "address")
-																		 * String
-																		 * address
-																		 */) {
+			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude, @QueryParam("rayon") Float rayon) {
 
 		// Préparation du wrapper
 		
@@ -143,12 +137,12 @@ public class RestaurantResource extends Application {
 		if (speciality != null && !specialities.isEmpty()) {
 			queryString += " JOIN r.specialities s ON s.speciality_label = '" + specialities.get(0) + "'";
 			for (int i = 1; i < specialities.size(); i++) {
-				queryString += " OR d.day = '" + specialities.get(i) + "'";
+				queryString += " OR s.speciality_label = '" + specialities.get(i) + "'";
 			}
 		}
 
 		//Geosearh
-		if (latitude != null && longitude != null && rayon != null){
+		if (latitude != null && longitude != null && rayon != null && rayon != 0){
 			float maxlatitude = latitude + offsetLat(latitude, rayon);
 			float minlatitude = latitude - offsetLat(latitude, rayon);
 			float maxlongitude = longitude + offsetLong(latitude, longitude, rayon);
@@ -182,10 +176,13 @@ public class RestaurantResource extends Application {
 				}
 			}
 			paginatedListWrapper.setRestaurants(returnList);
-			return Response.ok(paginatedListWrapper).build();
+		
+			return Response.ok(paginatedListWrapper).header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 		} else {
 			paginatedListWrapper.setRestaurants(requestResults);
-			return Response.ok(paginatedListWrapper).build();
+			return Response.ok(paginatedListWrapper).header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 		}
 	}
 
@@ -259,6 +256,23 @@ public class RestaurantResource extends Application {
 		}
 	}
 
+	@DELETE
+	@Path("/deleteAllRestaurants")
+	public Response deleteAllRestaurants(){
+		Response response;
+		Query query = entityManager.createQuery(
+				"SELECT r.id FROM Restaurant r" );
+		List<Long> restaurant_ids = query.getResultList();
+		for(Long l : restaurant_ids){
+			response = deleteRestaurant(l);
+			if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
+				return response;
+			}
+		}
+		return Response.status(Response.Status.NO_CONTENT).build();
+	}
+	
+	
 	@DELETE
 	@Path("{id}")
 	public Response deleteRestaurant(@PathParam("id") Long id) {

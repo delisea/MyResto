@@ -1,14 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { Router} from '@angular/router';
+import { AppRoutingModule }        from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { HeroService } from './hero.service';
-import { MessageService } from './message.service';
-import { MessagesComponent } from './messages/messages.component';
-
+import {NavbarComponent} from "./navbar/navbar.component";
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LocalisationFilterComponent } from './localisation-filter/localisation-filter.component';
 import { FiltersComponent } from './filters/filters.component';
@@ -18,11 +14,14 @@ import { RestaurantsListComponent } from './restaurants-list/restaurants-list.co
 import { RestaurantPreviewComponent } from './restaurant-preview/restaurant-preview.component';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { MockRestaurantsService } from './mock-restaurants.service';
-
+import { GeoCodingService } from './geocoding.service';
+import { AgmCoreModule } from '@agm/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-
+import {DisponibilityFilterComponent} from './disponibility-filter/disponibility-filter.component';
+import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import {PersonFilterComponent} from './person-filter/person-filter.component';
 
 import {
   MatAutocompleteModule,
@@ -47,6 +46,7 @@ import {
   MatRippleModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSidenavContainer,
   MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
@@ -56,14 +56,13 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
+  MatOptionModule,
 } from '@angular/material';
 
+
 @NgModule({
-  declarations: [
+  declarations: [  
     AppComponent,
-    HeroesComponent,
-    HeroDetailComponent,
-    MessagesComponent,
     LocalisationFilterComponent,
     FiltersComponent,
     PriceFilterComponent,
@@ -71,14 +70,25 @@ import {
     RestaurantsListComponent,
     RestaurantPreviewComponent,
     RestaurantDetailsComponent,
+    DisponibilityFilterComponent,
+    SpecialityFilterComponent,
+    NavbarComponent,
+    PersonFilterComponent
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyAMAiC8zck-0vAdoaFnZx9Y2e-Z-TK1PVU",
+      libraries: ["places"]
+    }),
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
     NgbModule.forRoot(),
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatInputModule,
+    MatSliderModule,
+    MatIconModule,
     MatNativeDateModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -90,8 +100,16 @@ import {
     FlexLayoutModule,
     MatCardModule,
     MatToolbarModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatSidenavModule,
   ],
-  providers: [ HeroService, MessageService, MockRestaurantsService, HttpClientModule ],
+  providers: [ MockRestaurantsService, GeoCodingService, HttpClientModule ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule { 
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}
