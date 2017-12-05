@@ -510,34 +510,7 @@
         }
       }
     },
-    "/restaurants/deleteAllRestaurants": {
-      "delete": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-        ],
-        "responses": {
-          "204": {
-            "description": "NO CONTENT",
-            "headers": {}
-          },
-          "404": {
-            "description": "NOT FOUND",
-            "headers": {}
-          },
-          "500": {
-            "description": "INTERNAL SERVER ERROR",
-            "headers": {}
-          }
-        }
-      }
-    },
     "/disponibilities": {
-
       "post": {
         "consumes": [
           "application/json"
@@ -621,75 +594,7 @@
         }
       }
     },
-    "/disponibilities/getDays": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [         
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {}
-          },
-          "404": {
-            "description": "NOT FOUND",
-            "headers": {}
-          },
-          "500": {
-            "description": "INTERNAL SERVER ERROR",
-            "headers": {}
-          },
-        }
-      }
-    },
-    "/disponibilities/getPeriodes": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [         
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {}
-          },
-          "404": {
-            "description": "NOT FOUND",
-            "headers": {}
-          },
-          "500": {
-            "description": "INTERNAL SERVER ERROR",
-            "headers": {}
-          },
-        }
-      }
-    },
     "/specialities": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {},
-            "schema": {}
-          }
-        }
-      },
       "post": {
         "consumes": [
           "application/json"
@@ -769,6 +674,236 @@
           "204": {
             "description": "No Content",
             "headers": {}
+          }
+        }
+      }
+    },
+    "/menu/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Menu"
+            }
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/menu": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Menu"
+            }
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Menu"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Menu"
+            }
+          }
+        }
+      }
+    },
+    "/menu/getMenusByRestaurantId": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "restaurant_id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "description": "Get all the menus linked to a specified restaurant",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Menu"
+            }
+          }
+        }
+      }
+    },
+    "/meal/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Meal"
+            }
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/meal": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Meal"
+            }
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "menu_id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Meal"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/Meal"
+            }
           }
         }
       }
@@ -883,8 +1018,44 @@
         "speciality_label": {
           "type": "string",
           "enum": [
-            "ITALIAN", "CHINESE", "JAPANESE", "FASTFOOD", "GRILS", "BREWERY", "CREPERIE", "FRENCH", "MEDITERRANEAN", "SEAFOOD" 
+            "ITALIAN",
+            "CHINESE",
+            "JAPANESE"
           ]
+        }
+      }
+    },
+    "Menu": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "price": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Meal": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "price": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ENTREE",
+            "PLAT",
+            "DESSERT"
+          ]
+        },
+        "name": {
+          "type": "string"
         }
       }
     }
