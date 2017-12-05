@@ -8,14 +8,16 @@ import {MockRestaurantsService} from "../mock-restaurants.service";
   encapsulation: ViewEncapsulation.None
 })
 export class PersonFilterComponent implements OnInit {
-    
- public nbPerson: number;
 
-  constructor(private restaurantService: MockRestaurantsService) { }
+  public nbPerson: number;
+
+  constructor(private restaurantService: MockRestaurantsService) {
+  }
 
   ngOnInit() {
   }
 
-  nbPersonAdded(){
-    this.restaurantService.addFilter("nb_person",this.nbPerson);
+  nbPersonAdded() {
+    this.restaurantService.addFilter("nb_person", this.nbPerson);
+  }
 }
