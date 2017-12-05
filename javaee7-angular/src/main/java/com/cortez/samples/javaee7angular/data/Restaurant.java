@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 @Entity
-@JsonIgnoreProperties(value = { "tables","disponibilities","specialities" })
+@JsonIgnoreProperties(value = { "tables","disponibilities","specialities","menus" })
 public class Restaurant {
 
 	@Id
@@ -37,6 +37,17 @@ public class Restaurant {
 	
 	@OneToMany(mappedBy = "restaurant")	
 	private List<Speciality> specialities;
+	
+	@OneToMany(mappedBy = "restaurant")	
+	private List<Menu> menus;
+
+	public List<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
 
 	public Restaurant() {
 		super();

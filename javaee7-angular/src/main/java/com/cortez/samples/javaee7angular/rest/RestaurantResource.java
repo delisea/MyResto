@@ -344,7 +344,7 @@ public class RestaurantResource extends Application {
 	@GET
 	@Path("/getSpecialities/{restaurant_id}")
 	public Response getSpecialities(@PathParam("restaurant_id") Long restaurant_id) {
-		List<TableResto> requestResults = null;
+		List<Speciality> requestResults = null;
 		String queryString = "SELECT s FROM Speciality s where s.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
@@ -354,7 +354,7 @@ public class RestaurantResource extends Application {
 	@GET
 	@Path("/getDisponibilities/{restaurant_id}")
 	public Response getDisponibilities(@PathParam("restaurant_id") Long restaurant_id) {
-		List<TableResto> requestResults = null;
+		List<Disponibility> requestResults = null;
 		String queryString = "SELECT d FROM Disponibility d where d.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
