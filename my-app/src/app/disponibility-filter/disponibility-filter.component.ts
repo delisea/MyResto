@@ -16,14 +16,14 @@ export class DisponibilityFilterComponent implements OnInit {
 
   disponibilities = new FormControl();
   days = new FormControl();
-  
+
   periodeList = [];
 
-  periodeUrl = "http://localhost:8080/javaee7-angular/resources/disponibilities/getPeriodes";
+  periodeUrl = "http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/disponibilities/getPeriodes";
 
   dayList = [];
-  
-  dayUrl = "http://localhost:8080/javaee7-angular/resources/disponibilities/getDays";
+
+  dayUrl = "http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/disponibilities/getDays";
 
   ngOnInit() {
     this.disponibilities.valueChanges.subscribe(

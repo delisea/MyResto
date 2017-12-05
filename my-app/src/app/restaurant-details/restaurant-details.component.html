@@ -1,4 +1,6 @@
 <a  routerLink="/restaurants" routerLinkActive="active">back</a>
-<p>
-  restaurant-details works!
-</p>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class = "content">
+
+  <div fxFlex = calc(50%-10)><app-description-restaurant></app-description-restaurant></div>
+  <div fxFlex = calc(50%-10)><app-menu></app-menu></div>
+</div>

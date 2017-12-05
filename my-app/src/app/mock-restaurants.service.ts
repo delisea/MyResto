@@ -10,7 +10,7 @@ import { Filter } from './Filter';
 export class MockRestaurantsService {
   restaurants: Restaurant[] = [];
 
-  base_search_url: string = 'http://localhost:8080/javaee7-angular/resources/restaurants/search?page=1&sortDirections=asc&sortFields=id';
+  base_search_url: string = 'http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/restaurants/search?page=1&sortDirections=asc&sortFields=id';
 
   filter: Filter = {
     disponibility: [],
@@ -51,7 +51,7 @@ export class MockRestaurantsService {
 
     console.log(this.filter);
     var url = this.base_search_url;
-    console.log(this.filter.speciality)
+    console.log(this.filter.speciality);
     if (this.filter.speciality.length != 0) {
       url = url.concat("&speciality=");
       for (let speciality of this.filter.speciality) {

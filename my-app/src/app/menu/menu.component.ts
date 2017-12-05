@@ -3,16 +3,18 @@ import {Restaurant} from "../Restaurant";
 import {PaginatedListWrapper} from "../PaginatedListWrapper";
 import {MockRestaurantsService} from "../mock-restaurants.service";
 import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-restaurants-list',
-  templateUrl: './restaurants-list.component.html',
-  styleUrls: ['./restaurants-list.component.css'],
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class RestaurantsListComponent implements OnInit {
+export class MenuComponent implements OnInit {
 
-   public restaurants : Restaurant[];
-   public paginatedListWrapper : PaginatedListWrapper;
+
+  public restaurants : Restaurant[];
+  public paginatedListWrapper : PaginatedListWrapper;
 
   constructor(private restaurantService: MockRestaurantsService, private router: Router) {
     restaurantService.filterAdded.subscribe(
@@ -25,6 +27,7 @@ export class RestaurantsListComponent implements OnInit {
   ngOnInit() {
     this.restaurantService.getRestaurants('http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/restaurants/search')
       .subscribe(paginatedListWrapper => this.restaurants = paginatedListWrapper.restaurants);
-      console.log(this.restaurants)
+    console.log(this.restaurants)
   }
+
 }

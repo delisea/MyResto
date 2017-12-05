@@ -25,7 +25,7 @@ export class PriceFilterComponent implements OnInit {
   onChange(event): void {
     console.log(event);
     //this.restaurantService.addFilter([{address : "test", email : "test", id : 42, name : "test", tel_number : "test", url_img: "test"}])
-    //this.restaurantService.addFilter("http://localhost:8080/javaee7-angular/resources/restaurants/search?disponibility=MORNING&day=MONDAY" )
+    //this.restaurantService.addFilter("http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/restaurants/search?disponibility=MORNING&day=MONDAY" )
   }
 
 }

@@ -58,6 +58,8 @@ import {
   MatStepperModule,
   MatOptionModule,
 } from '@angular/material';
+import { DescriptionRestaurantComponent } from './description-restaurant/description-restaurant.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 @NgModule({
@@ -73,7 +75,9 @@ import {
     DisponibilityFilterComponent,
     SpecialityFilterComponent,
     NavbarComponent,
-    PersonFilterComponent
+    PersonFilterComponent,
+    DescriptionRestaurantComponent,
+    MenuComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
