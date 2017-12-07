@@ -1,14 +1,3 @@
-enum Price {
-  Cheap = "€",
-  Average = "€€",
-  Expensive = "€€€",
-};
-
-enum Food {
-  Italian = "Italien",
-  Chinese = "Chinois",
-  Mexican = "Méxicain",
-};
 
 export class Restaurant {
   address : string;

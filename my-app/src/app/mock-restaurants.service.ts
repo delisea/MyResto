@@ -5,10 +5,12 @@ import { Subject } from "rxjs/Subject";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { Filter } from './Filter';
+import {Menu} from "./Menu";
 
 @Injectable()
 export class MockRestaurantsService {
   restaurants: Restaurant[] = [];
+  menus: Observable<Menu[]>;
 
   base_search_url: string = 'http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/restaurants/search?page=1&sortDirections=asc&sortFields=id';
 
@@ -29,6 +31,14 @@ export class MockRestaurantsService {
 
   getRestaurants(url): Observable<PaginatedListWrapper> {
     return (this.http.get<PaginatedListWrapper>(url))
+  }
+
+  getMenus(restaurantID): Observable<Menu[]>{
+    var url =  "http://localhost:8080/javaee7-angular/resources/menu/getMenusByRestaurantId?restaurant_id="+restaurantID;
+    console.log(url);
+    this.menus = this.http.get<Menu[]>(url);
+    console.log(this.menus);
+    return (this.menus);
   }
 
   addFilter(type, value): void {

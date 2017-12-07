@@ -61,6 +61,7 @@ import {
 import { DescriptionRestaurantComponent } from './description-restaurant/description-restaurant.component';
 import { MenuComponent } from './menu/menu.component';
 import { InscriptionConnexionComponent } from './inscription-connexion/inscription-connexion.component';
+import 'hammerjs';
 
 
 @NgModule({

@@ -23,6 +23,9 @@ module.exports = function (config) {
       environment: 'dev'
     },
     reporters: ['progress', 'kjhtml'],
+    files: [
+      { pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css' }
+    ],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

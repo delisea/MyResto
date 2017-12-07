@@ -2,7 +2,32 @@
   alignment: center;
   background-color: #589244;
 }
+.white {
+  background:#FFFFFF;color:rgba(0,0,0,.87)}
+
+.green {
+  background:#589244;color:rgba(0,0,0,.87)}
 
 .description-text{
   alignment: center;
+}
+
+
+.reserver {
+  color: #000000;
+  background-color: #589244;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+
+}
+
+.reserver:hover {
+  background-color: #83A58B;
+}
+
+.reserver:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: auto;
 }
