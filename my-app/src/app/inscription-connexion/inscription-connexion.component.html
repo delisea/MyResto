@@ -1,7 +1,8 @@
+<div class="truc-a-centrer">
 <mat-card>
 <mat-tab-group>
   <mat-tab label="Connexion"><mat-card>
-    <div class="example-container">
+    <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
       <mat-form-field hintLabel="Max 10 characters">
         <input matInput #input maxlength="10" placeholder="Enter some input">
         <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
@@ -17,7 +18,7 @@
   </mat-tab>
 
     <mat-tab label="Inscription"><mat-card>
-      <div class="example-container">
+      <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
 
         <mat-form-field hintLabel="Max 10 characters">
           <input matInput #input maxlength="10" placeholder="Nom">
@@ -56,4 +57,6 @@
   </mat-tab>
 </mat-tab-group>
 </mat-card>
+</div>
+
 
