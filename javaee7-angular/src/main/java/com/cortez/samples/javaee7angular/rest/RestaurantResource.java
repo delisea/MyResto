@@ -338,7 +338,8 @@ public class RestaurantResource extends Application {
 		String queryString = "SELECT t FROM TableResto t where t.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK).entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET
@@ -348,7 +349,8 @@ public class RestaurantResource extends Application {
 		String queryString = "SELECT s FROM Speciality s where s.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK).entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET
@@ -358,7 +360,8 @@ public class RestaurantResource extends Application {
 		String queryString = "SELECT d FROM Disponibility d where d.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK).entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET

@@ -48,7 +48,8 @@ public class MealResource extends Application{
 					.entity(getExceptionMessage(e))
 					.build();
 		}
-		return Response.ok(meal).build();
+		return Response.ok(meal).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 	
 	@GET
