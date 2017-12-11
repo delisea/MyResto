@@ -962,6 +962,9 @@
         "name": {
           "type": "string"
         },
+        "description":{
+          "type": "string"
+        },
         "address": {
           "type": "string"
         },
@@ -1049,9 +1052,9 @@
         "type": {
           "type": "string",
           "enum": [
-            "ENTREE",
-            "PLAT",
-            "DESSERT"
+            "STARTER",
+            "MAINCOURSE",
+            "DESERT"
           ]
         },
         "name": {
