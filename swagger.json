@@ -1049,9 +1049,9 @@
         "type": {
           "type": "string",
           "enum": [
-            "ENTREE",
-            "PLAT",
-            "DESSERT"
+            "STARTER",
+            "MAINCOURSE",
+            "DESERT"
           ]
         },
         "name": {
