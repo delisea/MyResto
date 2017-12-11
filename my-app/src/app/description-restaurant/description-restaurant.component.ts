@@ -12,16 +12,15 @@ import { Restaurant } from '../Restaurant';
 export class DescriptionRestaurantComponent implements OnInit {
 
   private restaurant_id: number;
-  private description : String;
-  private restaurant: Restaurant;
+  public restaurant: Restaurant = new Restaurant();
   constructor(private restaurantService: MockRestaurantsService, private router: Router, private route: ActivatedRoute) {
       this.route.params.subscribe(params =>
-      this.restaurant_id = params['id'])
+      this.restaurant_id = params['id'])  
+      this.restaurant.description = "Ce restaurant n'a pas de description";
    }
 
   ngOnInit() {
     this.restaurantService.getRestaurant(this.restaurant_id)
-    .subscribe(restaurant => this.restaurant = restaurant);
+    .subscribe(restaurant => this.restaurant = restaurant)
   }
-
 }
