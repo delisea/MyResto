@@ -16,7 +16,7 @@ export class DescriptionRestaurantComponent implements OnInit {
   constructor(private restaurantService: MockRestaurantsService, private router: Router, private route: ActivatedRoute) {
       this.route.params.subscribe(params =>
       this.restaurant_id = params['id'])  
-      this.restaurant.description = "Ce restaurant n'a pas de description";
+      this.restaurant.description = "";
    }
 
   ngOnInit() {
