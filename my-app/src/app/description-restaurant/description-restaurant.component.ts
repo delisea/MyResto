@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MockRestaurantsService } from "../mock-restaurants.service";
+import { Restaurant } from '../Restaurant';
 
 @Component({
   selector: 'app-description-restaurant',
@@ -8,9 +11,17 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class DescriptionRestaurantComponent implements OnInit {
 
-  constructor() { }
+  private restaurant_id: number;
+  private description : String;
+  private restaurant: Restaurant;
+  constructor(private restaurantService: MockRestaurantsService, private router: Router, private route: ActivatedRoute) {
+      this.route.params.subscribe(params =>
+      this.restaurant_id = params['id'])
+   }
 
   ngOnInit() {
+    this.restaurantService.getRestaurant(this.restaurant_id)
+    .subscribe(restaurant => this.restaurant = restaurant);
   }
 
 }

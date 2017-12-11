@@ -12,8 +12,10 @@ export class MockRestaurantsService {
   restaurants: Restaurant[] = [];
   menus: Observable<Menu[]>;
 
-  base_search_url: string = 'http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/restaurants/search?page=1&sortDirections=asc&sortFields=id';
-
+  base_url: string = 'http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/';
+  base_search_url: string = this.base_url + 'restaurants/search?page=1&sortDirections=asc&sortFields=id';
+  base_menus_url: string = this.base_url + 'menu/getMenusByRestaurantId?restaurant_id=';
+  base_restaurant_url: string = this.base_url + 'restaurants/';
   filter: Filter = {
     disponibility: [],
     day: [],
@@ -33,11 +35,14 @@ export class MockRestaurantsService {
     return (this.http.get<PaginatedListWrapper>(url))
   }
 
-  getMenus(restaurantID): Observable<Menu[]>{
-    var url =  "http://localhost:8080/javaee7-angular/resources/menu/getMenusByRestaurantId?restaurant_id="+restaurantID;
-    console.log(url);
+  getRestaurant(restaurant_id): Observable<Restaurant> {
+    var url = this.base_restaurant_url + restaurant_id;
+    return (this.http.get<Restaurant>(url))
+  }
+
+  getMenus(restaurant_id): Observable<Menu[]>{
+    var url =  this.base_menus_url+restaurant_id;
     this.menus = this.http.get<Menu[]>(url);
-    console.log(this.menus);
     return (this.menus);
   }
 
