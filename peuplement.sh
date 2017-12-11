@@ -137,3 +137,18 @@ echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/sp
 #	Ajout de la spécialité JAPANESE sur resto2
 echo -e "\nAjout de la spécialité JAPANESE sur resto2 \n"
 echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/specialities" -H "accept: application/json" -H "restaurant_id: "+$idResto2 -H "Content-Type: application/json" -d "{ \"id\": 0, \"speciality_label\": \"JAPANESE\"}")
+
+# Ajout du menu "menu du jour" sur resto1
+echo -e "\nAjout du menu 'menu du jour' sur resto1 \n"
+idMenu=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/menu" -H "accept: application/json" -H "restaurant_id: "+$idResto1 -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 15, \"name\": \"menu du jour\"}")
+idMenu=$(echo -e $idMenu | cut -d':' -f 2 | cut -d',' -f 1)
+echo -e "\n idMenu = $idMenu \n"
+
+#Ajout du plat 'salade' de type STARTER sur 'menu du jour'
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/meal" -H "accept: application/json" -H "menu_id: "+$idMenu -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 3, \"type\": \"STARTER\", \"name\": \"salade\"}")
+
+#Ajout du plat 'steack frite' de type MAINCOURSE sur 'menu du jour'
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/meal" -H "accept: application/json" -H "menu_id: "+$idMenu -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 10, \"type\": \"MAINCOURSE\", \"name\": \"steack frites\"}")
+
+#Ajout du plat 'glace au chocolat' de type DESERT sur 'menu du jour'
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/meal" -H "accept: application/json" -H "menu_id: "+$idMenu -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 2, \"type\": \"DESERT\", \"name\": \"glace au chocolat\"}")

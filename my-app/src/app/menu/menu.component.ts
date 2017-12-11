@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Restaurant} from "../Restaurant";
-import {PaginatedListWrapper} from "../PaginatedListWrapper";
-import {MockRestaurantsService} from "../mock-restaurants.service";
-import { Router } from '@angular/router';
-import {Menu} from "../Menu";
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Restaurant } from "../Restaurant";
+import { PaginatedListWrapper } from "../PaginatedListWrapper";
+import { MockRestaurantsService } from "../mock-restaurants.service";
+import { Router, ActivatedRoute } from '@angular/router';
+import { Menu } from "../Menu";
 
 @Component({
   selector: 'app-menu',
@@ -13,28 +13,30 @@ import {Menu} from "../Menu";
 })
 export class MenuComponent implements OnInit {
 
-  menus:Menu[];
+  menus: Menu[];
 
   models = [];
 
-  public restaurants : Restaurant[];
-  public paginatedListWrapper : PaginatedListWrapper;
+  public restaurants: Restaurant[];
+  public paginatedListWrapper: PaginatedListWrapper;
+  public restaurant_id: number;
 
-  constructor(private restaurantService: MockRestaurantsService, private router: Router) {
-
+  constructor(private restaurantService: MockRestaurantsService, private router: Router, private route: ActivatedRoute) {
+    this.route.params.subscribe(params =>
+    this.restaurant_id = params['id'])
   }
 
   ngOnInit() {
-    this.restaurantService.getMenus("38")
+    console.log(this.restaurant_id);
+    this.restaurantService.getMenus(this.restaurant_id)
       .subscribe(
-        menus => {this.menus=menus;
+      menus => {
+        this.menus = menus;
         console.log(menus);
-          for (let menu of menus){
-            this.models.push({value:0});
-          }
+        for (let menu of menus) {
+          this.models.push({ value: 0 });
         }
-    )
-
+      }
+      )
   }
-
 }

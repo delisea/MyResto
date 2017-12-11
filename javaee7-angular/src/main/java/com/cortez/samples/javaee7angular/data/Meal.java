@@ -76,7 +76,7 @@ public class Meal {
 	}
 	
 	public enum TypeMeal {
-        ENTREE, PLAT, DESSERT
+        STARTER, MAINCOURSE, DESERT
     }
 	
 	@Converter(autoApply=true)
