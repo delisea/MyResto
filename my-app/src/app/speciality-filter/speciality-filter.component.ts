@@ -28,7 +28,11 @@ export class SpecialityFilterComponent implements OnInit {
       }
     );
     this.getSpecialities()
-    .subscribe(list => this.specialityList = list);
+    .subscribe(list => this.specialityList = list.sort(function(a,b){
+      if(a<b) return -1;
+      if(a>b) return 1;
+      return 0;
+    }));
 
     console.log(this.specialityList);
   }
