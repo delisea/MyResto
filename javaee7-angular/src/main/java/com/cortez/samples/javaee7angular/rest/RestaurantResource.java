@@ -63,8 +63,7 @@ public class RestaurantResource extends Application {
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e)).build();
 		}
-		return Response.ok(rest).header("Access-Control-Allow-Origin", "*")
-					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
+		return Response.ok(rest).build();
 	}
 
 	@GET
@@ -230,7 +229,6 @@ public class RestaurantResource extends Application {
 		if (existingRestaurant == null) { // Ajout
 			Restaurant restaurantToSave = new Restaurant();
 			restaurantToSave.setAddress(restaurant.getAddress());
-			restaurantToSave.setDescription(restaurant.getDescription());
 			restaurantToSave.setEmail(restaurant.getEmail());
 			restaurantToSave.setName(restaurant.getName());
 			restaurantToSave.setTel_number(restaurant.getTel_number());
@@ -245,7 +243,6 @@ public class RestaurantResource extends Application {
 
 		} else { // Modif
 			existingRestaurant.setAddress(restaurant.getAddress());
-			existingRestaurant.setDescription(restaurant.getDescription());
 			existingRestaurant.setEmail(restaurant.getEmail());
 			existingRestaurant.setName(restaurant.getName());
 			existingRestaurant.setTel_number(restaurant.getTel_number());

@@ -1,32 +1,32 @@
 #!/bin/bash
 
 #	Ajout d'un restaurant (nom = "resto1")
-idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto1\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1871598, \"longitude\": 5.7367073}")
+idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto1\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1871598, \"longitude\": 5.7367073}")
 idResto1=$(echo -e $idResto1 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto1 = $idResto1 \n"
 
 #	Ajout d'un restaurant (nom = "resto2")
-idResto2=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto2\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1855057, \"longitude\": 5.7405284}")
+idResto2=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto2\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1855057, \"longitude\": 5.7405284}")
 idResto2=$(echo -e $idResto2 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto2 = $idResto2 \n"
 
 #	Ajout d'un restaurant (nom = "resto3")
-idResto3=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto3\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1845394, \"longitude\": 5.7421717}")
+idResto3=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto3\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1845394, \"longitude\": 5.7421717}")
 idResto3=$(echo -e $idResto3 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto3 = $idResto3 \n"
 
 #	Ajout d'un restaurant (nom = "Hippopotamus Gières")
-idHippo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Hippopotamus Gieres\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"https://i.ytimg.com/vi/uLF1e4wziTA/maxresdefault.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1896624, \"longitude\": 5.7766054 }")
+idHippo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Hippopotamus Gieres\", \"address\": \"string\", \"url_img\": \"https://i.ytimg.com/vi/uLF1e4wziTA/maxresdefault.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1896624, \"longitude\": 5.7766054 }")
 idHippo=$(echo -e $idHippo | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idHippo = $idHippo \n"
 
 #	Ajout d'un restaurant (nom = "MacDo de l'aigle")
-idMacDo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"MacDo de l'aigle\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"http://static.pix-geeks.com/2016/03/mcdonalds-burger-king-troll-twitter-42676-1.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1830954, \"longitude\": 5.7155548 }")
+idMacDo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"MacDo de l'aigle\", \"address\": \"string\", \"url_img\": \"http://static.pix-geeks.com/2016/03/mcdonalds-burger-king-troll-twitter-42676-1.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1830954, \"longitude\": 5.7155548 }")
 idMacDo=$(echo -e $idMacDo | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idMacDo = $idMacDo \n"
 
 #	Ajout d'un restaurant (nom = "La tour Eiffel")
-idEiffel=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"La tour Eiffel\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"http://img0.svstatic.com/tour-eiffel/la-tour-eiffel-aux-couleurs-de-la-france-en-hommage-aux-victimes-des-attentats_12518_wide.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 48.8583701, \"longitude\": 2.2922873 }")
+idEiffel=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"La tour Eiffel\", \"address\": \"string\", \"url_img\": \"http://img0.svstatic.com/tour-eiffel/la-tour-eiffel-aux-couleurs-de-la-france-en-hommage-aux-victimes-des-attentats_12518_wide.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 48.8583701, \"longitude\": 2.2922873 }")
 idEiffel=$(echo -e $idEiffel | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idEiffel = $idEiffel \n"
 

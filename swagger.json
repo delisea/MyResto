@@ -962,9 +962,6 @@
         "name": {
           "type": "string"
         },
-        "description":{
-          "type": "string"
-        },
         "address": {
           "type": "string"
         },

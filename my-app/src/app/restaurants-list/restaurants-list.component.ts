@@ -25,5 +25,6 @@ export class RestaurantsListComponent implements OnInit {
   ngOnInit() {
     this.restaurantService.getRestaurants('http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/restaurants/search')
       .subscribe(paginatedListWrapper => this.restaurants = paginatedListWrapper.restaurants);
+      console.log(this.restaurants)
   }
 }
