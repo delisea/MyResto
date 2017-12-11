@@ -1,19 +1,16 @@
 <mat-card>
   <mat-card-header>
-
-
     <div fxFlex fxLayout="column">
-    <mat-card class="green" fxFlex fxLayoutAlign="center center">
-    <div >
-      Description
-    </div>
-    </mat-card>
+      <mat-card class="green" fxFlex fxLayoutAlign="center center">
+        <div>
+          Description
+        </div>
+      </mat-card>
 
-    <mat-card fxFlex fxLayoutAlign="start center" class="white">
-      <div>
-        {{restaurant.description}}
-      </div>
-    </mat-card>
+      <mat-card fxFlex fxLayoutAlign="start center" class="white">
+        <div *ngIf="restaurant.description != ''; else noDescription">{{restaurant.description}}</div>
+        <ng-template #noDescription> Ce restaurant n'a pas fourni de description. </ng-template>
+      </mat-card>
     </div>
 
   </mat-card-header>
@@ -21,45 +18,43 @@
 
   <mat-card-content class="green">
 
-      <div fxFlex fxLayout="column">
+    <div fxFlex fxLayout="column">
 
       <!--<mat-card fxFlex fxLayoutAlign="center center">-->
-        <!--<div >-->
-          <!--Maps-->
-        <!--</div>-->
+      <!--<div >-->
+      <!--Maps-->
+      <!--</div>-->
       <!--</mat-card>-->
-        <mat-card fxFlex fxLayoutAlign="center center" class="green">
-          <div >
-            Votre réservation
-          </div>
-        </mat-card>
+      <mat-card fxFlex fxLayoutAlign="center center" class="green">
+        <div>
+          Votre réservation
+        </div>
+      </mat-card>
 
-        <mat-card fxFlex fxLayout="column" fxLayoutAlign="center center" class="white">
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </mat-card>
+      <mat-card fxFlex fxLayout="column" fxLayoutAlign="center center" class="white">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-card>
 
-        <mat-card fxFlex fxLayout="column" fxLayoutAlign="center center" class="white">
-          <mat-radio-group>
-            <mat-radio-button value="1">Morning</mat-radio-button>
-            <mat-radio-button value="2">Midday</mat-radio-button>
-            <mat-radio-button value="3">Evening</mat-radio-button>
-          </mat-radio-group>
-        </mat-card>
+      <mat-card fxFlex fxLayout="column" fxLayoutAlign="center center" class="white">
+        <mat-radio-group>
+          <mat-radio-button value="1">Morning</mat-radio-button>
+          <mat-radio-button value="2">Midday</mat-radio-button>
+          <mat-radio-button value="3">Evening</mat-radio-button>
+        </mat-radio-group>
+      </mat-card>
 
-        <mat-card fxFlex fxLayoutAlign="center center" class="green">
-          <div >
-            Résumé de la reservation
-          </div>
-        </mat-card>
+      <mat-card fxFlex fxLayoutAlign="center center" class="green">
+        <div>
+          Résumé de la reservation
+        </div>
+      </mat-card>
 
       <mat-card fxFlex fxLayoutAlign="start center" class="white">
-          date
-          horaire
-          nb de personnes
+        date horaire nb de personnes
       </mat-card>
     </div>
 
@@ -73,4 +68,3 @@
 
   </mat-card-actions>
 </mat-card>
-
