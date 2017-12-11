@@ -11,13 +11,13 @@
 
     <mat-card fxFlex fxLayoutAlign="start center" class="white">
       <div>
-        Ici la description du restaurant
+        {{restaurant.description}}
       </div>
     </mat-card>
     </div>
 
   </mat-card-header>
-  <img mat-card-image src="https://www.wien.info/media/images/41993-das-loft-sofitel-19to1.jpeg" alt="Photo of a Shiba Inu">
+  <img mat-card-image src={{restaurant.url_img}} alt="Photo du restaurant">
 
   <mat-card-content class="green">
 

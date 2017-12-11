@@ -4,6 +4,7 @@ export class Restaurant {
   email : string;
   id : number;
   name : string;
+  description : string;
   tel_number : string;
   url_img: string;
   latitude: number;

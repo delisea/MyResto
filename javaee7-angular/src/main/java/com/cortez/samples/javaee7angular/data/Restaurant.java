@@ -21,6 +21,7 @@ public class Restaurant {
 	private Long id;
 
 	private String name;
+	private String description;	
 	private String address;
 	private String url_img;
 	private String tel_number;
@@ -171,5 +172,21 @@ public class Restaurant {
 		if (speciality.getRestaurant() != this) {
 			speciality.setRestaurant(this);
 		}
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setLatitude(float latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(float longitude) {
+		this.longitude = longitude;
 	}
 }
