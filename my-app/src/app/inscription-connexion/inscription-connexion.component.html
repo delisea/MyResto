@@ -1,61 +1,61 @@
 <a  routerLink="/restaurants" routerLinkActive="active">
-  <button mat-fab fxFlex="70px" fxLayoutAlign="center center">Retour</button>
+  <button mat-fab fxFlex="70px" fxLayoutAlign="center center">Back</button>
 </a>
 <div class="truc-a-centrer">
 <mat-card>
 <mat-tab-group>
-  <mat-tab label="Connexion"><mat-card>
+  <mat-tab label="Sign in"><mat-card>
     <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
       <mat-form-field>
-        <input matInput #input placeholder="Email">
+        <input matInput #input placeholder="E-mail">
       </mat-form-field>
 
 
       <mat-form-field>
-        <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'">
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
 
       </mat-form-field>
 
-      <a  routerLink="/restaurants/Validation" routerLinkActive="active">
-        <button mat-fab fxFlex="80px" fxLayoutAlign="center center">Connexion</button>
+      <a  routerLink="/validation" routerLinkActive="active">
+        <button mat-fab fxFlex="80px" fxLayoutAlign="center center">Log in</button>
       </a>
 
     </div>
   </mat-card>
   </mat-tab>
 
-    <mat-tab label="Inscription"><mat-card>
+    <mat-tab label="Sign up"><mat-card>
       <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
 
         <mat-form-field hintLabel="">
-          <input matInput #input placeholder="Nom">
+          <input matInput #input placeholder="Name">
         </mat-form-field>
 
         <mat-form-field hintLabel="">
-          <input matInput #input placeholder="Prenom">
+          <input matInput #input placeholder="First Name">
         </mat-form-field>
 
         <mat-form-field hintLabel="">
-          <input matInput #input placeholder="Email">
+          <input matInput #input placeholder="E-mail">
         </mat-form-field>
 
         <mat-form-field hintLabel="">
-          <input matInput #input placeholder="Téléphone">
+          <input matInput #input placeholder="Phone">
         </mat-form-field>
 
 
         <mat-form-field>
-          <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'">
+          <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
 
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Confirmer mot de passe" [type]="hide ? 'password' : 'text'">
+          <input matInput placeholder="Confirm password" [type]="hide ? 'password' : 'text'">
 
         </mat-form-field>
 
         <a  routerLink="/validation" routerLinkActive="active">
-          <button mat-fab fxFlex="80px" fxLayoutAlign="center center">S'inscrire</button>
+          <button mat-fab fxFlex="80px" fxLayoutAlign="center center">Sign up</button>
         </a>
 
       </div>
