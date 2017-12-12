@@ -21,10 +21,12 @@ public class Restaurant {
 	private Long id;
 
 	private String name;
+	private String description;	
 	private String address;
 	private String url_img;
 	private String tel_number;
 	private String email;
+	private Long creation_date; // timestamp
 	//Degree
 	private float latitude;
 	private float longitude;
@@ -171,5 +173,29 @@ public class Restaurant {
 		if (speciality.getRestaurant() != this) {
 			speciality.setRestaurant(this);
 		}
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setLatitude(float latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(float longitude) {
+		this.longitude = longitude;
+	}
+
+	public Long getCreationDate() {
+		return creation_date;
+	}
+
+	public void setCreationDate(Long creationDate) {
+		this.creation_date = creationDate;
 	}
 }

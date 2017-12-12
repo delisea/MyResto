@@ -1,8 +1,9 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Restaurant} from "../Restaurant";
-import {PaginatedListWrapper} from "../PaginatedListWrapper";
-import {MockRestaurantsService} from "../mock-restaurants.service";
-import { Router } from '@angular/router';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Restaurant } from "../Restaurant";
+import { PaginatedListWrapper } from "../PaginatedListWrapper";
+import { MockRestaurantsService } from "../mock-restaurants.service";
+import { Router, ActivatedRoute } from '@angular/router';
+import { Menu } from "../Menu";
 
 @Component({
   selector: 'app-menu',
@@ -12,22 +13,29 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
+  menus: Menu[];
 
-  public restaurants : Restaurant[];
-  public paginatedListWrapper : PaginatedListWrapper;
+  models = [];
 
-  constructor(private restaurantService: MockRestaurantsService, private router: Router) {
-    restaurantService.filterAdded.subscribe(
-      url => {
-        this.restaurantService.getRestaurants(url)
-          .subscribe(paginatedListWrapper => this.restaurants = paginatedListWrapper.restaurants)
-      });
+  public restaurants: Restaurant[];
+  public paginatedListWrapper: PaginatedListWrapper;
+  public restaurant_id: number;
+
+  constructor(private restaurantService: MockRestaurantsService, private router: Router, private route: ActivatedRoute) {
+    this.route.params.subscribe(params =>
+    this.restaurant_id = params['id'])
   }
 
   ngOnInit() {
-    this.restaurantService.getRestaurants('http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/restaurants/search')
-      .subscribe(paginatedListWrapper => this.restaurants = paginatedListWrapper.restaurants);
-    console.log(this.restaurants)
+    this.restaurantService.getMenus(this.restaurant_id)
+      .subscribe(
+      menus => {
+        this.menus = menus;
+        console.log(menus);
+        for (let menu of menus) {
+          this.models.push({ value: 0 });
+        }
+      }
+      )
   }
-
 }

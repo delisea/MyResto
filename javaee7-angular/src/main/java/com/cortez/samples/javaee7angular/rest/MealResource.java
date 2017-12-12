@@ -2,6 +2,7 @@ package com.cortez.samples.javaee7angular.rest;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,12 +17,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.cortez.samples.javaee7angular.data.Meal;
 import com.cortez.samples.javaee7angular.data.Menu;
+import com.cortez.samples.javaee7angular.data.Restaurant;
 @Stateless
 @ApplicationPath("/resources")
 @Path("/meal")
@@ -48,7 +51,8 @@ public class MealResource extends Application{
 					.entity(getExceptionMessage(e))
 					.build();
 		}
-		return Response.ok(meal).build();
+		return Response.ok(meal).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 	
 	@GET
@@ -59,6 +63,22 @@ public class MealResource extends Application{
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 	
+	@GET
+	@Path("/getMealsByMenuId")
+	public Response getMealsByMenuId(@QueryParam("menu_id") Long menu_id){
+		Menu existingMenu = entityManager.find(Menu.class, menu_id);
+		if (existingMenu  == null) {
+			return Response.status(Response.Status.NOT_FOUND)
+					.entity("le menu d'id : "+menu_id+" est introuvable.").build();
+		}
+		
+		List<Menu> menus = null;
+		String queryString = ("SELECT distinct m FROM Meal m WHERE m.menu.id =" +  menu_id);
+		Query query = entityManager.createQuery(queryString);
+		menus = query.getResultList();
+		return Response.status(Response.Status.OK).entity(menus).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
+	}
 	
 	@POST
 	public Response saveMeal(@HeaderParam("Menu_id") Long menu_id, Meal meal) {

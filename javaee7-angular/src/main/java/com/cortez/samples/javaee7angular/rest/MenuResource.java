@@ -74,8 +74,8 @@ public class MenuResource extends Application{
 		String queryString = ("SELECT distinct m FROM Menu m WHERE m.restaurant.id =" +  restaurant_id);
 		Query query = entityManager.createQuery(queryString);
 		menus = query.getResultList();
-		return Response.status(Response.Status.OK).entity(menus).build();
-		
+		return Response.status(Response.Status.OK).entity(menus).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();		
 	}
 	
 	

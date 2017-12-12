@@ -2,6 +2,7 @@ package com.cortez.samples.javaee7angular.rest;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -63,7 +64,8 @@ public class RestaurantResource extends Application {
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e)).build();
 		}
-		return Response.ok(rest).build();
+		return Response.ok(rest).header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET
@@ -229,11 +231,14 @@ public class RestaurantResource extends Application {
 		if (existingRestaurant == null) { // Ajout
 			Restaurant restaurantToSave = new Restaurant();
 			restaurantToSave.setAddress(restaurant.getAddress());
+			restaurantToSave.setDescription(restaurant.getDescription());
 			restaurantToSave.setEmail(restaurant.getEmail());
 			restaurantToSave.setName(restaurant.getName());
 			restaurantToSave.setTel_number(restaurant.getTel_number());
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
 			restaurantToSave.setLocalisation(restaurant.getLatitude(), restaurant.getLongitude());
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			restaurantToSave.setCreationDate(timestamp.getTime());
 			try {
 				entityManager.persist(restaurantToSave);
 			} catch (Exception e) {
@@ -243,6 +248,7 @@ public class RestaurantResource extends Application {
 
 		} else { // Modif
 			existingRestaurant.setAddress(restaurant.getAddress());
+			existingRestaurant.setDescription(restaurant.getDescription());
 			existingRestaurant.setEmail(restaurant.getEmail());
 			existingRestaurant.setName(restaurant.getName());
 			existingRestaurant.setTel_number(restaurant.getTel_number());
@@ -338,7 +344,8 @@ public class RestaurantResource extends Application {
 		String queryString = "SELECT t FROM TableResto t where t.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK).entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET
@@ -348,7 +355,8 @@ public class RestaurantResource extends Application {
 		String queryString = "SELECT s FROM Speciality s where s.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK).entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET
@@ -358,7 +366,8 @@ public class RestaurantResource extends Application {
 		String queryString = "SELECT d FROM Disponibility d where d.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK).entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET

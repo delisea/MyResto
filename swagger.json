@@ -833,6 +833,30 @@
           }
         }
       },
+      "/meal/getMealsByMenuId": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "menu_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {}
+          }
+        }
+      },
       "delete": {
         "consumes": [
           "application/json"
@@ -962,6 +986,9 @@
         "name": {
           "type": "string"
         },
+        "description":{
+          "type": "string"
+        },
         "address": {
           "type": "string"
         },
@@ -1049,9 +1076,9 @@
         "type": {
           "type": "string",
           "enum": [
-            "ENTREE",
-            "PLAT",
-            "DESSERT"
+            "STARTER",
+            "MAINCOURSE",
+            "DESERT"
           ]
         },
         "name": {

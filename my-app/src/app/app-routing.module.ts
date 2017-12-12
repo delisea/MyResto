@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { FiltersComponent } from './filters/filters.component';
+import {InscriptionConnexionComponent} from "./inscription-connexion/inscription-connexion.component";
 
 const appRoutes: Routes = [
-    { path: 'restaurant/:id', 
+    { path: 'restaurant/:id',
       component: RestaurantDetailsComponent,
       data: {title:'restaurant details'}
+    },
+    { path: 'inscription',
+      component: InscriptionConnexionComponent,
+      data: {title:'Inscription'}
     },
     {
       path: 'restaurants',
@@ -26,6 +31,7 @@ const appRoutes: Routes = [
         appRoutes,
         {
           enableTracing: true, // <-- debugging purposes only
+		  useHash: true
         }
       )
     ],
