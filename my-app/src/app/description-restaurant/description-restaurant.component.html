@@ -9,14 +9,14 @@
 
       <mat-card fxFlex fxLayoutAlign="start center" class="white">
         <div *ngIf="restaurant.description != ''; else noDescription">{{restaurant.description}}</div>
-        <ng-template #noDescription> Ce restaurant n'a pas fourni de description. </ng-template>
+        <ng-template #noDescription> No details for this restaurant. </ng-template>
       </mat-card>
     </div>
 
   </mat-card-header>
     <!-- A décommenter quand ce sera mieux agencé à l'écran -->
     <!-- <img id="photo_resto" mat-card-image src="{{restaurant.url_img}}" onerror="document.getElementById('photo_resto').src = 'https://cdn3.iconfinder.com/data/icons/abstract-1/512/no_image-512.png'"> -->
-    <img mat-card-image src="https://www.wien.info/media/images/41993-das-loft-sofitel-19to1.jpeg" alt="Photo of a Shiba Inu">
+    <img mat-card-image src="https://www.wien.info/media/images/41993-das-loft-sofitel-19to1.jpeg" alt="Photo of a restaurant table">
     <mat-card-content class="green">
 
     <div fxFlex fxLayout="column">
@@ -28,7 +28,7 @@
       <!--</mat-card>-->
       <mat-card fxFlex fxLayoutAlign="center center" class="green">
         <div>
-          Votre réservation
+          Your reservation
         </div>
       </mat-card>
 
@@ -48,7 +48,7 @@
         </mat-radio-group>
 
 
-        Nombre de personnes : {{nbpersons}}
+        Number of guests : {{nbpersons}}
         <mat-slider thumbLabel min="0" max="20" step="1" [(ngModel)]="nbpersons">
           </mat-slider>
         </mat-card>
@@ -60,7 +60,7 @@
 
       <mat-card fxFlex fxLayoutAlign="center center" class="green">
         <div>
-         Résumé de la reservation
+          Summary of the reservation
         </div>
       </mat-card>
 
@@ -70,10 +70,10 @@
           Date : {{ date | date : "EEEE d MMMM y" }}
         </div>
         <div>
-          <div class="example-selected-value">Horaire : {{favoriteDispo}}</div>
+          <div class="example-selected-value">Time : {{favoriteDispo}}</div>
         </div>
         <div>
-          Nombre de personnes : {{nbpersons}}
+          Number of guests : {{nbpersons}}
         </div>
 
         <a routerLink="/inscription">
