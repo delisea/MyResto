@@ -32,40 +32,65 @@
         </div>
       </mat-card>
 
+
+
       <mat-card fxFlex fxLayout="column" fxLayoutAlign="center center" class="white">
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateInput)="change_date($event)">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-      </mat-card>
 
-      <mat-card fxFlex fxLayout="column" fxLayoutAlign="center center" class="white">
-        <mat-radio-group>
-          <mat-radio-button value="1">Morning</mat-radio-button>
-          <mat-radio-button value="2">Midday</mat-radio-button>
-          <mat-radio-button value="3">Evening</mat-radio-button>
+        <mat-radio-group fxFlex fxLayout="column" class="example-radio-group" [(ngModel)]="favoriteDispo">
+          <mat-radio-button class="example-radio-button" *ngFor="let dispo of dispos" [value]="dispo">
+            {{dispo}}
+          </mat-radio-button>
         </mat-radio-group>
-      </mat-card>
+
+
+        Nombre de personnes : {{nbpersons}}
+        <mat-slider thumbLabel min="0" max="20" step="1" [(ngModel)]="nbpersons">
+          </mat-slider>
+        </mat-card>
+
+
+
+
+
 
       <mat-card fxFlex fxLayoutAlign="center center" class="green">
         <div>
-          Résumé de la reservation
+         Résumé de la reservation
         </div>
       </mat-card>
 
-      <mat-card fxFlex fxLayoutAlign="start center" class="white">
-        date horaire nb de personnes
+      <mat-card fxFlex fxLayout="column" fxLayoutAlign="center center" class="white">
+        <div>
+         <!--Date : {{date}}-->
+          Date : {{ date | date : "EEEE d MMMM y" }}
+        </div>
+        <div>
+          <div class="example-selected-value">Horaire : {{favoriteDispo}}</div>
+        </div>
+        <div>
+          Nombre de personnes : {{nbpersons}}
+        </div>
+
+        <a routerLink="/inscription">
+          <button class="reserver" mat-raised-button color=#589244 fxFlex fxLayoutAlign="center center">Réserver et payer</button>
+        </a>
       </mat-card>
+
+
+
     </div>
 
-  </mat-card-content>
+
+
+    </mat-card-content>
 
   <mat-card-actions>
 
-    <a routerLink="/inscription">
-      <button class="reserver" mat-raised-button color=#589244 fxFlex fxLayoutAlign="center center">Réserver et payer</button>
-    </a>
 
   </mat-card-actions>
 </mat-card>
