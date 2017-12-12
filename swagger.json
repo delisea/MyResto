@@ -293,8 +293,7 @@
               "enum": [
                 "MORNING",
                 "MIDDAY",
-                "EVENING",
-                "NIGHT"
+                "EVENING"
               ]
             }
           },
@@ -1019,8 +1018,7 @@
           "enum": [
             "MORNING",
             "MIDDAY",
-            "EVENING",
-            "NIGHT"
+            "EVENING"
           ]
         },
         "day": {

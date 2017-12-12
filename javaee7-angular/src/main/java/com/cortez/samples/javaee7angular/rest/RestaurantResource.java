@@ -29,6 +29,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.cortez.samples.javaee7angular.data.Disponibility;
+import com.cortez.samples.javaee7angular.data.Meal;
+import com.cortez.samples.javaee7angular.data.Menu;
 import com.cortez.samples.javaee7angular.data.Restaurant;
 import com.cortez.samples.javaee7angular.data.Speciality;
 import com.cortez.samples.javaee7angular.data.TableResto;
@@ -327,6 +329,27 @@ public class RestaurantResource extends Application {
 							.build();
 				}
 		}
+		
+		// Supprimer les menus associés
+				List<Menu> menusToDelete = restaurantToDelete.getMenus();
+				for (Menu m : menusToDelete) {
+					Menu menuToDelete = entityManager.find(Menu.class, m.getId());
+					if (menuToDelete != null)
+						try {
+							// Supprimer les plats associés à ce menu
+							List<Meal> mealsToDelete = menuToDelete.getMeals();
+							for(Meal meal : mealsToDelete){
+								Meal mealToDelete = entityManager.find(Meal.class, meal.getId());
+								if(mealToDelete != null){
+									entityManager.remove(mealToDelete);
+								}
+							}
+							entityManager.remove(menuToDelete);
+						} catch (Exception e) {
+							return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e))
+									.build();
+						}
+				}
 
 		// Suppression du restaurant
 		try {

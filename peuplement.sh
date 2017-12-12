@@ -78,12 +78,12 @@ echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/di
 echo -e "\nAjout de la disponibilité THURSDAY-MORNING sur Hippopotamus \n"
 echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: "+$idHippo -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"MORNING\", \"day\": \"THURSDAY\"}")
 
-# 	Ajout de la disponibilité FRIDAY-NIGHT sur MacDo
-echo -e "\nAjout de la disponibilité FRIDAY-NIGHT sur MacDo\n"
-echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: "+$idMacDo -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"NIGHT\", \"day\": \"FRIDAY\"}")
+# 	Ajout de la disponibilité FRIDAY-EVENING sur MacDo
+echo -e "\nAjout de la disponibilité FRIDAY-EVENING sur MacDo\n"
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: "+$idMacDo -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"EVENING\", \"day\": \"FRIDAY\"}")
 
 # 	Ajout de la disponibilité SATURDAY-MORNING sur MacDo
-echo -e "\nAjout de la disponibilité FRIDAY-NIGHT sur MacDo\n"
+echo -e "\nAjout de la disponibilité SATURDAY-MORNING sur MacDo\n"
 echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: "+$idMacDo -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"MORNING\", \"day\": \"SATURDAY\"}")
 
 # 	Ajout de la disponibilité MONDAY-MORNING sur resto1
@@ -98,9 +98,9 @@ echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/di
 echo -e "\nAjout de la disponibilité TUESDAY-MIDDAY sur resto2 \n"
 echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: "+$idResto2 -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"MIDDAY\", \"day\": \"TUESDAY\"}")
 
-#	Ajout de la disponibilité SUNDAY-NIGHT sur resto2
-echo -e "\nAjout de la disponibilité SUNDAY-NIGHT sur resto2 \n"
-echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: "+$idResto2 -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"NIGHT\", \"day\": \"SUNDAY\"}")
+#	Ajout de la disponibilité SUNDAY-MORNING sur resto2
+echo -e "\nAjout de la disponibilité SUNDAY-MORNING sur resto2 \n"
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/disponibilities" -H "accept: application/json" -H "restaurant_id: "+$idResto2 -H "Content-Type: application/json" -d "{ \"id\": 0, \"periode\": \"MORNING\", \"day\": \"SUNDAY\"}")
 
 #	Ajout de la spécialité ITALIAN sur resto1
 echo -e "\nAjout de la spécialité ITALIAN sur resto1 \n"
