@@ -62,6 +62,7 @@ import { DescriptionRestaurantComponent } from './description-restaurant/descrip
 import { MenuComponent } from './menu/menu.component';
 import { InscriptionConnexionComponent } from './inscription-connexion/inscription-connexion.component';
 import 'hammerjs';
+import { ValidationComponent } from './validation/validation.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import 'hammerjs';
     PersonFilterComponent,
     DescriptionRestaurantComponent,
     MenuComponent,
-    InscriptionConnexionComponent
+    InscriptionConnexionComponent,
+    ValidationComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

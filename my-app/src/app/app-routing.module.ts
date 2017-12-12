@@ -4,6 +4,7 @@ import { RestaurantsListComponent } from './restaurants-list/restaurants-list.co
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { FiltersComponent } from './filters/filters.component';
 import {InscriptionConnexionComponent} from "./inscription-connexion/inscription-connexion.component";
+import {ValidationComponent} from "./validation/validation.component";
 
 const appRoutes: Routes = [
     { path: 'restaurant/:id',
@@ -14,6 +15,10 @@ const appRoutes: Routes = [
       component: InscriptionConnexionComponent,
       data: {title:'Inscription'}
     },
+  { path: 'validation',
+    component: ValidationComponent,
+    data: {title:'Validation'}
+  },
     {
       path: 'restaurants',
       component: RestaurantsListComponent,
