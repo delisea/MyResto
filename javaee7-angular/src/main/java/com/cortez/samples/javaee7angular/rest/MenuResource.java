@@ -75,8 +75,7 @@ public class MenuResource extends Application{
 		Query query = entityManager.createQuery(queryString);
 		menus = query.getResultList();
 		return Response.status(Response.Status.OK).entity(menus).header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
-		
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();		
 	}
 	
 	
