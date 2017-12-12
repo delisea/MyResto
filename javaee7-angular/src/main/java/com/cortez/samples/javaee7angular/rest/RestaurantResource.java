@@ -2,6 +2,7 @@ package com.cortez.samples.javaee7angular.rest;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -236,6 +237,8 @@ public class RestaurantResource extends Application {
 			restaurantToSave.setTel_number(restaurant.getTel_number());
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
 			restaurantToSave.setLocalisation(restaurant.getLatitude(), restaurant.getLongitude());
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			restaurantToSave.setCreationDate(timestamp.getTime());
 			try {
 				entityManager.persist(restaurantToSave);
 			} catch (Exception e) {

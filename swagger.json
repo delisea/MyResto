@@ -833,6 +833,30 @@
           }
         }
       },
+      "/meal/getMealsByMenuId": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "menu_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "schema": {}
+          }
+        }
+      },
       "delete": {
         "consumes": [
           "application/json"

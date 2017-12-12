@@ -26,6 +26,7 @@ public class Restaurant {
 	private String url_img;
 	private String tel_number;
 	private String email;
+	private Long creation_date; // timestamp
 	//Degree
 	private float latitude;
 	private float longitude;
@@ -188,5 +189,13 @@ public class Restaurant {
 
 	public void setLongitude(float longitude) {
 		this.longitude = longitude;
+	}
+
+	public Long getCreationDate() {
+		return creation_date;
+	}
+
+	public void setCreationDate(Long creationDate) {
+		this.creation_date = creationDate;
 	}
 }
