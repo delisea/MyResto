@@ -6,14 +6,13 @@
 <mat-tab-group>
   <mat-tab label="Connexion"><mat-card>
     <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
-      <mat-form-field hintLabel="Max 10 characters">
-        <input matInput #input maxlength="10" placeholder="Email">
-        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+      <mat-form-field>
+        <input matInput #input placeholder="Email">
       </mat-form-field>
 
 
       <mat-form-field>
-        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+        <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'">
 
       </mat-form-field>
 
@@ -29,33 +28,29 @@
       <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
 
         <mat-form-field hintLabel="">
-          <input matInput #input maxlength="20" placeholder="Nom">
-          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+          <input matInput #input placeholder="Nom">
         </mat-form-field>
 
         <mat-form-field hintLabel="">
-          <input matInput #input maxlength="20" placeholder="Prenom">
-          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+          <input matInput #input placeholder="Prenom">
         </mat-form-field>
 
         <mat-form-field hintLabel="">
-          <input matInput #input maxlength="" placeholder="Email">
-          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+          <input matInput #input placeholder="Email">
         </mat-form-field>
 
         <mat-form-field hintLabel="">
-          <input matInput #input maxlength="10" placeholder="Téléphone">
-          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+          <input matInput #input placeholder="Téléphone">
         </mat-form-field>
 
 
         <mat-form-field>
-          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+          <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'">
 
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Confirm your password" [type]="hide ? 'password' : 'text'">
+          <input matInput placeholder="Confirmer mot de passe" [type]="hide ? 'password' : 'text'">
 
         </mat-form-field>
 
