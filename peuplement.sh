@@ -1,17 +1,17 @@
 #!/bin/bash
 
-#	Ajout d'un restaurant (nom = "resto1")
-idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto1\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1871598, \"longitude\": 5.7367073}")
+#	Ajout d'un restaurant (nom = "Chez Le Pèr'Gras")
+idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Chez Le Pèr'Gras\", \"description\": \"Cette table propose un menu régional gastronomique dans un cadre élégant ou en terrasse avec vue sur la ville.\", \"address\": \"string\", \"url_img\": \"http://www.pergras.com/uploads/2016/08/PG_contact-footer.jpg\", \"tel_number\": \"04 76 42 09 47\", \"email\": \"pergras.fr\", \"latitude\": 45.201539, \"longitude\": 5.725881}")
 idResto1=$(echo -e $idResto1 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto1 = $idResto1 \n"
 
-#	Ajout d'un restaurant (nom = "resto2")
-idResto2=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto2\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1855057, \"longitude\": 5.7405284}")
+#	Ajout d'un restaurant (nom = "Dragons Elysées")
+idResto2=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Dragons Elysées\", \"description\": \"Degustez des spécialités asiatiques les pieds sur l'eau. A deux pas des champs Elysées.\", \"address\": \"11 Rue de Berri, 75008 Paris\", \"url_img\": \"https://u.tfstatic.com/restaurant_photos/725/37725/169/612/dragons-elysees-vue-de-la-salle-b421b.jpg\", \"tel_number\": \"01 42 89 85 10\", \"email\": \"dragonselysees.fr\", \"latitude\": 48.872473, \"longitude\": 2.303882}")
 idResto2=$(echo -e $idResto2 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto2 = $idResto2 \n"
 
-#	Ajout d'un restaurant (nom = "resto3")
-idResto3=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"resto3\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"string\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1845394, \"longitude\": 5.7421717}")
+#	Ajout d'un restaurant (nom = "L'Ardoise")
+idResto3=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"L'Ardoise\", \"description\": \"Dans un cadre classique et chaleureux, de copieux plats régionaux et traditionnels, avec terrasse en été.\", \"address\": \"2 Rue de Miribel, 38000 Grenoble\", \"url_img\": \"https://media.v3.grenoble-tourisme.com/photos/structure_471/2051181.jpg.1200x900_q85.jpg\", \"tel_number\": \"04 76 27 75 90\", \"email\": \"string\", \"latitude\": 45.190454, \"longitude\": 5.725394}")
 idResto3=$(echo -e $idResto3 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto3 = $idResto3 \n"
 
@@ -21,12 +21,12 @@ idHippo=$(echo -e $idHippo | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idHippo = $idHippo \n"
 
 #	Ajout d'un restaurant (nom = "MacDo de l'aigle")
-idMacDo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"MacDo de l'aigle\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"http://static.pix-geeks.com/2016/03/mcdonalds-burger-king-troll-twitter-42676-1.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1830954, \"longitude\": 5.7155548 }")
+idMacDo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"MacDo de l'aigle\", \"description\": \"Fast food reconnu. Sur place ou à emporter. Nouveau : CBO est de retour.\", \"address\": \" 99 Cours Jean Jaurès, 38000 Grenoble\", \"url_img\": \"https://ws.mcdonalds.fr/media/20/bf/e6/20bfe64a9cc5d60e387318306526924e65b5a587\", \"tel_number\": \"0476841508\", \"email\": \"mcdonalds.fr\", \"latitude\": 45.183095, \"longitude\": 5.717749 }")
 idMacDo=$(echo -e $idMacDo | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idMacDo = $idMacDo \n"
 
-#	Ajout d'un restaurant (nom = "La tour Eiffel")
-idEiffel=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"La tour Eiffel\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"http://img0.svstatic.com/tour-eiffel/la-tour-eiffel-aux-couleurs-de-la-france-en-hommage-aux-victimes-des-attentats_12518_wide.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 48.8583701, \"longitude\": 2.2922873 }")
+#	Ajout d'un restaurant (nom = "58 Tour Eiffel Restaurant")
+idEiffel=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"58 Tour Eiffel Restaurant\", \"description\": \"Vue imprenable sur Paris. Restaurant gastronomique inimitable dans un cadre idyllique.\", \"address\": \"Tour Eiffel, Champ de Mars, 75007 Paris\", \"url_img\": \"http://img0.svstatic.com/tour-eiffel/la-tour-eiffel-aux-couleurs-de-la-france-en-hommage-aux-victimes-des-attentats_12518_wide.jpg\", \"tel_number\": \"0 825 56 66 62\", \"email\": \"58toureiffel.fr\", \"latitude\": 48.858684, \"longitude\": 2.294250 }")
 idEiffel=$(echo -e $idEiffel | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idEiffel = $idEiffel \n"
 
