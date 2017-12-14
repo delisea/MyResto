@@ -7,7 +7,7 @@
         </div>
       </mat-card>
 
-      <mat-card fxFlex fxLayoutAlign="start center" class="white">
+      <mat-card fxFlex fyFlex fxLayoutAlign="start center" class="white">
         <div *ngIf="restaurant.description != ''; else noDescription">{{restaurant.description}}</div>
         <ng-template #noDescription> No details for this restaurant. </ng-template>
       </mat-card>
@@ -77,7 +77,7 @@
         </div>
 
         <a routerLink="/inscription">
-          <button class="reserver" mat-raised-button color=#589244 fxFlex fxLayoutAlign="center center">Reserve and pay</button>
+          <button class="reserver" mat-raised-button color=#589244 fxFlex fxLayoutAlign="center center">Book and pay</button>
         </a>
       </mat-card>
 
