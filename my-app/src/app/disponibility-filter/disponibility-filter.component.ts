@@ -19,11 +19,7 @@ export class DisponibilityFilterComponent implements OnInit {
 
   periodeList = [];
 
-  periodeUrl = "http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/disponibilities/getPeriodes";
-
   dayList = [];
-
-  dayUrl = "http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/disponibilities/getDays";
 
   ngOnInit() {
     this.disponibilities.valueChanges.subscribe(

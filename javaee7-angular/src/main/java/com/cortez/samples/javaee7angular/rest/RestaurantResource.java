@@ -78,7 +78,9 @@ public class RestaurantResource extends Application {
 			@QueryParam("disponibility") String disponibility,
 			@QueryParam("speciality") String speciality, @QueryParam("day") String day,
 			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts,
-			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude, @QueryParam("rayon") Float rayon) {
+			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude,
+			@QueryParam("rayon") Float rayon,
+			@DefaultValue("10") @QueryParam("pageSize") int pageSize) {
 
 		// Préparation du wrapper
 		
@@ -86,7 +88,7 @@ public class RestaurantResource extends Application {
 		paginatedListWrapper.setCurrentPage(page);
 		paginatedListWrapper.setSortFields(sortFields);
 		paginatedListWrapper.setSortDirections(sortDirections);
-		paginatedListWrapper.setPageSize(10);
+		paginatedListWrapper.setPageSize(pageSize);
 		paginatedListWrapper.setTotalResults(countRestaurants());
 		int start = (paginatedListWrapper.getCurrentPage() - 1) * paginatedListWrapper.getPageSize();
 				

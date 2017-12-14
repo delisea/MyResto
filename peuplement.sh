@@ -1,27 +1,27 @@
 #!/bin/bash
 
 #	Ajout d'un restaurant (nom = "Chez Le Pèr'Gras")
-idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Chez Le Pèr'Gras\", \"description\": \"Cette table propose un menu régional gastronomique dans un cadre élégant ou en terrasse avec vue sur la ville.\", \"address\": \"string\", \"url_img\": \"http://www.pergras.com/uploads/2016/08/PG_contact-footer.jpg\", \"tel_number\": \"04 76 42 09 47\", \"email\": \"pergras.fr\", \"latitude\": 45.201539, \"longitude\": 5.725881}")
+idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Chez Le Per'Gras\", \"description\": \"Cette table propose un menu regional gastronomique dans un cadre elegant ou en terrasse avec vue sur la ville.\", \"address\": \"string\", \"url_img\": \"http://www.pergras.com/uploads/2016/08/PG_contact-footer.jpg\", \"tel_number\": \"04 76 42 09 47\", \"email\": \"pergras.fr\", \"latitude\": 45.201539, \"longitude\": 5.725881}")
 idResto1=$(echo -e $idResto1 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto1 = $idResto1 \n"
 
 #	Ajout d'un restaurant (nom = "Dragons Elysées")
-idResto2=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Dragons Elysées\", \"description\": \"Degustez des spécialités asiatiques les pieds sur l'eau. A deux pas des champs Elysées.\", \"address\": \"11 Rue de Berri, 75008 Paris\", \"url_img\": \"https://u.tfstatic.com/restaurant_photos/725/37725/169/612/dragons-elysees-vue-de-la-salle-b421b.jpg\", \"tel_number\": \"01 42 89 85 10\", \"email\": \"dragonselysees.fr\", \"latitude\": 48.872473, \"longitude\": 2.303882}")
+idResto2=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Dragons Elysees\", \"description\": \"Degustez des specialites asiatiques les pieds sur l'eau. A deux pas des champs Elysees.\", \"address\": \"11 Rue de Berri, 75008 Paris\", \"url_img\": \"https://u.tfstatic.com/restaurant_photos/725/37725/169/612/dragons-elysees-vue-de-la-salle-b421b.jpg\", \"tel_number\": \"01 42 89 85 10\", \"email\": \"dragonselysees.fr\", \"latitude\": 48.872473, \"longitude\": 2.303882}")
 idResto2=$(echo -e $idResto2 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto2 = $idResto2 \n"
 
 #	Ajout d'un restaurant (nom = "L'Ardoise")
-idResto3=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"L'Ardoise\", \"description\": \"Dans un cadre classique et chaleureux, de copieux plats régionaux et traditionnels, avec terrasse en été.\", \"address\": \"2 Rue de Miribel, 38000 Grenoble\", \"url_img\": \"https://media.v3.grenoble-tourisme.com/photos/structure_471/2051181.jpg.1200x900_q85.jpg\", \"tel_number\": \"04 76 27 75 90\", \"email\": \"string\", \"latitude\": 45.190454, \"longitude\": 5.725394}")
+idResto3=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"L'Ardoise\", \"description\": \"Dans un cadre classique et chaleureux, de copieux plats regionaux et traditionnels, avec terrasse en ete.\", \"address\": \"2 Rue de Miribel, 38000 Grenoble\", \"url_img\": \"https://media.v3.grenoble-tourisme.com/photos/structure_471/2051181.jpg.1200x900_q85.jpg\", \"tel_number\": \"04 76 27 75 90\", \"email\": \"ardoise_123@hotmail.fr\", \"latitude\": 45.190454, \"longitude\": 5.725394}")
 idResto3=$(echo -e $idResto3 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto3 = $idResto3 \n"
 
 #	Ajout d'un restaurant (nom = "Hippopotamus Gières")
-idHippo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Hippopotamus Gieres\", \"description\": \"string\", \"address\": \"string\", \"url_img\": \"https://i.ytimg.com/vi/uLF1e4wziTA/maxresdefault.jpg\", \"tel_number\": \"string\", \"email\": \"string\", \"latitude\": 45.1896624, \"longitude\": 5.7766054 }")
+idHippo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Hippopotamus Gieres\", \"description\": \"Chaine de restaurants au decor noir et rouge, specialises en grillades de viandes avec service continu 7j/7.\", \"address\": \"1 Allee du Perou, 38610 Gieres\", \"url_img\": \"https://i.ytimg.com/vi/uLF1e4wziTA/maxresdefault.jpg\", \"tel_number\": \"04 76 61 61 10\", \"email\": \"hyppopotamus@hotmail.fr\", \"latitude\": 45.1896624, \"longitude\": 5.7766054 }")
 idHippo=$(echo -e $idHippo | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idHippo = $idHippo \n"
 
 #	Ajout d'un restaurant (nom = "MacDo de l'aigle")
-idMacDo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"MacDo de l'aigle\", \"description\": \"Fast food reconnu. Sur place ou à emporter. Nouveau : CBO est de retour.\", \"address\": \" 99 Cours Jean Jaurès, 38000 Grenoble\", \"url_img\": \"https://ws.mcdonalds.fr/media/20/bf/e6/20bfe64a9cc5d60e387318306526924e65b5a587\", \"tel_number\": \"0476841508\", \"email\": \"mcdonalds.fr\", \"latitude\": 45.183095, \"longitude\": 5.717749 }")
+idMacDo=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"MacDo de l'aigle\", \"description\": \"Fast food reconnu. Sur place ou a emporter. Nouveau : CBO est de retour.\", \"address\": \" 99 Cours Jean Jaures, 38000 Grenoble\", \"url_img\": \"https://ws.mcdonalds.fr/media/20/bf/e6/20bfe64a9cc5d60e387318306526924e65b5a587\", \"tel_number\": \"0476841508\", \"email\": \"mcdonalds.fr\", \"latitude\": 45.183095, \"longitude\": 5.717749 }")
 idMacDo=$(echo -e $idMacDo | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idMacDo = $idMacDo \n"
 
@@ -138,17 +138,17 @@ echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/sp
 echo -e "\nAjout de la spécialité JAPANESE sur resto2 \n"
 echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/specialities" -H "accept: application/json" -H "restaurant_id: "+$idResto2 -H "Content-Type: application/json" -d "{ \"id\": 0, \"speciality_label\": \"JAPANESE\"}")
 
-# Ajout du menu "menu du jour" sur resto1
-echo -e "\nAjout du menu 'menu du jour' sur resto1 \n"
+# Ajout du menu "menu of the day sur resto1
+echo -e "\nAjout du menu 'menu of the day' sur resto1 \n"
 idMenu=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/menu" -H "accept: application/json" -H "restaurant_id: "+$idResto1 -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 15, \"name\": \"menu du jour\"}")
 idMenu=$(echo -e $idMenu | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idMenu = $idMenu \n"
 
 #Ajout du plat 'salade' de type STARTER sur 'menu du jour'
-echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/meal" -H "accept: application/json" -H "menu_id: "+$idMenu -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 3, \"type\": \"STARTER\", \"name\": \"salade\"}")
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/meal" -H "accept: application/json" -H "menu_id: "+$idMenu -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 3, \"type\": \"STARTER\", \"name\": \"salad\"}")
 
 #Ajout du plat 'steack frite' de type MAINCOURSE sur 'menu du jour'
-echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/meal" -H "accept: application/json" -H "menu_id: "+$idMenu -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 10, \"type\": \"MAINCOURSE\", \"name\": \"steack frites\"}")
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/meal" -H "accept: application/json" -H "menu_id: "+$idMenu -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 10, \"type\": \"MAINCOURSE\", \"name\": \"steack and chips\"}")
 
 #Ajout du plat 'glace au chocolat' de type DESERT sur 'menu du jour'
-echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/meal" -H "accept: application/json" -H "menu_id: "+$idMenu -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 2, \"type\": \"DESERT\", \"name\": \"glace au chocolat\"}")
+echo -e $(curl --silent POST "http://localhost:8080/javaee7-angular/resources/meal" -H "accept: application/json" -H "menu_id: "+$idMenu -H "Content-Type: application/json" -d "{ \"id\": 0, \"price\": 2, \"type\": \"DESERT\", \"name\": \"chocolate ice cream\"}")

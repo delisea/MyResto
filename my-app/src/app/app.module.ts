@@ -22,6 +22,7 @@ import {DisponibilityFilterComponent} from './disponibility-filter/disponibility
 import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {PersonFilterComponent} from './person-filter/person-filter.component';
+import {PageSizeFilterComponent} from './pageSize-filter/pageSize-filter.component';
 
 import {
   MatAutocompleteModule,
@@ -79,6 +80,7 @@ import { ValidationComponent } from './validation/validation.component';
     SpecialityFilterComponent,
     NavbarComponent,
     PersonFilterComponent,
+    PageSizeFilterComponent,
     DescriptionRestaurantComponent,
     MenuComponent,
     InscriptionConnexionComponent,

@@ -6,4 +6,5 @@ export class Filter {
   latitude : number;
   longitude : number;
   rayon : number;
+  pageSize : number;
 }

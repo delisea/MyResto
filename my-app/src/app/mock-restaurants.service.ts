@@ -23,7 +23,8 @@ export class MockRestaurantsService {
     nb_person: null,
     latitude: null,
     longitude: null,
-    rayon : null
+    rayon : null,
+    pageSize : null
   };
 
   private filterAddedSource = new Subject<string>();
@@ -47,8 +48,6 @@ export class MockRestaurantsService {
   }
 
   addFilter(type, value): void {
-    console.log(type);
-    console.log(value);
     if (type == "disponibility") {
       this.filter.disponibility = value;
     } else if (type == "nb_person") {
@@ -63,10 +62,10 @@ export class MockRestaurantsService {
       this.filter.longitude = value.longitude;
       this.filter.rayon = value.rayon;
     }
-
-    console.log(this.filter);
+    else if(type == "pageSize"){
+      this.filter.pageSize = value;
+    }
     var url = this.base_search_url;
-    console.log(this.filter.speciality);
     if (this.filter.speciality.length != 0) {
       url = url.concat("&speciality=");
       for (let speciality of this.filter.speciality) {
@@ -100,9 +99,9 @@ export class MockRestaurantsService {
         url = url.concat("&rayon="+this.filter.rayon)
       }
     }
-
-    console.log("ici");
-    console.log(url);
+    if(this.filter.pageSize != null){
+     url = url.concat("&pageSize="+this.filter.pageSize);
+    }
     this.getRestaurants(url);
     this.filterAddedSource.next(url);
   }
