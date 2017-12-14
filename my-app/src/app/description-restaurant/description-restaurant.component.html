@@ -8,8 +8,10 @@
       </mat-card>
 
       <mat-card fxFlex fyFlex fxLayoutAlign="start center" class="white">
-        <div *ngIf="restaurant.description != ''; else noDescription">{{restaurant.description}}</div>
-        <ng-template #noDescription> No details for this restaurant. </ng-template>
+        <mat-card-content>
+          <div *ngIf="restaurant.description != ''; else noDescription">{{restaurant.description}}</div>
+          <ng-template #noDescription> No details for this restaurant. </ng-template>
+        </mat-card-content>
       </mat-card>
     </div>
 
