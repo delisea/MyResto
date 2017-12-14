@@ -1,4 +1,11 @@
-<div fxLayout="row" fxLayoutWrap>
+<div fxLayout="column" fxLayoutWrap>
+  <mat-card class="green">
+      <mat-card-title style="color:white; text-align:center">
+          Total price : {{total_price}}€
+        </mat-card-title>
+    </mat-card>
+</div>
+<div fxLayout="row" fxLayoutWrap>   
   <mat-card class="mat-elevation-z4" *ngFor="let menu of menus" class="col-sm-3" fxFlex.xs=calc(100%) fxFlex.sm=calc(50%-10)
     fxFlex.md=calc(33%-10px) fxFlex.lg=calc(25%-10px) fxFlex.xl=calc(25%-10px) style="margin-bottom: 10px; margin-right : 10px"
     ng-style="hoverActive ? {'background':#ECEFE0} : {}">
@@ -18,7 +25,4 @@
       </div>
     </mat-card-content>
   </mat-card>
-  <div style="float:right;color:white">
-    Prix total : {{total_price}}€
-  </div>
 </div>
