@@ -26,4 +26,4 @@
   </mat-card>
 </div>
 </div>
-<app-pageSize-filter style="float:right"></app-pageSize-filter>
+<app-pageSize-filter style="float:right" *ngIf="restaurants !== undefined && restaurants.length != 0"></app-pageSize-filter>

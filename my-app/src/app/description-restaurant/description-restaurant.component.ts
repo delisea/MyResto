@@ -26,7 +26,6 @@ export class DescriptionRestaurantComponent implements OnInit {
 
   change_date(event: MatDatepickerInputEvent<Date>) {
     this.date = event.value;
-    console.log(event.value);
   }
 
   ngOnInit() {
@@ -36,7 +35,7 @@ export class DescriptionRestaurantComponent implements OnInit {
 
   favoriteDispo: string;
 
-  nbpersons = 0;
+  nbPersons = 0;
 
   dispos = [
     'Morning',
