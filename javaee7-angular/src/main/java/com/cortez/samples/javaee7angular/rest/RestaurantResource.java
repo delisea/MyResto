@@ -6,13 +6,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -35,7 +32,6 @@ import com.cortez.samples.javaee7angular.data.Restaurant;
 import com.cortez.samples.javaee7angular.data.Speciality;
 import com.cortez.samples.javaee7angular.data.TableResto;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
-import java.util.regex.*;
 
 @Stateless
 @ApplicationPath("/resources")
