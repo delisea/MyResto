@@ -1,7 +1,9 @@
 #!/bin/bash
 
 #	Ajout d'un restaurant (nom = "Chez Le Pèr'Gras")
-idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Chez Le Per'Gras\", \"description\": \"Cette table propose un menu regional gastronomique dans un cadre elegant ou en terrasse avec vue sur la ville.\", \"address\": \"string\", \"url_img\": \"http://www.pergras.com/uploads/2016/08/PG_contact-footer.jpg\", \"tel_number\": \"04 76 42 09 47\", \"email\": \"pergras.fr\", \"latitude\": 45.201539, \"longitude\": 5.725881}")
+
+idResto1=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Chez Le Per'Gras\", \"description\": \"Cette table propose un menu regional gastronomique dans un cadre elegant ou en terrasse avec vue sur la ville.\", \"address\": \"90 Chemin de la Bastille, 38000 Grenoble\", \"url_img\": \"http://www.pergras.com/uploads/2016/08/PG_contact-footer.jpg\", \"tel_number\": \"04 76 42 09 47\", \"email\": \"pergras.fr\", \"latitude\": 45.201539, \"longitude\": 5.725881}")
+
 idResto1=$(echo -e $idResto1 | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idResto1 = $idResto1 \n"
 
@@ -29,6 +31,11 @@ echo -e "\n idMacDo = $idMacDo \n"
 idEiffel=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"58 Tour Eiffel Restaurant\", \"description\": \"Vue imprenable sur Paris. Restaurant gastronomique inimitable dans un cadre idyllique.\", \"address\": \"Tour Eiffel, Champ de Mars, 75007 Paris\", \"url_img\": \"http://img0.svstatic.com/tour-eiffel/la-tour-eiffel-aux-couleurs-de-la-france-en-hommage-aux-victimes-des-attentats_12518_wide.jpg\", \"tel_number\": \"0 825 56 66 62\", \"email\": \"58toureiffel.fr\", \"latitude\": 48.858684, \"longitude\": 2.294250 }")
 idEiffel=$(echo -e $idEiffel | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idEiffel = $idEiffel \n"
+
+#	Ajout d'un restaurant (nom = "Fouquet's")
+idEiffel=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Fouquet's\", \"description\": \"Ce restaurant repute au cadre raffine propose des plats francais creatifs et plus de 350 vins et champagnes.\", \"address\": \"99 Av. des Champs-Élysées, 75008 Paris\", \"url_img\": \"https://www.casinosbarriere.com/content/dam/casinos/sites_locaux/toulouse/restaurants/fouquets/carousel/image_1/carousel_fouquets_toulouse_desktop.jpg\", \"tel_number\": \"01 40 69 60 50\", \"email\": \"58toureiffel.fr\", \"latitude\": 48.871525, \"longitude\": 2.301181 }")
+idEiffel=$(echo -e $idFouquets | cut -d':' -f 2 | cut -d',' -f 1)
+echo -e "\n idEiffel = $idFouquets \n"
 
 # 	Ajout d'une table de 10 places non bougeable sur La tour Eiffel 
 echo -e "\nAjout d'une table de 5 places non bougeable sur resto1 \n"
