@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PersonFilterComponent } from './person-filter.component';
+import { PageSizeFilterComponent } from './pageSize-filter.component';
 
-describe('PersonFilterComponent', () => {
-  let component: PersonFilterComponent;
-  let fixture: ComponentFixture<PersonFilterComponent>;
+describe('PageSizeFilterComponent', () => {
+  let component: PageSizeFilterComponent;
+  let fixture: ComponentFixture<PageSizeFilterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonFilterComponent ]
+      declarations: [ PageSizeFilterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PersonFilterComponent);
+    fixture = TestBed.createComponent(PageSizeFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

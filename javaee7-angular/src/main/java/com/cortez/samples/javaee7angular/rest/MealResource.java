@@ -24,7 +24,7 @@ import javax.ws.rs.core.Response;
 
 import com.cortez.samples.javaee7angular.data.Meal;
 import com.cortez.samples.javaee7angular.data.Menu;
-import com.cortez.samples.javaee7angular.data.Restaurant;
+
 @Stateless
 @ApplicationPath("/resources")
 @Path("/meal")

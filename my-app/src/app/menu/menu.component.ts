@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit {
   public restaurants: Restaurant[];
   public paginatedListWrapper: PaginatedListWrapper;
   public restaurant_id: number;
+  public total_price: number;
 
   constructor(private restaurantService: MockRestaurantsService, private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.route.params.subscribe(params =>
@@ -31,6 +32,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.total_price = 0;
     this.restaurantService.getMenus(this.restaurant_id)
       .subscribe(
       menus => {
@@ -45,5 +47,14 @@ export class MenuComponent implements OnInit {
 
   getMealsByMenuId(menu_id):Observable<Meal[]>{
     return this.http.get<Meal[]>("http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/meal/getMealsByMenuId?menu_id="+menu_id);
+  }
+
+  calculatePrice(){
+    this.total_price = 0;
+    if(this.menus !== undefined){
+      for(let menu of this.menus){
+        this.total_price = this.total_price+=menu.price*menu.numberOfCommand;
+      }
+    }
   }
 }
