@@ -5,6 +5,7 @@ import { RestaurantDetailsComponent } from './restaurant-details/restaurant-deta
 import { FiltersComponent } from './filters/filters.component';
 import {InscriptionConnexionComponent} from "./inscription-connexion/inscription-connexion.component";
 import {ValidationComponent} from "./validation/validation.component";
+import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 
 const appRoutes: Routes = [
     { path: 'restaurant/:id',
@@ -15,6 +16,10 @@ const appRoutes: Routes = [
       component: InscriptionConnexionComponent,
       data: {title:'Inscription'}
     },
+  { path: 'privacy',
+    component: PrivacyPolicyComponent,
+    data: {title:'Privacy policy'}
+  },
   { path: 'validation',
     component: ValidationComponent,
     data: {title:'Validation'}
