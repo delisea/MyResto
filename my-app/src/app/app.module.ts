@@ -22,6 +22,7 @@ import {DisponibilityFilterComponent} from './disponibility-filter/disponibility
 import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {PersonFilterComponent} from './person-filter/person-filter.component';
+import {PageSizeFilterComponent} from './pageSize-filter/pageSize-filter.component';
 
 import {
   MatAutocompleteModule,
@@ -62,6 +63,7 @@ import { DescriptionRestaurantComponent } from './description-restaurant/descrip
 import { MenuComponent } from './menu/menu.component';
 import { InscriptionConnexionComponent } from './inscription-connexion/inscription-connexion.component';
 import 'hammerjs';
+import { ValidationComponent } from './validation/validation.component';
 
 
 @NgModule({
@@ -78,9 +80,11 @@ import 'hammerjs';
     SpecialityFilterComponent,
     NavbarComponent,
     PersonFilterComponent,
+    PageSizeFilterComponent,
     DescriptionRestaurantComponent,
     MenuComponent,
-    InscriptionConnexionComponent
+    InscriptionConnexionComponent,
+    ValidationComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

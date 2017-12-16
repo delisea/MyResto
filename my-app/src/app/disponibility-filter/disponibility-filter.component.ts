@@ -19,39 +19,23 @@ export class DisponibilityFilterComponent implements OnInit {
 
   periodeList = [];
 
-  periodeUrl = "http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/disponibilities/getPeriodes";
-
   dayList = [];
-
-  dayUrl = "http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/disponibilities/getDays";
 
   ngOnInit() {
     this.disponibilities.valueChanges.subscribe(
       form => {
-        console.log({"disponibility":form});
+        console.log(form);
         this.restaurantService.addFilter("disponibility",form)
       }
     )
 
     this.days.valueChanges.subscribe(
       form => {
-        console.log({"day":form});
         this.restaurantService.addFilter("day",form)
       }
     )
 
-    this.getPeriodes()
-    .subscribe(periodeList => this.periodeList = periodeList)
-
-    this.getDays()
-    .subscribe(daylist => this.dayList = daylist)
-  }
-
-  getPeriodes():Observable<String[]>{
-    return this.http.get<String[]>(this.periodeUrl);
-  }
-
-  getDays():Observable<String[]>{
-    return this.http.get<String[]>(this.dayUrl);
+    this.periodeList = ["Morning","Midday","Evening"];
+    this.dayList = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
   }
 }

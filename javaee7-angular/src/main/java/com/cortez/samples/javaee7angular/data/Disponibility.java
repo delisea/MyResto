@@ -22,7 +22,7 @@ import javax.persistence.ManyToOne;
 public class Disponibility {
 	
     public enum Periode {
-        MORNING, MIDDAY, EVENING, NIGHT
+        MORNING, MIDDAY, EVENING
     }
     
     public enum Day {
