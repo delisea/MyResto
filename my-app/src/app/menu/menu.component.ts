@@ -53,7 +53,8 @@ export class MenuComponent implements OnInit {
     this.total_price = 0;
     if(this.menus !== undefined){
       for(let menu of this.menus){
-        this.total_price = this.total_price+=menu.price*menu.numberOfCommand;
+        if(menu.numberOfCommand !== undefined)
+          this.total_price+=menu.price*menu.numberOfCommand;
       }
     }
   }
