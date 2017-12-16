@@ -36,7 +36,7 @@ idEiffel=$(echo -e $idEiffel | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idEiffel = $idEiffel \n"
 
 #	Ajout d'un restaurant (nom = "Fouquet's")
-idFouquets=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Fouquet's\", \"description\": \"Ce restaurant repute au cadre raffine propose des plats francais creatifs et plus de 350 vins et champagnes.\", \"address\": \"99 Av. des Champs-Élysées, 75008 Paris\", \"url_img\": \"https://www.casinosbarriere.com/content/dam/casinos/sites_locaux/toulouse/restaurants/fouquets/carousel/image_1/carousel_fouquets_toulouse_desktop.jpg\", \"tel_number\": \"01 40 69 60 50\", \"email\": \"58toureiffel.fr\", \"latitude\": 48.871525, \"longitude\": 2.301181 }")
+idFouquets=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Fouquet's\", \"description\": \"Ce restaurant repute au cadre raffine propose des plats francais creatifs et plus de 350 vins et champagnes.\", \"address\": \"99 Av. des Champs-Elysees, 75008 Paris\", \"url_img\": \"https://www.casinosbarriere.com/content/dam/casinos/sites_locaux/toulouse/restaurants/fouquets/carousel/image_1/carousel_fouquets_toulouse_desktop.jpg\", \"tel_number\": \"01 40 69 60 50\", \"email\": \"58toureiffel.fr\", \"latitude\": 48.871525, \"longitude\": 2.301181 }")
 idFouquets=$(echo -e $idFouquets | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idFouquets = $idFouquets \n"
 
