@@ -28,10 +28,10 @@ import com.cortez.samples.javaee7angular.data.Restaurant;
 
 @Stateless
 @ApplicationPath("/resources")
-@Path("Reservation")
+@Path("reservations")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class Reservationresource  extends Application{
+public class ReservationResource  extends Application{
 
 	@PersistenceContext
 	private EntityManager entityManager;
