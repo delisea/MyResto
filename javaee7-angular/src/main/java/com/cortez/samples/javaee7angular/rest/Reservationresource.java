@@ -28,7 +28,7 @@ import com.cortez.samples.javaee7angular.data.Restaurant;
 
 @Stateless
 @ApplicationPath("/resources")
-@Path("menu")
+@Path("Reservation")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class Reservationresource  extends Application{
