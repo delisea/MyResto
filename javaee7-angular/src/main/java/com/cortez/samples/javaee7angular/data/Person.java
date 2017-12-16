@@ -13,6 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Entity implementation class for Entity: Restaurant
  *
@@ -20,6 +22,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "PERSON_TYPE", discriminatorType = DiscriminatorType.STRING)
+@JsonIgnoreProperties(value = { "reservations" })
 public class Person {
 
 	@Id

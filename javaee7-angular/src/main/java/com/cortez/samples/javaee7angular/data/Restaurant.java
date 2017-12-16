@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 @Entity
-@JsonIgnoreProperties(value = { "tables","disponibilities","specialities","menus" })
+@JsonIgnoreProperties(value = { "tables","disponibilities","specialities","menus", "reservations" })
 public class Restaurant {
 
 	@Id
