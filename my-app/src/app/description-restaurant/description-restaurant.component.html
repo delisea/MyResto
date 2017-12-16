@@ -7,7 +7,7 @@
         </div>
       </mat-card>
 
-      <mat-card fxFlex fyFlex fxLayoutAlign="start center" class="white">
+      <mat-card fxFlex fyFlex class="white">
         <mat-card-content>
           <div *ngIf="restaurant.description != ''; else noDescription">{{restaurant.description}}</div>
           <ng-template #noDescription> No details for this restaurant. </ng-template>
@@ -16,13 +16,11 @@
     </div>
 
   </mat-card-header>
-    <!-- A décommenter quand ce sera mieux agencé à l'écran -->
-    <!-- <img id="photo_resto" mat-card-image src="{{restaurant.url_img}}" onerror="document.getElementById('photo_resto').src = 'https://cdn3.iconfinder.com/data/icons/abstract-1/512/no_image-512.png'"> -->
-    <img mat-card-image src="https://www.wien.info/media/images/41993-das-loft-sofitel-19to1.jpeg" alt="Photo of a restaurant table">
-    <mat-card-content class="green">
-
+  <!-- A décommenter quand ce sera mieux agencé à l'écran -->
+  <img id="photo_resto" mat-card-image src="{{restaurant.url_img}}" onerror="document.getElementById('photo_resto').src = 'https://cdn3.iconfinder.com/data/icons/abstract-1/512/no_image-512.png'">
+  <!--<img mat-card-image src="https://www.wien.info/media/images/41993-das-loft-sofitel-19to1.jpeg" alt="Photo of a restaurant table">-->
+  <mat-card-content class="green">
     <div fxFlex fxLayout="column">
-
       <!--<mat-card fxFlex fxLayoutAlign="center center">-->
       <!--<div >-->
       <!--Maps-->
@@ -34,31 +32,28 @@
         </div>
       </mat-card>
 
-
-
-      <mat-card fxFlex fxLayout="column" fxLayoutAlign="center center" class="white">
+      <mat-card fxLayout="column" fxLayoutAlign="center center" class="white">
         <mat-form-field>
           <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateInput)="change_date($event)">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <mat-radio-group fxFlex fxLayout="column" class="example-radio-group" [(ngModel)]="favoriteDispo">
+
+
+        <mat-radio-group fxLayout="column" class="example-radio-group" [(ngModel)]="favoriteDispo">
           <mat-radio-button class="example-radio-button" *ngFor="let dispo of dispos" [value]="dispo">
             {{dispo}}
           </mat-radio-button>
         </mat-radio-group>
 
 
-        Number of guests : {{nbpersons}}
-        <mat-slider thumbLabel min="0" max="20" step="1" [(ngModel)]="nbpersons">
-          </mat-slider>
-        </mat-card>
 
+        Number of guests : {{nbPersons}}
+        <mat-slider thumbLabel min="0" max="20" step="1" [(ngModel)]="nbPersons">
+        </mat-slider>
 
-
-
-
+      </mat-card>
 
       <mat-card fxFlex fxLayoutAlign="center center" class="green">
         <div>
@@ -66,33 +61,22 @@
         </div>
       </mat-card>
 
-      <mat-card fxFlex fxLayout="column" fxLayoutAlign="center center" class="white">
+      <mat-card fxLayout="column" fxLayoutAlign="center center" class="white">
         <div>
-         <!--Date : {{date}}-->
+          <!--Date : {{date}}-->
           Date : {{ date | date : "EEEE d MMMM y" }}
         </div>
+        <div>Time : {{favoriteDispo}}</div>
         <div>
-          <div class="example-selected-value">Time : {{favoriteDispo}}</div>
+          Number of guests : {{nbPersons}}
         </div>
-        <div>
-          Number of guests : {{nbpersons}}
-        </div>
-
-        <a routerLink="/inscription">
-          <button class="reserver" mat-raised-button color=#589244 fxFlex fxLayoutAlign="center center">Book and pay</button>
-        </a>
       </mat-card>
-
-
-
     </div>
-
-
-
-    </mat-card-content>
-
+  </mat-card-content>
+  <a routerLink="/inscription">
+    <button class="reserver" [disabled]="date === null || favoriteDispo === null || nbPersons == 0" mat-raised-button color=#589244
+      fxFlex fxLayoutAlign="center center">Book and pay</button>
+  </a>
   <mat-card-actions>
-
-
   </mat-card-actions>
 </mat-card>
