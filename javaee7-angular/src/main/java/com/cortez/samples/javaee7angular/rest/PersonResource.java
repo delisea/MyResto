@@ -22,7 +22,7 @@ import com.cortez.samples.javaee7angular.data.Person;
 
 @Stateless
 @ApplicationPath("/resources")
-@Path("Person")
+@Path("persons")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PersonResource extends Application {
@@ -38,7 +38,7 @@ public class PersonResource extends Application {
 			person = entityManager.find(Person.class, id);
 			if(person == null){
 				return Response.status(Response.Status.NOT_FOUND)
-						.entity("la table d'id : "+id+" est introuvable.")
+						.entity("la person d'id : "+id+" est introuvable.")
 						.build();
 			}
 		} catch (Exception e) {			

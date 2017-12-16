@@ -63,6 +63,7 @@ public class ReservationResource  extends Application{
 		return Response.ok(reservation).build();
 	}
 	
+	// Récupérer les reservations d'un restaurant
 	@GET
 	@Path("/getReservationsByRestaurantId")
 	public Response getReservationsByRestaurantId(@QueryParam("restaurant_id") Long restaurant_id){
