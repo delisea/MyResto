@@ -1,5 +1,7 @@
 package com.cortez.samples.javaee7angular.data;
 
+import java.sql.Date;
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Basic;
 import javax.persistence.Convert;
@@ -12,19 +14,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Reservation {
 	
 	public enum Periode {
-        MORNING, MIDDAY, EVENING, NIGHT
+        MORNING, MIDDAY, EVENING
     }
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String date;
+	@Temporal(TemporalType.DATE)
+	private Date date;
 	
 	@ManyToOne
 	@JoinColumn(name = "person_id")
@@ -38,7 +43,7 @@ public class Reservation {
 	@Convert( converter=PeriodeConverter.class )
 	private Periode periode;
 	
-	private int nbCouvert;
+	private int nbCouverts;
 
 	public Reservation(){}
 	
@@ -46,11 +51,11 @@ public class Reservation {
 		return id;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -79,12 +84,12 @@ public class Reservation {
 		this.periode = periode;
 	}
 	
-	public int getNbCouvert() {
-		return nbCouvert;
+	public int getNbCouverts() {
+		return nbCouverts;
 	}
 
-	public void setNbCouvert(int nbCouvert) {
-		this.nbCouvert = nbCouvert;
+	public void setNbCouverts(int nbCouvert) {
+		this.nbCouverts = nbCouvert;
 	}
 	
 	@Converter(autoApply=true)

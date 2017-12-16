@@ -90,7 +90,7 @@ public class Reservationresource  extends Application{
 		}
 		
 		List<Reservation> reservations = null;
-		String queryString = ("SELECT distinct m FROM Menu m WHERE m.restaurant.id =" +  person_id);
+		String queryString = ("SELECT distinct r FROM Reservation r WHERE r.person.id =" +  person_id);
 		Query query = entityManager.createQuery(queryString);
 		reservations = query.getResultList();
 		return Response.status(Response.Status.OK).entity(reservations).header("Access-Control-Allow-Origin", "*")
@@ -117,7 +117,7 @@ public class Reservationresource  extends Application{
         	Reservation reservationToSave = new Reservation();
         	reservationToSave.setPerson(existingPerson);  
         	reservationToSave.setRestaurant(existingRestaurant);
-        	reservationToSave.setNbCouvert(reservation.getNbCouvert());
+        	reservationToSave.setNbCouverts(reservation.getNbCouverts());
         	reservationToSave.setPeriode(reservation.getPeriode());
         	reservationToSave.setDate(reservation.getDate());      	
             try{
@@ -132,7 +132,7 @@ public class Reservationresource  extends Application{
         } else { // Modif
         	existingReservation.setPerson(existingPerson);  
         	existingReservation.setRestaurant(existingRestaurant);
-        	existingReservation.setNbCouvert(reservation.getNbCouvert());
+        	existingReservation.setNbCouverts(reservation.getNbCouverts());
         	existingReservation.setPeriode(reservation.getPeriode());
         	existingReservation.setDate(reservation.getDate());
         	try{
@@ -147,7 +147,7 @@ public class Reservationresource  extends Application{
 	
 	@DELETE
 	@Path("{id}")
-	public Response deleteMenu(@PathParam("id") Long id) {
+	public Response deleteReservation(@PathParam("id") Long id) {
 		Response response = getReservation(id);
 		if(response.getStatus() != Response.Status.OK.getStatusCode()){
 			return response;

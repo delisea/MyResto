@@ -43,7 +43,7 @@ public class Restaurant {
 	@OneToMany(mappedBy = "restaurant")	
 	private List<Menu> menus;
 	
-	@OneToMany (mappedBy = "restaurant")
+	@OneToMany(mappedBy = "restaurant")
 	private List<Reservation> reservations;
 
 	public List<Menu> getMenus() {
