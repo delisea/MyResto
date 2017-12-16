@@ -1,5 +1,7 @@
 package com.cortez.samples.javaee7angular.data;
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -8,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 /**
  * Entity implementation class for Entity: Restaurant
  *
@@ -25,6 +30,9 @@ public class Person {
 	private String last_name;
 	private String tel_number;
 	private String email;
+	
+	@OneToMany (mappedBy = "person")
+	private List<Reservation> reservations;
 	
 	public Person(){
 		super();
@@ -65,4 +73,30 @@ public class Person {
 	public Long getId() {
 		return id;
 	}
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+	
+	
 }

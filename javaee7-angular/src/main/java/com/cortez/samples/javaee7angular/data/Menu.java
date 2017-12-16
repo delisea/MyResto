@@ -31,8 +31,6 @@ public class Menu {
 	@OneToMany(mappedBy = "menu")
 	private List<Meal> meals;
 	
-	//@OneToMany(mappedBy = "Menu")
-	//private List<Formula> formulas;
 	
 	public Menu() {}
 
@@ -46,14 +44,6 @@ public class Menu {
 	public void setMeals(List<Meal> meals) {
 		this.meals = meals;
 	}
-
-//	public List<Formula> getFormulas() {
-//		return formulas;
-//	}
-//
-//	public void setFormulas(List<Formula> formulas) {
-//		this.formulas = formulas;
-//	}
 
 	public Restaurant getRestaurant(){
 		return this.restaurant;

@@ -42,6 +42,9 @@ public class Restaurant {
 	
 	@OneToMany(mappedBy = "restaurant")	
 	private List<Menu> menus;
+	
+	@OneToMany (mappedBy = "restaurant")
+	private List<Reservation> reservations;
 
 	public List<Menu> getMenus() {
 		return menus;
@@ -198,4 +201,14 @@ public class Restaurant {
 	public void setCreationDate(Long creationDate) {
 		this.creation_date = creationDate;
 	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+	
+	
 }
