@@ -1,6 +1,6 @@
 package com.cortez.samples.javaee7angular.data;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Basic;
