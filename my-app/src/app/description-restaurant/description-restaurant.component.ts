@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MockRestaurantsService } from "../mock-restaurants.service";
 import { Restaurant } from '../Restaurant';
-import {MatDatepickerInputEvent} from "@angular/material";
+import { MatDatepickerInputEvent } from "@angular/material";
 
 @Component({
   selector: 'app-description-restaurant',
@@ -15,10 +15,10 @@ export class DescriptionRestaurantComponent implements OnInit {
   private restaurant_id: number;
   public restaurant: Restaurant = new Restaurant();
   constructor(private restaurantService: MockRestaurantsService, private router: Router, private route: ActivatedRoute) {
-      this.route.params.subscribe(params =>
+    this.route.params.subscribe(params =>
       this.restaurant_id = params['id'])
-      this.restaurant.description = "";
-   }
+    this.restaurant.description = "";
+  }
 
   events: string[] = [];
 
@@ -30,7 +30,7 @@ export class DescriptionRestaurantComponent implements OnInit {
 
   ngOnInit() {
     this.restaurantService.getRestaurant(this.restaurant_id)
-    .subscribe(restaurant => this.restaurant = restaurant)
+      .subscribe(restaurant => this.restaurant = restaurant)
   }
 
   favoriteDispo: string;
