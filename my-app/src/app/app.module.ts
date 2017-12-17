@@ -10,6 +10,7 @@ import { LocalisationFilterComponent } from './localisation-filter/localisation-
 import { FiltersComponent } from './filters/filters.component';
 import { PriceFilterComponent } from './price-filter/price-filter.component';
 import { DateFilterComponent } from './date-filter/date-filter.component';
+import { FrenchComponent } from './french/french.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 import { RestaurantPreviewComponent } from './restaurant-preview/restaurant-preview.component';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
@@ -74,6 +75,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     FiltersComponent,
     PriceFilterComponent,
     DateFilterComponent,
+    FrenchComponent,
     RestaurantsListComponent,
     RestaurantPreviewComponent,
     RestaurantDetailsComponent,
