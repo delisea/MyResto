@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 @Entity
-@JsonIgnoreProperties(value = { "tables","disponibilities","specialities" })
+@JsonIgnoreProperties(value = { "tables","disponibilities","specialities","menus", "reservations" })
 public class Restaurant {
 
 	@Id
@@ -21,10 +21,12 @@ public class Restaurant {
 	private Long id;
 
 	private String name;
+	private String description;	
 	private String address;
 	private String url_img;
 	private String tel_number;
 	private String email;
+	private Long creation_date; // timestamp
 	//Degree
 	private float latitude;
 	private float longitude;
@@ -37,6 +39,20 @@ public class Restaurant {
 	
 	@OneToMany(mappedBy = "restaurant")	
 	private List<Speciality> specialities;
+	
+	@OneToMany(mappedBy = "restaurant")	
+	private List<Menu> menus;
+	
+	@OneToMany(mappedBy = "restaurant")
+	private List<Reservation> reservations;
+
+	public List<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
 
 	public Restaurant() {
 		super();
@@ -161,4 +177,38 @@ public class Restaurant {
 			speciality.setRestaurant(this);
 		}
 	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setLatitude(float latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(float longitude) {
+		this.longitude = longitude;
+	}
+
+	public Long getCreationDate() {
+		return creation_date;
+	}
+
+	public void setCreationDate(Long creationDate) {
+		this.creation_date = creationDate;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+	
+	
 }

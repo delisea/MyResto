@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 
 /**
  * Simple entity.
@@ -23,7 +22,7 @@ import javax.persistence.SequenceGenerator;
 public class Disponibility {
 	
     public enum Periode {
-        MORNING, MIDDAY, EVENING, NIGHT
+        MORNING, MIDDAY, EVENING
     }
     
     public enum Day {
@@ -51,6 +50,7 @@ public class Disponibility {
         this.id = id;
     }
 
+    // Default constructor
     public Disponibility(){}
     
     @ManyToOne
@@ -72,7 +72,7 @@ public class Disponibility {
 
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
-		if(!restaurant.getTables().contains(this)){
+		if(!restaurant.getDisponibilities().contains(this)){
 			restaurant.addDisponibility(this);
 		}
 	}	

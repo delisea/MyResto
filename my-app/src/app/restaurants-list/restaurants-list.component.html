@@ -1,8 +1,13 @@
+<div fxLayout="row" fxLayout.xs="column"  fxLayoutGap="10px" class="content">
+<div class = "filter">
+  <app-filters></app-filters>
+</div>
+
 <div fxLayout="row" fxLayoutWrap>
   <mat-card class="mat-elevation-z4" *ngFor="let restaurant of restaurants" fxFlex.xs = calc(100%) fxFlex.sm = calc(50%-10) fxFlex.md= calc(33%-10px) fxFlex.lg= calc(25%-10px) fxFlex.xl= calc(25%-10px) style="margin-bottom: 10px; margin-right : 10px" routerLink="/restaurant/{{restaurant.id}}"
-    routerLinkActive="active" ng-style="hoverActive ? {'background':#ECEFE0} : {}">
+    routerLinkActive="active">
     <mat-card-title>{{restaurant.name}}</mat-card-title>
-    <img mat-card-image src={{restaurant.url_img}} alt="Photo du restaurant" class="example-image">
+    <img mat-card-image src={{restaurant.url_img}} alt="Restaurant picture" class="example-image">
     <mat-card-content>
       <img src="/assets/location.png" alt="location-icon" width="20px"height="20px"> {{restaurant.address}}
       <div>
@@ -20,3 +25,5 @@
     </mat-card-content>
   </mat-card>
 </div>
+</div>
+<app-pageSize-filter style="float:right" *ngIf="restaurants !== undefined && restaurants.length != 0"></app-pageSize-filter>

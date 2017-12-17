@@ -2,16 +2,14 @@ package com.cortez.samples.javaee7angular.rest;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -28,11 +26,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.cortez.samples.javaee7angular.data.Disponibility;
+import com.cortez.samples.javaee7angular.data.Meal;
+import com.cortez.samples.javaee7angular.data.Menu;
 import com.cortez.samples.javaee7angular.data.Restaurant;
 import com.cortez.samples.javaee7angular.data.Speciality;
 import com.cortez.samples.javaee7angular.data.TableResto;
 import com.cortez.samples.javaee7angular.pagination.PaginatedListWrapper;
-import java.util.regex.*;
 
 @Stateless
 @ApplicationPath("/resources")
@@ -63,7 +62,8 @@ public class RestaurantResource extends Application {
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e)).build();
 		}
-		return Response.ok(rest).build();
+		return Response.ok(rest).header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET
@@ -74,7 +74,9 @@ public class RestaurantResource extends Application {
 			@QueryParam("disponibility") String disponibility,
 			@QueryParam("speciality") String speciality, @QueryParam("day") String day,
 			@DefaultValue("0") @QueryParam("nbCouverts") int nbCouverts,
-			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude, @QueryParam("rayon") Float rayon) {
+			@QueryParam("latitude") Float latitude, @QueryParam("longitude") Float longitude,
+			@QueryParam("rayon") Float rayon,
+			@DefaultValue("10") @QueryParam("pageSize") int pageSize) {
 
 		// Préparation du wrapper
 		
@@ -82,7 +84,7 @@ public class RestaurantResource extends Application {
 		paginatedListWrapper.setCurrentPage(page);
 		paginatedListWrapper.setSortFields(sortFields);
 		paginatedListWrapper.setSortDirections(sortDirections);
-		paginatedListWrapper.setPageSize(10);
+		paginatedListWrapper.setPageSize(pageSize);
 		paginatedListWrapper.setTotalResults(countRestaurants());
 		int start = (paginatedListWrapper.getCurrentPage() - 1) * paginatedListWrapper.getPageSize();
 				
@@ -229,11 +231,14 @@ public class RestaurantResource extends Application {
 		if (existingRestaurant == null) { // Ajout
 			Restaurant restaurantToSave = new Restaurant();
 			restaurantToSave.setAddress(restaurant.getAddress());
+			restaurantToSave.setDescription(restaurant.getDescription());
 			restaurantToSave.setEmail(restaurant.getEmail());
 			restaurantToSave.setName(restaurant.getName());
 			restaurantToSave.setTel_number(restaurant.getTel_number());
 			restaurantToSave.setUrl_img(restaurant.getUrl_img());
 			restaurantToSave.setLocalisation(restaurant.getLatitude(), restaurant.getLongitude());
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			restaurantToSave.setCreationDate(timestamp.getTime());
 			try {
 				entityManager.persist(restaurantToSave);
 			} catch (Exception e) {
@@ -243,6 +248,7 @@ public class RestaurantResource extends Application {
 
 		} else { // Modif
 			existingRestaurant.setAddress(restaurant.getAddress());
+			existingRestaurant.setDescription(restaurant.getDescription());
 			existingRestaurant.setEmail(restaurant.getEmail());
 			existingRestaurant.setName(restaurant.getName());
 			existingRestaurant.setTel_number(restaurant.getTel_number());
@@ -321,6 +327,27 @@ public class RestaurantResource extends Application {
 							.build();
 				}
 		}
+		
+		// Supprimer les menus associés
+				List<Menu> menusToDelete = restaurantToDelete.getMenus();
+				for (Menu m : menusToDelete) {
+					Menu menuToDelete = entityManager.find(Menu.class, m.getId());
+					if (menuToDelete != null)
+						try {
+							// Supprimer les plats associés à ce menu
+							List<Meal> mealsToDelete = menuToDelete.getMeals();
+							for(Meal meal : mealsToDelete){
+								Meal mealToDelete = entityManager.find(Meal.class, meal.getId());
+								if(mealToDelete != null){
+									entityManager.remove(mealToDelete);
+								}
+							}
+							entityManager.remove(menuToDelete);
+						} catch (Exception e) {
+							return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(getExceptionMessage(e))
+									.build();
+						}
+				}
 
 		// Suppression du restaurant
 		try {
@@ -338,27 +365,30 @@ public class RestaurantResource extends Application {
 		String queryString = "SELECT t FROM TableResto t where t.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK).entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET
 	@Path("/getSpecialities/{restaurant_id}")
 	public Response getSpecialities(@PathParam("restaurant_id") Long restaurant_id) {
-		List<TableResto> requestResults = null;
+		List<Speciality> requestResults = null;
 		String queryString = "SELECT s FROM Speciality s where s.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK).entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET
 	@Path("/getDisponibilities/{restaurant_id}")
 	public Response getDisponibilities(@PathParam("restaurant_id") Long restaurant_id) {
-		List<TableResto> requestResults = null;
+		List<Disponibility> requestResults = null;
 		String queryString = "SELECT d FROM Disponibility d where d.restaurant.id=" + restaurant_id;
 		Query query = entityManager.createQuery(queryString);
 		requestResults = query.getResultList();
-		return Response.status(Response.Status.OK).entity(requestResults).build();
+		return Response.status(Response.Status.OK).entity(requestResults).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 	}
 
 	@GET

@@ -10,6 +10,7 @@ import { LocalisationFilterComponent } from './localisation-filter/localisation-
 import { FiltersComponent } from './filters/filters.component';
 import { PriceFilterComponent } from './price-filter/price-filter.component';
 import { DateFilterComponent } from './date-filter/date-filter.component';
+import { FrenchComponent } from './french/french.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 import { RestaurantPreviewComponent } from './restaurant-preview/restaurant-preview.component';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
@@ -22,6 +23,7 @@ import {DisponibilityFilterComponent} from './disponibility-filter/disponibility
 import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {PersonFilterComponent} from './person-filter/person-filter.component';
+import {PageSizeFilterComponent} from './pageSize-filter/pageSize-filter.component';
 
 import {
   MatAutocompleteModule,
@@ -58,22 +60,35 @@ import {
   MatStepperModule,
   MatOptionModule,
 } from '@angular/material';
+import { DescriptionRestaurantComponent } from './description-restaurant/description-restaurant.component';
+import { MenuComponent } from './menu/menu.component';
+import { InscriptionConnexionComponent } from './inscription-connexion/inscription-connexion.component';
+import 'hammerjs';
+import { ValidationComponent } from './validation/validation.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 @NgModule({
-  declarations: [  
+  declarations: [
     AppComponent,
     LocalisationFilterComponent,
     FiltersComponent,
     PriceFilterComponent,
     DateFilterComponent,
+    FrenchComponent,
     RestaurantsListComponent,
     RestaurantPreviewComponent,
     RestaurantDetailsComponent,
     DisponibilityFilterComponent,
     SpecialityFilterComponent,
     NavbarComponent,
-    PersonFilterComponent
+    PersonFilterComponent,
+    PageSizeFilterComponent,
+    DescriptionRestaurantComponent,
+    MenuComponent,
+    InscriptionConnexionComponent,
+    ValidationComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -103,11 +118,13 @@ import {
     MatOptionModule,
     MatSelectModule,
     MatSidenavModule,
+    MatTabsModule,
+    MatRadioModule
   ],
   providers: [ MockRestaurantsService, GeoCodingService, HttpClientModule ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { 
+export class AppModule {
   // Diagnostic only: inspect router configuration
   constructor(router: Router) {
     console.log('Routes: ', JSON.stringify(router.config, undefined, 2));

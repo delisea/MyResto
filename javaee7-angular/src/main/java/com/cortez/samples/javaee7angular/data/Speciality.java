@@ -52,7 +52,7 @@ public class Speciality {
 	
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
-		if(!restaurant.getTables().contains(this)){
+		if(!restaurant.getSpecialities().contains(this)){
 			restaurant.addSpeciality(this);
 		}
 	}

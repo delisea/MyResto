@@ -21,8 +21,8 @@ export class LocalisationFilterComponent implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
   public hideMap: boolean;
-  private hideRadiusFilter: boolean;
-  private localisationFilter : LocalisationFilter;
+  public hideRadiusFilter: boolean;
+  public localisationFilter : LocalisationFilter;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;

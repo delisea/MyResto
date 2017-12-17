@@ -1,5 +1,5 @@
 <mat-form-field>
   <mat-select placeholder="Specialities" [formControl]="specialities" multiple>
-    <mat-option *ngFor="let speciality of specialityList" [value]="speciality">{{speciality}}</mat-option>
+    <mat-option *ngFor="let speciality of specialityList" [value]="speciality">{{speciality.charAt(0).toUpperCase()+ speciality.slice(1).toLowerCase()}}</mat-option>
   </mat-select>
 </mat-form-field>

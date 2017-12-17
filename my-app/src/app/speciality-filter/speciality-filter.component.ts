@@ -14,21 +14,25 @@ export class SpecialityFilterComponent implements OnInit {
 
   constructor(private restaurantService: MockRestaurantsService, private http: HttpClient) { }
 
-  
+
   specialities = new FormControl();
-  
+
   specialityList = [];
 
-  url = "http://localhost:8080/javaee7-angular/resources/specialities";
+  url = "http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/specialities";
 
   ngOnInit() {
     this.specialities.valueChanges.subscribe(
       form => {
         this.restaurantService.addFilter("speciality",form)
-      }     
-    )
+      }
+    );
     this.getSpecialities()
-    .subscribe(list => this.specialityList = list)
+    .subscribe(list => this.specialityList = list.sort(function(a,b){
+      if(a<b) return -1;
+      if(a>b) return 1;
+      return 0;
+    }));
 
     console.log(this.specialityList);
   }

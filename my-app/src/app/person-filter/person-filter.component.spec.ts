@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PersonFilterComponent } from './person-filter.component';
 
-describe('LocalisationFilterComponent', () => {
+describe('PersonFilterComponent', () => {
   let component: PersonFilterComponent;
   let fixture: ComponentFixture<PersonFilterComponent>;
 
