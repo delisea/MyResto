@@ -14,20 +14,15 @@
   <mat-tab label="Sign in"><mat-card>
     <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
 
-      <!---->
-      <!--<mat-form-field>-->
-        <!--<input matInput #input placeholder="E-mail">-->
-      <!--</mat-form-field>-->
-
       <mat-form-field>
-        <input matInput placeholder="Enter your email" [formControl]="email" required>
-        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        <input matInput placeholder="Enter your email" [formControl]="email">
+        <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
       </mat-form-field>
 
 
       <mat-form-field>
-        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
-
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [formControl]="required">
+        <mat-error *ngIf="required.invalid">{{getErrorMessageRequired()}}</mat-error>
       </mat-form-field>
 
       <a  routerLink="/validation" routerLinkActive="active">
@@ -42,44 +37,38 @@
       <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
 
         <mat-form-field hintLabel="">
-          <input matInput #input placeholder="Name">
+          <input matInput #input placeholder="Name" [formControl]="required2" required>
+          <mat-error *ngIf="required2.invalid">{{getErrorMessageRequired()}}</mat-error>
+
         </mat-form-field>
 
         <mat-form-field hintLabel="">
-          <input matInput #input placeholder="First Name">
-        </mat-form-field>
-
-        <!--<mat-form-field hintLabel="">-->
-          <!--<input matInput #input placeholder="E-mail">-->
-        <!--</mat-form-field>-->
-
-        <mat-form-field>
-          <input matInput placeholder="Enter your email" [formControl]="email" required>
-          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
-
-        <!--<mat-form-field hintLabel="">-->
-          <!--<input matInput #input placeholder="Phone">-->
-        <!--</mat-form-field>-->
-
-        <!--<mat-form-field>-->
-          <!--<input matInput placeholder="Phone number" [formControl]="phone" required>-->
-          <!--<mat-error *ngIf="phone.invalid">{{getErrorMessagePhone()}}</mat-error>-->
-        <!--</mat-form-field>-->
-
-        <mat-form-field hintLabel="Max 10 characters">
-          <input matInput #input maxlength="10" placeholder="Enter some input">
-          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+          <input matInput #input placeholder="First Name" [formControl]="required3" required>
+          <mat-error *ngIf="required3.invalid">{{getErrorMessageRequired()}}</mat-error>
         </mat-form-field>
 
 
         <mat-form-field>
-          <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
+          <input matInput placeholder="Enter your email" [formControl]="email2" required>
+          <mat-error *ngIf="email2.invalid">{{getErrorMessageEmail2()}}</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <input matInput #input maxlength="10" placeholder="Enter phone number" [formControl]="required4" required>
+          <mat-error *ngIf="required4.invalid">{{getErrorMessageRequired()}}</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [formControl]="required5" required>
+          <mat-error *ngIf="required5.invalid">{{getErrorMessageRequired()}}</mat-error>
 
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Confirm password" [type]="hide ? 'password' : 'text'">
+          <input matInput placeholder="Confirm password" [type]="hide ? 'password' : 'text'" [formControl]="required6" required>
+          <mat-error *ngIf="required6.invalid">{{getErrorMessageRequired()}}</mat-error>
 
         </mat-form-field>
 
