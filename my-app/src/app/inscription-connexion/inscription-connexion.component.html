@@ -26,7 +26,7 @@
       </mat-form-field>
 
       <a  routerLink="/validation" routerLinkActive="active">
-        <button mat-fab fxFlex="80px" fxLayoutAlign="center center">Log in</button>
+        <button mat-fab fxFlex="80px" fxLayoutAlign="center center" [disabled]="email.errors != null || required.errors != null" mat-raised-button color=#589244>Log in</button>
       </a>
 
     </div>
@@ -73,7 +73,7 @@
         </mat-form-field>
 
         <a  routerLink="/validation" routerLinkActive="active">
-          <button mat-fab fxFlex="80px" fxLayoutAlign="center center">Sign up</button>
+          <button mat-fab fxFlex="80px" fxLayoutAlign="center center" [disabled]="email2.errors != null || required2.errors != null || required3.errors != null || required4.errors != null || required5.errors != null || required6.errors != null" mat-raised-button color=#589244>Sign up</button>
         </a>
 
       </div>
