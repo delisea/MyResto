@@ -46,7 +46,7 @@ export class MenuComponent implements OnInit {
   }
 
   getMealsByMenuId(menu_id):Observable<Meal[]>{
-    return this.http.get<Meal[]>("http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/meal/getMealsByMenuId?menu_id="+menu_id);
+    return this.http.get<Meal[]>("http://18.196.18.169/javaee7-angular/resources/meal/getMealsByMenuId?menu_id="+menu_id);
   }
 
   calculatePrice(){
