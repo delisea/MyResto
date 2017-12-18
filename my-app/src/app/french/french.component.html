@@ -1,1 +1,77 @@
+<a  routerLink="/restaurants" routerLinkActive="active">
+  <button mat-fab fxFlex="70px" fxLayoutAlign="center center">Back</button>
+</a>
+<div fxFlex fxLayoutAlign="end start">
+  <a routerLink="/inscription">
+    <button mat-button color="primary">En</button>
+  </a>
+</div>
+
+
+<div class="truc-a-centrer">
+  <mat-card>
+    <mat-tab-group>
+      <mat-tab label="Connexion"><mat-card>
+        <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
+          <mat-form-field>
+            <input matInput #input placeholder="Email">
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'">
+
+          </mat-form-field>
+
+          <a  routerLink="/frenchvalidation" routerLinkActive="active">
+            <button mat-fab fxFlex="80px" fxLayoutAlign="center center">Connexion</button>
+          </a>
+
+        </div>
+      </mat-card>
+      </mat-tab>
+
+      <mat-tab label="Inscription"><mat-card>
+        <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
+
+          <mat-form-field hintLabel="">
+            <input matInput #input placeholder="Nom">
+          </mat-form-field>
+
+          <mat-form-field hintLabel="">
+            <input matInput #input placeholder="Prenom">
+          </mat-form-field>
+
+          <mat-form-field hintLabel="">
+            <input matInput #input placeholder="Email">
+          </mat-form-field>
+
+          <mat-form-field hintLabel="">
+            <input matInput #input placeholder="Telephone">
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'">
+
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Confirmez mot de passe" [type]="hide ? 'password' : 'text'">
+
+          </mat-form-field>
+
+          <a  routerLink="/frenchvalidation" routerLinkActive="active">
+            <button mat-fab fxFlex="80px" fxLayoutAlign="center center">S'inscrire</button>
+          </a>
+
+        </div>
+      </mat-card>
+
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+
 

@@ -2,10 +2,11 @@
   <mat-card-header>
     <div fxFlex fxLayout="column">
       <mat-card class="green" fxFlex fxLayoutAlign="center center">
-        <div>
-          Description
-        </div>
-      </mat-card>
+          <mat-card-content>
+            <div *ngIf="restaurant.name != ''; else noName">{{restaurant.name}}</div>
+            <ng-template #noName> No name for this restaurant. </ng-template>
+          </mat-card-content>
+        </mat-card>
 
       <mat-card fxFlex fyFlex class="white">
         <mat-card-content>

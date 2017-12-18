@@ -6,6 +6,8 @@ import { FiltersComponent } from './filters/filters.component';
 import {InscriptionConnexionComponent} from "./inscription-connexion/inscription-connexion.component";
 import {ValidationComponent} from "./validation/validation.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
+import {FrenchComponent} from "./french/french.component";
+import {FrenchvalidationComponent} from "./frenchvalidation/frenchvalidation.component";
 
 const appRoutes: Routes = [
     { path: 'restaurant/:id',
@@ -24,7 +26,15 @@ const appRoutes: Routes = [
     component: ValidationComponent,
     data: {title:'Validation'}
   },
-    {
+  { path: 'french',
+    component: FrenchComponent,
+    data: {title:'French'}
+  },
+  { path: 'frenchvalidation',
+    component: FrenchvalidationComponent,
+    data: {title:'French validation'}
+  },
+  {
       path: 'restaurants',
       component: RestaurantsListComponent,
       data: { title: 'Restaurants List' }
