@@ -126,9 +126,12 @@ public class ReservationResource  extends Application{
             }catch(Exception e){            
     			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
     					.entity(getExceptionMessage(e))
+    					.header("Access-Control-Allow-Origin", "*")
+    					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
     					.build();
             }
-            return Response.ok(reservationToSave).build();
+            return Response.ok(reservationToSave).header("Access-Control-Allow-Origin", "*")
+    					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
             
         } else { // Modif
         	existingReservation.setPerson(existingPerson);  
@@ -137,10 +140,12 @@ public class ReservationResource  extends Application{
         	existingReservation.setPeriode(reservation.getPeriode());
         	existingReservation.setDate(reservation.getDate());
         	try{
-        		return Response.ok(entityManager.merge(existingReservation)).build();
+        		return Response.ok(entityManager.merge(existingReservation)).header("Access-Control-Allow-Origin", "*")
+    					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
         	}catch(Exception e){
     			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-    					.entity(getExceptionMessage(e))
+    					.entity(getExceptionMessage(e)).header("Access-Control-Allow-Origin", "*")
+    					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
     					.build();
         	}        
         }

@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.cortez.samples.javaee7angular.data.Disponibility.DayConverter" 
+    project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Disponibility.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="658" y="-100"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="2" language="java" name="com.cortez.samples.javaee7angular.data.Disponibility.Periode" 
+    project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Disponibility.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="854" y="148"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="3" language="java" name="com.cortez.samples.javaee7angular.data.Disponibility.PeriodeConverter" 
+    project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Disponibility.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1073" y="140"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.cortez.samples.javaee7angular.data.Disponibility" project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Disponibility.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="181" x="864" y="-311"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="5" language="java" name="com.cortez.samples.javaee7angular.data.Disponibility.Day" 
+    project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Disponibility.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="181" x="1196" y="-10"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="6" language="java" name="com.cortez.samples.javaee7angular.data.Restaurant" project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Restaurant.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="419" y="332"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.cortez.samples.javaee7angular.data.Menu" project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Menu.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="93" y="174"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.cortez.samples.javaee7angular.data.Meal.TypeMealConverter" 
+    project="javaee7-angular" file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Meal.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="239" x="-262" y="556"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.cortez.samples.javaee7angular.data.Meal" project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Meal.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-167" y="334"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="10" language="java" name="com.cortez.samples.javaee7angular.data.Meal.TypeMeal" 
+    project="javaee7-angular" file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Meal.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="181" x="17" y="556"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="11" language="java" name="com.cortez.samples.javaee7angular.data.Reservation.Periode" 
+    project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Reservation.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="794" y="800"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="12" language="java" name="com.cortez.samples.javaee7angular.data.Reservation.PeriodeConverter" 
+    project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Reservation.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1040" y="791"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.cortez.samples.javaee7angular.data.Reservation" project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Reservation.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="794" y="517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="14" language="java" name="com.cortez.samples.javaee7angular.data.Speciality.Speciality_label" 
+    project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Speciality.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="148" y="1169"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="15" language="java" name="com.cortez.samples.javaee7angular.data.Speciality.SpecialityConverter" 
+    project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Speciality.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="418" y="1097"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.cortez.samples.javaee7angular.data.Speciality" project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/Speciality.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="163" y="895"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.cortez.samples.javaee7angular.data.TableResto" project="javaee7-angular" 
+    file="/javaee7-angular/src/main/java/com/cortez/samples/javaee7angular/data/TableResto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="757" y="1079"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="18">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="19" name="restaurant"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="22" name="restaurant"/>      
+      <multiplicity id="23" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="24">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="25" name="disponibilities"/>      
+      <multiplicity id="26" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="27">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </nesting>  
+  <association id="28">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="29" name="menus"/>      
+      <multiplicity id="30" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="31">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </nesting>  
+  <nesting id="32">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <association id="33">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="34" name="restaurant"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="37" name="menu"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="40" name="periode"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="43" name="day"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="46" name="speciality_label"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="49" name="restaurant"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="52" name="meals"/>      
+      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="54">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <nesting id="55">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <association id="56">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="57" name="restaurant"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="59">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <association id="60">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="61" name="typeMeal"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="64" name="periode"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="66">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="11"/>  
+  </nesting>  
+  <association id="67">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="68" name="reservations"/>      
+      <multiplicity id="69" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="71" name="tables"/>      
+      <multiplicity id="72" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="74" name="specialities"/>      
+      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="76">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <nesting id="77">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="12"/>  
+  </nesting>  
+  <nesting id="78">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
