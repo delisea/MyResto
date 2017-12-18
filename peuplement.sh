@@ -40,6 +40,21 @@ idFouquets=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources
 idFouquets=$(echo -e $idFouquets | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idFouquets = $idFouquets \n"
 
+#	Ajout d'un restaurant (nom = "La Roustide")
+idRoustide=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"La Roustide\", \"description\": \"Provencal cuisine of the season, served in an elegant and country setting with light colors, beige and wood.\", \"address\": \"34 Rue Beaumont, 06300 Nice\", \"url_img\": \"http://tellmewhere.us/media/f/A6FCB009-C6D4-4E2B-81CF-9F7F3D2BB71C.jpeg\", \"tel_number\": \"04 93 89 69 60\", \"email\": \"laroustide.fr/\", \"latitude\": 43.703533, \"longitude\": 7.285759 }")
+idRoustide=$(echo -e $idRoustide | cut -d':' -f 2 | cut -d',' -f 1)
+echo -e "\n idRoustide = $idRoustide \n"
+
+#	Ajout d'un restaurant (nom = "Aux deux chefs")
+idChefs=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Aux deux chefs\", \"description\": \"Refined and original dishes according to the season in a simple and warm setting with red and white tones.\", \"address\": \"56 Rue Dabray, 06000 Nice\", \"url_img\": \"https://media-cdn.tripadvisor.com/media/photo-s/02/f1/bb/16/aux-deux-chefs.jpg\", \"tel_number\": \" 04 93 52 56 50\", \"email\": \"auxdeuxchefs.fr/\", \"latitude\": 43.709321, \"longitude\": 7.257103}")
+idChefs=$(echo -e $idChefs | cut -d':' -f 2 | cut -d',' -f 1)
+echo -e "\n idChefs = $idChefs \n"
+
+#	Ajout d'un restaurant (nom = "Le Boudoir")
+idBoudoir=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Le Boudoir\", \"description\": \"Truffle, foie gras and refined Italian cuisine in a baroque black, white and mauve elegant and cozy.\", \"address\": \"10 Rue Chauvain, 06000 Nice\", \"url_img\": \"https://u.tfstatic.com/restaurant_photos/490/15490/169/612/le-boudoir-salle-du-restaurant-ba495.jpg\", \"tel_number\": \" 04 93 87 55 54\", \"email\": \"leboudoir.fr/\", \"latitude\": 43.698941, \"longitude\": 7.271234}")
+idBoudoir=$(echo -e $idBoudoir | cut -d':' -f 2 | cut -d',' -f 1)
+echo -e "\n idBoudoir = $idBoudoir \n"
+
 #---------------------------------- AJOUT DE TABLES --------------------------------#
 
 # 	Ajout d'une table de 10 places non bougeable sur La tour Eiffel 
