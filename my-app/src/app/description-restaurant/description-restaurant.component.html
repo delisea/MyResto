@@ -15,9 +15,7 @@
         </mat-card-content>
       </mat-card>
 
-      <app-localisation-filter></app-localisation-filter>
-
-    <mat-card fxFlex fyFlex class="white">
+      <mat-card fxFlex fyFlex class="white">
       <mat-card-content>
         <div *ngIf="restaurant.address != ''; else noAdress">{{restaurant.address}}</div>
         <ng-template #noAdress> No adress for this restaurant. </ng-template>
