@@ -12,7 +12,7 @@ export class MockRestaurantsService {
   restaurants: Restaurant[] = [];
   menus: Observable<Menu[]>;
 
-  base_url: string = 'http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/';
+  base_url: string = 'http://18.196.18.169/javaee7-angular/resources/';
   base_search_url: string = this.base_url + 'restaurants/search?page=1&sortDirections=asc&sortFields=id';
   base_menus_url: string = this.base_url + 'menu/getMenusByRestaurantId?restaurant_id=';
   base_restaurant_url: string = this.base_url + 'restaurants/';
