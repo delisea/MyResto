@@ -1,6 +1,6 @@
 <div class="form-group">
   <input style="width:70%; display:inline-block" placeholder="Enter an address" autocorrect="off" autocapitalize="off" spellcheck="off"
-    type="text" class="form-control" #search [formControl]="searchControl">
+         type="text" class="form-control" #search [formControl]="searchControl">
   <button (click)="clearSearch()">Clear</button>
 </div>
 <div *ngIf="!hideRadiusFilter">
@@ -11,7 +11,7 @@
 <div>
   <button [hidden]="!hideMap" (click)="showMapBool()">Show map</button>
   <button [hidden]="hideMap" (click)="hideMapBool()">Hide map</button>
-<agm-map style="width:250px" *ngIf="!hideMap" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
-  <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-</agm-map>
+  <agm-map style="width:250px" *ngIf="!hideMap" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
 </div>
