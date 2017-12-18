@@ -1,4 +1,4 @@
-<div class="form-group">
+<!--<div class="form-group">
   <input style="width:70%; display:inline-block" placeholder="Enter an address" autocorrect="off" autocapitalize="off" spellcheck="off"
          type="text" class="form-control" #search [formControl]="searchControl">
   <button (click)="clearSearch()">Clear</button>
@@ -7,11 +7,11 @@
   Radius
   <mat-slider style="display:inline-block; width:30%" thumbLabel min="0" max="50" step="5" [(ngModel)]="rayon" (ngModelChange)="rayonAdded()"></mat-slider>
   {{rayon}}
-</div>
+</div>-->
 <div>
   <button [hidden]="!hideMap" (click)="showMapBool()">Show map</button>
   <button [hidden]="hideMap" (click)="hideMapBool()">Hide map</button>
-  <agm-map style="width:250px" *ngIf="!hideMap" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  <agm-map style="width:250px" *ngIf="!hideMap" [latitude]="restaurant.latitude" [longitude]="restaurant.longitude" [scrollwheel]="true" [zoom]="zoom">
+    <agm-marker [latitude]="restaurant.latitude" [longitude]="restaurant.longitude"></agm-marker>
   </agm-map>
 </div>
