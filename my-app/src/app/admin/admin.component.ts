@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  displayedColumns = ['id', 'nbCouverts', 'periode','date'];
+  displayedColumns = ['id','nom_restaurant', 'nbCouverts', 'periode','date'];
   public dataSource:MatTableDataSource<Reservation>;
 
   applyFilter(filterValue: string) {
@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    let url = 'http://18.196.18.169/javaee7-angular/resources/reservations';
+    let url = 'https://18.196.18.169/javaee7-angular/resources/reservations';
     this.http.get<Reservation[]>(url).subscribe(reservations => this.dataSource = new MatTableDataSource(reservations));   
   }
 

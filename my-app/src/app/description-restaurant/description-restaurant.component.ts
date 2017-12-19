@@ -66,7 +66,7 @@ export class DescriptionRestaurantComponent implements OnInit {
       'periode':this.favoriteDispo.toUpperCase(),
       'date':this.date
     }
-    let url = 'http://18.196.18.169/javaee7-angular/resources/reservations';
+    let url = 'https://18.196.18.169/javaee7-angular/resources/reservations';
     this.http.post(url,reservation,{headers:headers, params:params}).subscribe(
       res => {
         console.log(res);
