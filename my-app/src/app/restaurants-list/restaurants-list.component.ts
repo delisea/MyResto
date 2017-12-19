@@ -23,7 +23,7 @@ export class RestaurantsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.restaurantService.getRestaurants('http://18.196.18.169/javaee7-angular/resources/restaurants/search')
+    this.restaurantService.getRestaurants('https://18.196.18.169/javaee7-angular/resources/restaurants/search')
       .subscribe(paginatedListWrapper => this.restaurants = paginatedListWrapper.restaurants);
   }
 }

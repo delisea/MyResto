@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    let url = 'http://18.196.18.169/javaee7-angular/resources/reservations';
+    let url = 'https://18.196.18.169/javaee7-angular/resources/reservations';
     this.http.get<Reservation[]>(url).subscribe(reservations => this.dataSource = new MatTableDataSource(reservations));   
   }
 

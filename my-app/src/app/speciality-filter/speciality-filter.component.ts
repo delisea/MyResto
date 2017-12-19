@@ -19,7 +19,7 @@ export class SpecialityFilterComponent implements OnInit {
 
   specialityList = [];
 
-  url = "http://18.196.18.169/javaee7-angular/resources/specialities";
+  url = "https://18.196.18.169/javaee7-angular/resources/specialities";
 
   ngOnInit() {
     this.specialities.valueChanges.subscribe(
