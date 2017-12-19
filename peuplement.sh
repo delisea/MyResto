@@ -55,6 +55,11 @@ idBoudoir=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/
 idBoudoir=$(echo -e $idBoudoir | cut -d':' -f 2 | cut -d',' -f 1)
 echo -e "\n idBoudoir = $idBoudoir \n"
 
+#	Ajout d'un restaurant (nom = "Le Moderne")
+idModerne=$(curl --silent POST "http://localhost:8080/javaee7-angular/resources/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 0, \"name\": \"Le Moderne\", \"description\": \"Hushed atmosphere and design for this restaurant serving traditional cuisine and a menu of the evening market.\", \"address\": \"11 Rue Hébert, 38000 Grenoble\", \"url_img\": \"https://u.tfstatic.com/restaurant_photos/172/1172/169/612/cafe-moderne-le-moderne-360ce.jpg\", \"tel_number\": \"04 76 01 91 03\", \"email\": \"lemoderne.fr/\", \"latitude\": 45.189714, \"longitude\": 5.734928}")
+idModerne=$(echo -e $idModerne | cut -d':' -f 2 | cut -d',' -f 1)
+echo -e "\n idResto67 = $idModerne \n"
+
 #---------------------------------- AJOUT DE TABLES --------------------------------#
 
 # 	Ajout d'une table de 10 places non bougeable sur La tour Eiffel 
