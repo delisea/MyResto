@@ -13,18 +13,20 @@
     <mat-tab-group>
       <mat-tab label="Connexion"><mat-card>
         <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
+
           <mat-form-field>
-            <input matInput #input placeholder="Email">
+            <input matInput placeholder="Entrez votre email" [formControl]="email">
+            <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
           </mat-form-field>
 
 
           <mat-form-field>
-            <input matInput placeholder="Mot de passe" type="password" ngControl='password'>
-
+            <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'" [formControl]="required">
+            <mat-error *ngIf="required.invalid">{{getErrorMessageRequired()}}</mat-error>
           </mat-form-field>
 
           <a  routerLink="/frenchvalidation" routerLinkActive="active">
-            <button mat-fab fxFlex="80px" fxLayoutAlign="center center">Connexion</button>
+            <button mat-fab fxFlex="80px" fxLayoutAlign="center center" [disabled]="email.errors != null || required.errors != null" mat-raised-button color=#589244>Connexion</button>
           </a>
 
         </div>
@@ -35,34 +37,43 @@
         <div class="example-container" fxLayoutAlign="center center" fxLayout="column">
 
           <mat-form-field hintLabel="">
-            <input matInput #input placeholder="Nom">
+            <input matInput #input placeholder="Nom" [formControl]="required2" required>
+            <mat-error *ngIf="required2.invalid">{{getErrorMessageRequired()}}</mat-error>
+
           </mat-form-field>
 
           <mat-form-field hintLabel="">
-            <input matInput #input placeholder="Prenom">
-          </mat-form-field>
-
-          <mat-form-field hintLabel="">
-            <input matInput #input placeholder="Email">
-          </mat-form-field>
-
-          <mat-form-field hintLabel="">
-            <input matInput #input placeholder="Telephone">
+            <input matInput #input placeholder="Prénom" [formControl]="required3" required>
+            <mat-error *ngIf="required3.invalid">{{getErrorMessageRequired()}}</mat-error>
           </mat-form-field>
 
 
           <mat-form-field>
-            <input matInput placeholder="Mot de passe" type="password" ngControl="password">
+            <input matInput placeholder="Entrez votre email" [formControl]="email2" required>
+            <mat-error *ngIf="email2.invalid">{{getErrorMessageEmail2()}}</mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <input matInput #input maxlength="10" placeholder="Entrer votre numéro de téléphone" [formControl]="required4" required>
+            <mat-error *ngIf="required4.invalid">{{getErrorMessageRequired()}}</mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'" [formControl]="required5" required>
+            <mat-error *ngIf="required5.invalid">{{getErrorMessageRequired()}}</mat-error>
 
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput placeholder="Confirmez mot de passe" type="password" ngControl="repeat">
+            <input matInput placeholder="Confirmez votre mot de passe" [type]="hide ? 'password' : 'text'" [formControl]="required6" required>
+            <mat-error *ngIf="required6.invalid">{{getErrorMessageRequired()}}</mat-error>
 
           </mat-form-field>
 
           <a  routerLink="/frenchvalidation" routerLinkActive="active">
-            <button mat-fab fxFlex="80px" fxLayoutAlign="center center">S'inscrire</button>
+            <button mat-fab fxFlex="80px" fxLayoutAlign="center center" [disabled]="email2.errors != null || required2.errors != null || required3.errors != null || required4.errors != null || required5.errors != null || required6.errors != null" mat-raised-button color=#589244>S'inscrire</button>
           </a>
 
         </div>
@@ -72,6 +83,5 @@
     </mat-tab-group>
   </mat-card>
 </div>
-
 
 
