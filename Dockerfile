@@ -3,7 +3,7 @@ FROM myresto_base
 USER root 
 
 # Should be changed for your public domain name
-ENV SWAGGER_API_URL http://localhost:8080/swagger.json
+ENV SWAGGER_API_URL http://18.196.18.169/swagger/swagger.json
 
 ENV SWAGGER_DIST swagger-ui
 ENV SWAGGER_TARGET_DIR $JBOSS_HOME/welcome-content
@@ -17,6 +17,7 @@ RUN sed -i -- 's|http://petstore.swagger.io/v2/swagger.json|'$SWAGGER_API_URL'|g
 # Add swagger.json
 ADD swagger.json $SWAGGER_TARGET_DIR/
 ADD dist $SWAGGER_TARGET_DIR/
+ADD swagger-ui $JBOSS_HOME/swagger
 
 # Add application
 ADD javaee7-angular.war $SWAGGER_DEPLOY_DIR/
