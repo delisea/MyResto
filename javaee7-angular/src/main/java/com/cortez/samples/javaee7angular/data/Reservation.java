@@ -35,7 +35,7 @@ public class Reservation {
 	private Date date;
 	
 	@ManyToOne
-	@JoinColumn(name = "person_id")
+	@JoinColumn(name = "person_id", nullable = true)
 	private Person person;
 	
 	@ManyToOne

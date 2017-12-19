@@ -4,6 +4,7 @@ import { RestaurantsListComponent } from './restaurants-list/restaurants-list.co
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { FiltersComponent } from './filters/filters.component';
 import {InscriptionConnexionComponent} from "./inscription-connexion/inscription-connexion.component";
+import {AdminComponent} from "./admin/admin.component";
 import {ValidationComponent} from "./validation/validation.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 import {FrenchComponent} from "./french/french.component";
@@ -18,6 +19,10 @@ const appRoutes: Routes = [
       component: InscriptionConnexionComponent,
       data: {title:'Inscription'}
     },
+    { path: 'admin',
+    component: AdminComponent,
+    data: {title:'Administration'}
+  },
   { path: 'privacy',
     component: PrivacyPolicyComponent,
     data: {title:'Privacy policy'}

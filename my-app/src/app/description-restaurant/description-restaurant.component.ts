@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MockRestaurantsService } from "../mock-restaurants.service";
 import { Restaurant } from '../Restaurant';
 import { MatDatepickerInputEvent } from "@angular/material";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams  } from "@angular/common/http";
 
 
 @Component({
@@ -52,22 +52,24 @@ export class DescriptionRestaurantComponent implements OnInit {
     console.log(this.nbPersons)
     console.log(this.date);
     let headers = new HttpHeaders();
-    headers.set('Content-Type', 'application/json; charset=utf-8');
-    headers.set('accept','application/json');
-    headers.set('person_id','2');
-    headers.set('restaurant_id',this.restaurant_id.toString());
-    headers.set('Access-Control-Allow-Origin','*');
-    headers.set('Access-Control-Allow-Methods','Access-Control-Allow-Methods');
+    headers.append('Content-Type', 'application/json; charset=utf-8')
+    .append('accept','application/json')
+    .append('Access-Control-Allow-Origin','*')
+    .append('Access-Control-Allow-Methods','GET, POST, DELETE, PUT');
+
     
+    let params = new HttpParams().set('restaurant_id', this.restaurant_id.toString());
+
     let reservation = {
       'id':0,
-      'nbcouverts':this.nbPersons,
-      'periode':this.favoriteDispo,
+      'nbCouverts':this.nbPersons,
+      'periode':this.favoriteDispo.toUpperCase(),
       'date':this.date
     }
-    let url = 'http://myresto-myresto.193b.starter-ca-central-1.openshiftapps.com/javaee7-angular/resources/reservations';
-    this.http.post(url,reservation,{headers:headers}).subscribe(
+    let url = 'http://18.196.18.169/javaee7-angular/resources/reservations';
+    this.http.post(url,reservation,{headers:headers, params:params}).subscribe(
       res => {
+        console.log(res);
         this.router.navigate(['/inscription']);
       },
       err => console.log(err)
