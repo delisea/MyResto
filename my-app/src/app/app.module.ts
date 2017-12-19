@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Router} from '@angular/router';
-import { AppRoutingModule }        from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NavbarComponent} from "./navbar/navbar.component";
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,6 +25,7 @@ import {SpecialityFilterComponent} from './speciality-filter/speciality-filter.c
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {PersonFilterComponent} from './person-filter/person-filter.component';
 import {PageSizeFilterComponent} from './pageSize-filter/pageSize-filter.component';
+import {AdminComponent} from './admin/admin.component';
 
 import {
   MatAutocompleteModule,
@@ -90,7 +91,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     MenuComponent,
     InscriptionConnexionComponent,
     ValidationComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    AdminComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -121,7 +123,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     MatSelectModule,
     MatSidenavModule,
     MatTabsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTableModule
   ],
   providers: [ MockRestaurantsService, GeoCodingService, HttpClientModule ],
   bootstrap: [ AppComponent ]

@@ -99,24 +99,27 @@ public class ReservationResource  extends Application{
 	}
 	
 	@POST
-	public Response saveReservation(@HeaderParam("restaurant_id") Long restaurant_id, @HeaderParam("person_id") Long person_id, Reservation reservation) {
+	public Response saveReservation(@QueryParam("restaurant_id") Long restaurant_id, @QueryParam("person_id") Long person_id, Reservation reservation) {
+		
 		Restaurant existingRestaurant = entityManager.find(Restaurant.class, restaurant_id);
 		if (existingRestaurant == null) {
 			return Response.status(Response.Status.NOT_FOUND)
 					.entity("le Restaurant d'id : "+restaurant_id+" est introuvable.").build();
 		}
 		
+		/*
 		Person existingPerson = entityManager.find(Person.class, person_id);
 		if (existingPerson == null) {
 			return Response.status(Response.Status.NOT_FOUND)
 					.entity("la personne d'id : "+person_id+" est introuvable.").build();
 		}
-		
+		*/
 		Response response = getReservation(reservation.getId());		
 		Reservation existingReservation = (response.getStatus() == Response.Status.OK.getStatusCode()) ? (Reservation) response.getEntity() : null;
         if (existingReservation == null) { // Ajout
+        	System.out.println("COUCOU");
         	Reservation reservationToSave = new Reservation();
-        	reservationToSave.setPerson(existingPerson);  
+        	//reservationToSave.setPerson(existingPerson);  
         	reservationToSave.setRestaurant(existingRestaurant);
         	reservationToSave.setNbCouverts(reservation.getNbCouverts());
         	reservationToSave.setPeriode(reservation.getPeriode());
@@ -134,7 +137,7 @@ public class ReservationResource  extends Application{
     					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
             
         } else { // Modif
-        	existingReservation.setPerson(existingPerson);  
+        	//existingReservation.setPerson(existingPerson);  
         	existingReservation.setRestaurant(existingRestaurant);
         	existingReservation.setNbCouverts(reservation.getNbCouverts());
         	existingReservation.setPeriode(reservation.getPeriode());
