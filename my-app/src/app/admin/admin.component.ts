@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  displayedColumns = ['id', 'nbCouverts', 'periode','date'];
+  displayedColumns = ['id','nom_restaurant', 'nbCouverts', 'periode','date'];
   public dataSource:MatTableDataSource<Reservation>;
 
   applyFilter(filterValue: string) {

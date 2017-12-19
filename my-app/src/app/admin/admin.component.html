@@ -13,6 +13,11 @@
         <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
         <mat-cell *matCellDef="let reservation"> {{reservation.id}} </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="nom_restaurant">
+        <mat-header-cell *matHeaderCellDef> Restaurant </mat-header-cell>
+        <mat-cell *matCellDef="let reservation"> {{reservation.restaurant.name}} </mat-cell>
+      </ng-container>
   
       <!-- Weight Column -->
       <ng-container matColumnDef="nbCouverts">

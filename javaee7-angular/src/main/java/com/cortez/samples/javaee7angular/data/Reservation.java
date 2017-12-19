@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties(value = { "person","restaurant" })
+@JsonIgnoreProperties(value = { "person" })
 public class Reservation {
 	
 	public enum Periode {
